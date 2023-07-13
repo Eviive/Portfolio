@@ -1,0 +1,190 @@
+@use "@/mixins";
+
+.card {
+    width: min(100%, 1300px);
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(5, 1fr);
+    align-items: center;
+    justify-items: end;
+
+    @include mixins.media-query(l) {
+        gap: 0;
+    };
+
+    @include mixins.media-query(m) {
+        width: 100%;
+    };
+
+    @include mixins.media-query(s) {
+        position: relative;
+        display: flex;
+        aspect-ratio: 16 / 10;
+    };
+
+    &:nth-of-type(even) {
+        justify-items: start;
+
+        .description {
+            grid-column: 1 / 4;
+            align-items: flex-start;
+
+            @include mixins.media-query(m) {
+                grid-column: 1 / 5;
+            };
+        }
+
+        .image {
+            grid-column: 3 / -1;
+        }
+    }
+
+    &:nth-of-type(odd) .logos div {
+        flex-direction: row-reverse;
+    }
+}
+
+.description {
+    grid-column: 4 / -1;
+    grid-row: 2 / 5;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 30px;
+
+    @include mixins.media-query(s) {
+        box-sizing: border-box;
+        @include mixins.size;
+        padding: 40px;
+        align-items: flex-start;
+        border: 2px solid hsl(var(--primary-2));
+        border-radius: 6px;
+        backdrop-filter: brightness(0.5);
+    };
+
+    p {
+        z-index: 3;
+        margin: 0.3em 0;
+        padding: 2em;
+        max-width: 50ch;
+        min-width: 30ch;
+        color: hsl(var(--secondary-1));
+        line-height: 1.35em;
+        border-radius: 5px;
+        background-color: hsl(var(--primary-2));
+        @include mixins.box-shadow();
+        transition: color 0.35s;
+
+        @include mixins.media-query(s) {
+            color: hsl(0deg, 0%, 95%);
+            padding: 1em 0;
+            min-width: unset;
+            background-color: unset;
+            box-shadow: unset;
+        };
+    }
+}
+
+.title {
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: inherit;
+    text-shadow: 0 0 5px hsl(var(--primary-2));
+
+    a {
+        @include mixins.media-query(s) {
+            color: hsl(0deg, 0%, 95%);
+        };
+    }
+
+    h3 {
+        margin: 0.2em 0;
+        font-size: 2em;
+    }
+
+    span {
+        color: hsl(var(--accent-1));
+        font-family: var(--font-mono);
+        font-size: 0.9em;
+    }
+}
+
+.logos {
+    flex-grow: 0;
+    --gap: 15px;
+    z-index: 3;
+    max-width: calc(5 * 36px + 4 * var(--gap));
+    display: flex;
+    flex-direction: column;
+    align-items: inherit;
+    gap: var(--gap);
+
+    div {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: var(--gap);
+    }
+
+    .links a {
+        padding: 3px;
+        color: hsl(var(--secondary-1));
+        display: flex;
+
+        &:hover {
+            color: hsl(var(--accent-1));
+        }
+    }
+}
+
+.image {
+    position: relative;
+    grid-column: 1 / 5;
+    grid-row: 1 / -1;
+    aspect-ratio: 16 / 10;
+    max-width: 650px;
+    display: flex;
+    border-radius: 6px;
+
+    @include mixins.media-query(s) {
+        z-index: -1;
+        position: absolute;
+        inset: 0 0 0 0;
+        aspect-ratio: unset;
+        background-color: hsl(0deg, 0%, 14%, 0.6);
+        border-radius: 7px;
+    };
+
+    a {
+        @include mixins.size();
+        border-radius: inherit;
+
+        div {
+            @include mixins.media-query(s) {
+                @include mixins.size();
+                border-radius: inherit;
+            };
+
+            img {
+                @include mixins.size();
+                border: 2px solid hsl(var(--primary-2));
+                border-radius: inherit;
+                transition: filter 0.35s;
+                @include mixins.box-shadow();
+
+                @include mixins.media-query(s) {
+                    object-fit: cover;
+                    border: none;
+                }
+            }
+        }
+    }
+
+    button {
+        position: absolute;
+        top: 5px;
+        right: 5px;
+    }
+}

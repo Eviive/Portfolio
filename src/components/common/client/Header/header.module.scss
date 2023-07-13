@@ -1,0 +1,54 @@
+@use "@/mixins";
+
+.header {
+    z-index: 100;
+    position: fixed;
+    padding: 0 10%;
+    @include mixins.size(100%, var(--header-height));
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: hsl(var(--primary-1), 0.7);
+    backdrop-filter: blur(8px);
+    color: hsl(var(--secondary-1));
+    font-family: var(--font-mono);
+    transition: background-color 0.35s, translate 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+
+    @include mixins.pseudo($pos: 0 0 0 0) {
+        z-index: -1;
+        @include mixins.box-shadow();
+        transition: opacity 0.5s;
+    }
+
+    &.top::after {
+        opacity: 0;
+    }
+
+    &.hidden {
+        --translateY: calc(var(--header-height) * -1);
+        translate: 0 var(--translateY);
+    }
+
+    .content {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
+.left {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+
+    .logo a {
+        display: flex;
+    }
+
+    .links {
+        display: flex;
+        gap: 25px;
+        text-transform: capitalize;
+    }
+}

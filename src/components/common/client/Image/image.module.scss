@@ -1,0 +1,11 @@
+.wrapper {
+    position: relative;
+    display: grid;
+    place-items: center;
+    border-radius: inherit;
+
+    .loader {
+        position: absolute;
+        color: hsl(var(--accent-1));
+    }
+}
