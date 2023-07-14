@@ -16,10 +16,10 @@ export const OtherProjectCard: FC<Props> = ({ project }) => {
                 <div className={styles.icons}>
                     <FiFolder size={40} strokeWidth={1} className={styles.folder} />
                     <div className={styles.links}>
-                        <Link className={styles.link} href={project.repoUrl}>
+                        <Link href={project.repoUrl}>
                             <FiGithub size={22} />
                         </Link>
-                        <Link className={styles.link} href={project.demoUrl}>
+                        <Link href={project.demoUrl}>
                             <FiExternalLink size={22} />
                         </Link>
                     </div>

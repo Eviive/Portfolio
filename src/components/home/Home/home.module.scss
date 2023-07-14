@@ -20,12 +20,12 @@
 
 .hello {
     width: max-content;
-    padding: 10% 0 0 15%;
+    padding: 20vh 0 0 15%;
     display: flex;
     flex-direction: column;
 
     @include mixins.media-query(s) {
-        padding: 20% 0 0;
+        padding-left: 0;
         font-size: clamp(10px, 3vw, 15px);
     };
 

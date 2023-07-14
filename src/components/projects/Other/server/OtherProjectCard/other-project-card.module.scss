@@ -25,7 +25,7 @@
         opacity: 0;
         @include mixins.size();
         @include mixins.box-shadow($down: 5px, $blur: 25px);
-        transition: opacity .5s ease;
+        transition: opacity 0.5s;
     };
 
     &:hover::after {
@@ -42,7 +42,7 @@
     p {
         margin: 2em 0;
         color: hsl(var(--secondary-1));
-        transition: color .35s ease;
+        transition: color 0.35s;
     }
 }
 
@@ -60,17 +60,18 @@
     display: flex;
     gap: 10px;
 
-    .link {
+    a {
         display: grid;
         place-items: center;
         color: hsl(var(--secondary-2));
-        transition: translate 0.35s;
+        transition: translate 0.35s, color 0.35s;
 
         &:nth-child(2) {
             margin-bottom: 2px;
         }
 
         &:hover {
+            color: hsl(var(--accent-1));
             translate: 0 -1.5px;
         }
     }

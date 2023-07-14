@@ -1,10 +1,10 @@
 import { formatClassNames } from "@/lib/utils";
 import NextLink from "next/link";
-import type { ComponentProps, FC } from "react";
+import type { ComponentPropsWithRef, FC } from "react";
 
 import styles from "./link.module.scss";
 
-type LinkProps = ComponentProps<typeof NextLink>;
+type LinkProps = ComponentPropsWithRef<typeof NextLink>;
 type Props = {
     blank?: boolean;
 } & LinkProps;

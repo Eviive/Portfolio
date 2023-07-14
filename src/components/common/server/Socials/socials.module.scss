@@ -29,10 +29,9 @@
         place-items: center;
 
         .discord {
-            transition: translate 0.5s, rotate 0.5s;
+            transition: rotate 0.5s;
 
             &:hover {
-                translate: 0 -3px;
                 rotate: 360deg;
             }
         }
