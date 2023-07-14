@@ -1,5 +1,5 @@
-import { FeaturedProjects } from "@/components/projects/Featured";
-import { OtherProjects } from "@/components/projects/Other";
+import { FeaturedProjects } from "@/components/projects/featured";
+import { OtherProjects } from "@/components/projects/other/server";
 import type { FC } from "react";
 
 import styles from "./projects.module.scss";

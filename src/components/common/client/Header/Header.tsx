@@ -1,8 +1,8 @@
 "use client";
 
 import { Link } from "@/components/common/server";
+import { formatClassNames } from "@/lib/utils";
 import logo from "@/public/logo.svg";
-import { formatClassNames } from "@/utils/components";
 import NextImage from "next/image";
 import type { FC } from "react";
 import { useEffect, useState } from "react";

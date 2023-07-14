@@ -1,8 +1,8 @@
 import { Header } from "@/components/common/client";
 import { Footer } from "@/components/common/server";
-import { inter, montserrat, sourceCodePro } from "@/fonts";
+import { inter, montserrat, sourceCodePro } from "@/lib/fonts";
+import { formatClassNames } from "@/lib/utils";
 import "@/styles/reset.scss";
-import { formatClassNames } from "@/utils/components";
 import type { Metadata } from "next";
 import type { FC, PropsWithChildren } from "react";
 

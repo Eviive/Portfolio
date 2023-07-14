@@ -10,13 +10,6 @@ type Props = {
 };
 
 export const OtherProjectCard: FC<Props> = ({ project }) => {
-
-    const skills = project.skills
-        .sort((a, b) => a.sort - b.sort)
-        .map((skill, i) => (
-            <li key={i}>{skill.name}</li>
-        ));
-
     return (
         <div className={styles.card}>
             <div>
@@ -37,7 +30,12 @@ export const OtherProjectCard: FC<Props> = ({ project }) => {
                 <p>{project.description}</p>
             </div>
             <ul className={styles.skills}>
-                {skills}
+                {project.skills
+                    .sort((a, b) => a.sort - b.sort)
+                    .map((skill, i) => (
+                        <li key={i}>{skill.name}</li>
+                    ))
+                }
             </ul>
         </div>
     );

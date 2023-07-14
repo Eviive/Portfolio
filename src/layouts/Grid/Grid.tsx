@@ -1,4 +1,4 @@
-import { formatClassNames } from "@/utils/components";
+import { formatClassNames } from "@/lib/utils";
 import type { CSSProperties, FC, PropsWithChildren } from "react";
 
 import styles from "./grid.module.scss";
@@ -12,7 +12,7 @@ type Props = {
 export const Grid: FC<PropsWithChildren<Props>> = props => {
     return (
         <ul
-            className={formatClassNames(styles.layout, props.className)}
+            className={formatClassNames(props.className, styles.layout)}
             style={{
                 "--size": props.size,
                 "--gap": props.gap
