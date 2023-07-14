@@ -1,5 +1,5 @@
 import { Thing } from "@/components/about";
-import { Title } from "@/components/common/client";
+import { Title } from "@/components/common/server";
 import { thingsData } from "@/content/things";
 import type { FC } from "react";
 

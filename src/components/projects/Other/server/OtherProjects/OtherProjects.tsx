@@ -1,4 +1,4 @@
-import { Title } from "@/components/common/client";
+import { Title } from "@/components/common/server";
 import { OtherProjectsWrapper } from "@/components/projects/other/client";
 import { ProjectService } from "@/services";
 import type { FC } from "react";

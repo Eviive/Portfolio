@@ -1,4 +1,4 @@
-import { Title } from "@/components/common/client";
+import { Title } from "@/components/common/server";
 import { FeaturedProjectCard } from "@/components/projects/featured";
 import { ProjectService } from "@/services";
 import type { FC } from "react";
