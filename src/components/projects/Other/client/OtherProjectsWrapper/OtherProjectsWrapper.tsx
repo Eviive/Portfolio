@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/common/client";
+import { Button, ScrollReveal } from "@/components/common/client";
 import { OtherProjectCard } from "@/components/projects/other/server";
 import { GridLayout } from "@/layouts";
 import { ProjectService } from "@/services";
@@ -40,12 +40,16 @@ export const OtherProjectsWrapper: FC<Props> = props => {
     return (
         <>
             <GridLayout className={styles.projects} size="300px">
-                {pagination.data
-                    .sort((a, b) => a.sort - b.sort)
-                    .map((project, i) => (
-                        <OtherProjectCard key={i} project={project} />
-                    ))
-                }
+                <ScrollReveal
+                    multiple
+                    content={
+                        pagination.data
+                            .sort((a, b) => a.sort - b.sort)
+                            .map((project, i) => (
+                                <OtherProjectCard key={i} project={project} />
+                            ))
+                    }
+                />
             </GridLayout>
             {!pagination.isLastPage && (
                 <Button

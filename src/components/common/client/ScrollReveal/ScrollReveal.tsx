@@ -43,10 +43,12 @@ export const ScrollReveal: FC<Props> = props => {
                     }
 
                     scrollRevealObject.reveal(el, {
-                        easing: "ease",
-                        distance: "30px",
                         origin: "bottom",
-                        viewFactor: 0.5,
+                        easing: "ease",
+                        distance: "25%",
+                        opacity: 0,
+                        scale: 0.75,
+                        viewFactor: 0.75,
                         cleanup: true,
                         ...options,
                         afterReveal: (el: HTMLElement) => {
