@@ -3,8 +3,6 @@ import { Home } from "@/components/home";
 import { Projects } from "@/components/projects";
 import type { NextPage } from "next";
 
-export const revalidate = 0;
-
 const Index: NextPage = () => {
     return (
         <>
