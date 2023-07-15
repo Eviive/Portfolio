@@ -1,7 +1,8 @@
 @use "@/mixins";
 
 .card {
-    width: min(100%, 1300px);
+    margin: 0 auto;
+    width: min(100%, 1000px);
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(5, 1fr);
@@ -19,7 +20,6 @@
     @include mixins.media-query(s) {
         position: relative;
         display: flex;
-        aspect-ratio: 16 / 10;
     };
 
     :nth-of-type(even) > & {
@@ -54,13 +54,10 @@
     gap: 30px;
 
     @include mixins.media-query(s) {
-        box-sizing: border-box;
-        @include mixins.size;
+        width: 100%;
         padding: 40px;
         align-items: flex-start;
-        border: 2px solid hsl(var(--primary-2));
         border-radius: 6px;
-        backdrop-filter: brightness(0.5);
     };
 
     p {
@@ -140,51 +137,40 @@
 }
 
 .image {
-    position: relative;
     grid-column: 1 / 5;
     grid-row: 1 / -1;
-    aspect-ratio: 16 / 10;
     max-width: 650px;
     display: flex;
+    border: 2px solid hsl(var(--primary-2));
     border-radius: 6px;
+    @include mixins.box-shadow();
 
     @include mixins.media-query(s) {
         z-index: -1;
         position: absolute;
         inset: 0 0 0 0;
-        aspect-ratio: unset;
         background-color: hsl(0deg, 0%, 14%, 0.6);
-        border-radius: 7px;
     };
 
     a {
         @include mixins.size();
         border-radius: inherit;
 
+        @include mixins.media-query(s) {
+            filter: brightness(0.3);
+        };
+
         div {
-            @include mixins.media-query(s) {
-                @include mixins.size();
-                border-radius: inherit;
-            };
+            @include mixins.size();
 
             img {
                 @include mixins.size();
-                border: 2px solid hsl(var(--primary-2));
                 border-radius: inherit;
-                transition: filter 0.35s;
-                @include mixins.box-shadow();
 
                 @include mixins.media-query(s) {
                     object-fit: cover;
-                    border: none;
                 }
             }
         }
-    }
-
-    button {
-        position: absolute;
-        top: 5px;
-        right: 5px;
     }
 }
