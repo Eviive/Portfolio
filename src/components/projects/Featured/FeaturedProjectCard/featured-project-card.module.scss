@@ -22,7 +22,7 @@
         aspect-ratio: 16 / 10;
     };
 
-    &:nth-of-type(even) {
+    :nth-of-type(even) > & {
         justify-items: start;
 
         .description {
@@ -39,7 +39,7 @@
         }
     }
 
-    &:nth-of-type(odd) .logos div {
+    :nth-of-type(odd) > & .logos div {
         flex-direction: row-reverse;
     }
 }

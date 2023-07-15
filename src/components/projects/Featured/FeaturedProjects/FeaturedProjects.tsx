@@ -1,3 +1,4 @@
+import { ScrollReveal } from "@/components/common/client";
 import { Title } from "@/components/common/server";
 import { FeaturedProjectCard } from "@/components/projects/featured";
 import { ProjectService } from "@/services";
@@ -13,12 +14,19 @@ export const FeaturedProjects: FC = async () => {
         <>
             <Title title="Some Projects I've Built" />
             <ul className={styles.featured}>
-                {featuredProjects
-                    .sort((a, b) => a.sort - b.sort)
-                    .map((project, i) => (
-                        <FeaturedProjectCard key={i} project={project} />
-                    ))
-                }
+                <ScrollReveal
+                    multiple
+                    content={
+                        featuredProjects
+                            .sort((a, b) => a.sort - b.sort)
+                            .map((project, i) => (
+                                <FeaturedProjectCard key={i} project={project} />
+                            ))
+                    }
+                    options={{
+                        intervalDelay: 0
+                    }}
+                />
             </ul>
         </>
     );

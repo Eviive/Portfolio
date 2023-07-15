@@ -13,7 +13,7 @@ type Props = {
 
 export const FeaturedProjectCard: FC<Props> = ({ project }) => {
     return (
-        <li className={styles.card}>
+        <div className={styles.card}>
             <div className={styles.description}>
                 <div className={styles.title}>
                     <span>Featured Project</span>
@@ -57,6 +57,6 @@ export const FeaturedProjectCard: FC<Props> = ({ project }) => {
                     />
                 </Link>
             </div>
-        </li>
+        </div>
     );
 };

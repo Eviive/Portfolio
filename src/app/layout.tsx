@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 
 const RootLayout: FC<PropsWithChildren> = props => {
     return (
-        <html lang="en">
+        <html lang="en" className="sr">
             <body className={formatClassNames(inter.className, sourceCodePro.variable, montserrat.variable)}>
                 <Header />
                 <main className={styles.main}>

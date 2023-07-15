@@ -1,6 +1,6 @@
 import { About } from "@/components/about";
 import { Home } from "@/components/home";
-import { Projects as Projects } from "@/components/projects";
+import { Projects } from "@/components/projects";
 import type { NextPage } from "next";
 
 export const revalidate = 0;
