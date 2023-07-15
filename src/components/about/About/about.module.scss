@@ -2,7 +2,7 @@
 
 .things {
     position: relative;
-    padding: 6% 0 8%;
+    padding: max(6%, 50px) 0 max(8%, 60px);
     display: flex;
     flex-direction: column;
     gap: 50px;
@@ -21,7 +21,7 @@
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 50px;
+    gap: max(5%, 50px);
 
     @include mixins.media-query(s) {
         padding: 0 25px;

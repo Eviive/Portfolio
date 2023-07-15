@@ -36,7 +36,7 @@ export const ScrollReveal: FC<Props> = props => {
                         ...options
                     } = props?.options ?? {};
 
-                    let delay = props.options?.delay ?? 150;
+                    let delay = props.options?.delay ?? 100;
 
                     if (props.multiple) {
                         delay += i * (intervalDelay ?? 100);
@@ -44,10 +44,11 @@ export const ScrollReveal: FC<Props> = props => {
 
                     scrollRevealObject.reveal(el, {
                         origin: "bottom",
+                        duration: 500,
                         easing: "ease",
                         distance: "25%",
                         opacity: 0,
-                        scale: 0.75,
+                        scale: 0.9,
                         viewFactor: 0.75,
                         cleanup: true,
                         ...options,
