@@ -1,6 +1,7 @@
 {
-    "name": "Albert Vaillon",
-    "short_name": "Albert Vaillon",
+    "name": "Albert Vaillon - Portfolio",
+    "short_name": "A. Vaillon - Portfolio",
+    "start_url": "/",
     "icons": [
         {
             "src": "/android-chrome-192x192.png",
@@ -11,6 +12,12 @@
             "src": "/android-chrome-512x512.png",
             "sizes": "512x512",
             "type": "image/png"
+        },
+        {
+            "src": "/maskable-icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
         }
     ],
     "theme_color": "#1a1a1a",

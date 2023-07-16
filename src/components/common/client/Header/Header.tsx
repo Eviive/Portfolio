@@ -73,7 +73,7 @@ export const Header: FC = () => {
                         <Link href="/">
                             <NextImage
                                 src={logo}
-                                alt="Logo"
+                                alt="Albert Vaillon's logo"
                                 height={50}
                                 priority
                             />

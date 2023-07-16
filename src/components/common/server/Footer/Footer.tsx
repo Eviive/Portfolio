@@ -12,7 +12,7 @@ export const Footer: FC = () => {
                 href="https://github.com/Eviive/Portfolio"
                 blank
             >
-                Designed &amp; Built by Albert Vaillon
+                Designed &amp; built by Albert Vaillon
             </Link>
         </footer>
     );

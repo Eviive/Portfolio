@@ -8,7 +8,7 @@ export const Home: FC = () => {
             <div className={styles.hello}>
                 <span>Hi, I&apos;m</span>
                 <h1>Albert Vaillon</h1>
-                <h3>Computer science student</h3>
+                <h2>Computer science student</h2>
             </div>
         </section>
     );
