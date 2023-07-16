@@ -1,0 +1,14 @@
+@use "@/mixins";
+
+.projects {
+    padding: 0 13%;
+
+    @include mixins.media-query(s) {
+        --size: 260px;
+        padding: 0 25px;
+    };
+}
+
+.button {
+    min-width: 135px;
+}

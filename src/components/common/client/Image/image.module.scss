@@ -1,0 +1,12 @@
+.wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: inherit;
+
+    .loader {
+        position: absolute;
+        color: hsl(var(--accent-1));
+    }
+}
