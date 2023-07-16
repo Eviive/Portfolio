@@ -9,7 +9,7 @@ export const OtherProjects: FC = async () => {
 
     return (
         <>
-            <Title title="My Other Projects" />
+            <Title title="My other projects" />
             <OtherProjectsWrapper initialPage={otherProjectsPage} />
         </>
     );

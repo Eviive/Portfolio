@@ -12,7 +12,7 @@ export const FeaturedProjects: FC = async () => {
 
     return (
         <>
-            <Title title="Some Projects I've Built" />
+            <Title title="Some projects I've built" />
             <ul className={styles.featured}>
                 <ScrollReveal
                     multiple
