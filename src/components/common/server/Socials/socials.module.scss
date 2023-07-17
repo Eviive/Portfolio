@@ -1,0 +1,39 @@
+@use "@/mixins";
+
+.socials {
+    position: fixed;
+    bottom: 0;
+    left: 3%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+
+    @include mixins.media-query(s) {
+        position: static;
+        flex-direction: row;
+    };
+
+    @include mixins.pseudo($abs: false) {
+        @include mixins.size(.5px, 80px);
+        border-radius: 10px;
+        background-color: hsl(var(--secondary-2));
+
+        @include mixins.media-query(s) {
+            display: none;
+        };
+    };
+
+    .link {
+        display: grid;
+        place-items: center;
+
+        .discord {
+            transition: rotate 0.5s;
+
+            &:hover {
+                rotate: 360deg;
+            }
+        }
+    }
+}

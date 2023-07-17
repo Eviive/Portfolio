@@ -1,0 +1,14 @@
+.footer {
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    font-family: var(--font-mono);
+    font-size: .75em;
+
+    .link {
+        color: hsl(var(--secondary-2));
+    }
+}
