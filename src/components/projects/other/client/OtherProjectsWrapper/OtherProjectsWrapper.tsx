@@ -37,17 +37,17 @@ export const OtherProjectsWrapper: FC<Props> = props => {
         }));
     };
 
+    pagination.data.sort((a, b) => a.sort - b.sort);
+
     return (
         <>
             <GridLayout className={styles.projects} size="300px">
                 <ScrollReveal
                     multiple
                     content={
-                        pagination.data
-                            .sort((a, b) => a.sort - b.sort)
-                            .map((project, i) => (
-                                <OtherProjectCard key={i} project={project} />
-                            ))
+                        pagination.data.map(project => (
+                            <OtherProjectCard key={project.id} project={project} />
+                        ))
                     }
                 />
             </GridLayout>

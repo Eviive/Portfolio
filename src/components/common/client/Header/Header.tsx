@@ -80,8 +80,8 @@ export const Header: FC = () => {
                         </Link>
                     </div>
                     <div className={styles.links}>
-                        {anchors.map((a, i) => (
-                            <Link key={i} href={`/#${a}`}>
+                        {anchors.map(a => (
+                            <Link key={a} href={`/#${a}`}>
                                 {a}
                             </Link>
                         ))}

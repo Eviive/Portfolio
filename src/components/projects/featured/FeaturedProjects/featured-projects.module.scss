@@ -11,7 +11,7 @@
     @include mixins.media-query(s) {
         padding: 0 25px;
         gap: 70px;
-    };
+    }
 
     li {
         flex-grow: 1;

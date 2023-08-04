@@ -8,7 +8,7 @@ type Props = {
     reset: () => void;
 };
 
-export const Error: FC<Props> = props => {
+const ErrorPage: FC<Props> = props => {
 
     useEffect(() => {
         console.error(props.error);
@@ -24,4 +24,4 @@ export const Error: FC<Props> = props => {
     );
 };
 
-export default Error;
+export default ErrorPage;

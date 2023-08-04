@@ -26,7 +26,7 @@
         @include mixins.size();
         @include mixins.box-shadow($down: 5px, $blur: 25px);
         transition: opacity 0.5s;
-    };
+    }
 
     &:hover::after {
         opacity: 1;

@@ -15,14 +15,14 @@
         @include mixins.media-query(s) {
             margin-left: 0;
             font-size: 1.3em;
-        };
+        }
 
         @include mixins.pseudo($pos: 40% auto auto 0) {
             @include mixins.size(.35em);
             aspect-ratio: 1 / 1;
             background-color: hsl(var(--accent-1));
             border-radius: 50%;
-        };
+        }
     }
 
     span {
@@ -34,6 +34,6 @@
         @include mixins.media-query(s) {
             max-width: 250px;
             flex: 1;
-        };
+        }
     }
 }
