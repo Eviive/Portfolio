@@ -49,6 +49,9 @@ export const OtherProjectsWrapper: FC<Props> = props => {
                             <OtherProjectCard key={project.id} project={project} />
                         ))
                     }
+                    options={{
+                        intervalDelay: 50
+                    }}
                 />
             </GridLayout>
             {!pagination.isLastPage && (

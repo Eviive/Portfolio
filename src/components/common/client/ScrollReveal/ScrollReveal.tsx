@@ -69,7 +69,7 @@ export const ScrollReveal: FC<Props> = props => {
         return () => {
             scrollRevealObject?.destroy();
         };
-    }, [ props ]);
+    }, [ props.content, props.multiple, props.options ]);
 
     const wrapComponent = (component: ReactElement, i: number = 0) => (
         <li
