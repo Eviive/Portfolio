@@ -14,7 +14,7 @@ type HeaderState = {
     isScrolling: boolean;
 };
 
-const anchors = [ "home", "about", "projects", "contact" ];
+const anchors = [ "home", "about", "projects" ];
 
 export const Header: FC = () => {
 
