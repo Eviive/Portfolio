@@ -1,7 +1,10 @@
 "use client";
 
+import { Button } from "@/components/common/client";
 import type { FC } from "react";
 import { useEffect } from "react";
+
+import styles from "./error.module.scss";
 
 type Props = {
     error: Error;
@@ -15,11 +18,11 @@ const ErrorPage: FC<Props> = props => {
     }, [ props.error ]);
 
     return (
-        <div>
-            <h2>Something went wrong!</h2>
-            <button onClick={props.reset}>
+        <div className={styles.wrapper}>
+            <h1 className={styles.title}>Something went wrong!</h1>
+            <Button handleClick={props.reset}>
                 Try again
-            </button>
+            </Button>
         </div>
     );
 };
