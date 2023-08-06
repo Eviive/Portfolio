@@ -1,0 +1,20 @@
+@use "@/mixins";
+
+.wrapper {
+    flex-grow: 1;
+    @include mixins.size();
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+
+    .title {
+        margin: 0 1em;
+        font-family: var(--font-title);
+        font-size: 3em;
+        font-weight: 900;
+        letter-spacing: 3px;
+        text-align: center;
+    }
+}

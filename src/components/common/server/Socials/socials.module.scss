@@ -12,7 +12,7 @@
     @include mixins.media-query(s) {
         position: static;
         flex-direction: row;
-    };
+    }
 
     @include mixins.pseudo($abs: false) {
         @include mixins.size(.5px, 80px);
@@ -21,8 +21,8 @@
 
         @include mixins.media-query(s) {
             display: none;
-        };
-    };
+        }
+    }
 
     .link {
         display: grid;

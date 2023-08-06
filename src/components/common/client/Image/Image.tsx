@@ -22,7 +22,7 @@ export const Image: FC<Props> = props => {
     const [ loading, setLoading ] = useState<boolean | null>(null);
 
     useEffect(() => {
-        setLoading(prevState => prevState === null ? true : prevState);
+        setLoading(prevState => prevState ?? true);
     }, []);
 
     return (

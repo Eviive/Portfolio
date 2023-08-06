@@ -30,6 +30,7 @@ export const ScrollReveal: FC<Props> = props => {
 
             refs.current
                 .filter(isNotNullOrUndefined)
+                .filter(el => !el.hasAttribute("data-sr"))
                 .forEach((el, i) => {
                     const {
                         intervalDelay,
@@ -60,13 +61,15 @@ export const ScrollReveal: FC<Props> = props => {
                         },
                         delay: delay
                     });
+
+                    el.setAttribute("data-sr", "");
                 });
         })();
 
         return () => {
             scrollRevealObject?.destroy();
         };
-    }, [ props ]);
+    }, [ props.content, props.multiple, props.options ]);
 
     const wrapComponent = (component: ReactElement, i: number = 0) => (
         <li

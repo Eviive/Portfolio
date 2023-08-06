@@ -12,6 +12,9 @@ type Props = {
 };
 
 export const FeaturedProjectCard: FC<Props> = ({ project }) => {
+
+    project.skills.sort((a, b) => a.sort - b.sort);
+
     return (
         <div className={styles.card}>
             <div className={styles.description}>
@@ -24,18 +27,15 @@ export const FeaturedProjectCard: FC<Props> = ({ project }) => {
                 <p>{project.description}</p>
                 <div className={styles.logos}>
                     <div className={styles.skills}>
-                        {project.skills
-                            .sort((a, b) => a.sort - b.sort)
-                            .map((skill, i) => (
-                                <Image
-                                    key={i}
-                                    src={ImageService.getImageUrl(skill.image) ?? ""}
-                                    alt={skill.image.alt}
-                                    title={skill.name}
-                                    width={36}
-                                />
-                            ))
-                        }
+                        {project.skills.map(s => (
+                            <Image
+                                key={s.id}
+                                src={ImageService.getImageUrl(s.image) ?? ""}
+                                alt={s.image.alt}
+                                title={s.name}
+                                width={36}
+                            />
+                        ))}
                     </div>
                     <div className={styles.links}>
                         <Link href={project.repoUrl} blank>

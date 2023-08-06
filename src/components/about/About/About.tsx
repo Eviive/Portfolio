@@ -15,8 +15,8 @@ export const About: FC = () => {
                     <ScrollReveal
                         multiple
                         content={
-                            thingsData.map((content, i) => (
-                                <Thing key={i} {...content} />
+                            thingsData.map(content => (
+                                <Thing key={content.name} {...content} />
                             ))
                         }
                     />

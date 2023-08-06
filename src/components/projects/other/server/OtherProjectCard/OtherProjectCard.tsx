@@ -10,16 +10,19 @@ type Props = {
 };
 
 export const OtherProjectCard: FC<Props> = ({ project }) => {
+
+    project.skills.sort((a, b) => a.sort - b.sort);
+
     return (
         <div className={styles.card}>
             <div>
                 <div className={styles.icons}>
                     <FiFolder size={40} strokeWidth={1} className={styles.folder} />
                     <div className={styles.links}>
-                        <Link href={project.repoUrl}>
+                        <Link href={project.repoUrl} blank>
                             <FiGithub size={22} />
                         </Link>
-                        <Link href={project.demoUrl}>
+                        <Link href={project.demoUrl} blank>
                             <FiExternalLink size={22} />
                         </Link>
                     </div>
@@ -30,12 +33,9 @@ export const OtherProjectCard: FC<Props> = ({ project }) => {
                 <p>{project.description}</p>
             </div>
             <ul className={styles.skills}>
-                {project.skills
-                    .sort((a, b) => a.sort - b.sort)
-                    .map((skill, i) => (
-                        <li key={i}>{skill.name}</li>
-                    ))
-                }
+                {project.skills.map(s => (
+                    <li key={s.id}>{s.name}</li>
+                ))}
             </ul>
         </div>
     );
