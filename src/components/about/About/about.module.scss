@@ -13,7 +13,7 @@
         @include mixins.size();
         transform: skewY(-2deg);
         @include mixins.box-shadow($down: 0px);
-    };
+    }
 }
 
 .cards {
@@ -25,7 +25,7 @@
 
     @include mixins.media-query(s) {
         padding: 0 25px;
-    };
+    }
 
     li {
         flex: 0 1 250px;

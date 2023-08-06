@@ -10,6 +10,8 @@ export const FeaturedProjects: FC = async () => {
 
     const featuredProjects = await ProjectService.findAllFeatured();
 
+    featuredProjects.sort((a, b) => a.sort - b.sort);
+
     return (
         <>
             <Title title="Some projects I've built" />
@@ -17,11 +19,9 @@ export const FeaturedProjects: FC = async () => {
                 <ScrollReveal
                     multiple
                     content={
-                        featuredProjects
-                            .sort((a, b) => a.sort - b.sort)
-                            .map((project, i) => (
-                                <FeaturedProjectCard key={i} project={project} />
-                            ))
+                        featuredProjects.map(project => (
+                            <FeaturedProjectCard key={project.id} project={project} />
+                        ))
                     }
                     options={{
                         intervalDelay: 0

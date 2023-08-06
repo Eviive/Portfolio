@@ -9,7 +9,7 @@
 
     @include mixins.media-query(s) {
         align-items: center;
-    };
+    }
 
     canvas {
         z-index: -1;
@@ -27,7 +27,7 @@
     @include mixins.media-query(s) {
         padding-left: 0;
         font-size: clamp(10px, 3vw, 15px);
-    };
+    }
 
     span {
         font-family: var(--font-mono);

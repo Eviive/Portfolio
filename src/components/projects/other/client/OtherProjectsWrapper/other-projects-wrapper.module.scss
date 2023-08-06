@@ -6,7 +6,7 @@
     @include mixins.media-query(s) {
         --size: 260px;
         padding: 0 25px;
-    };
+    }
 }
 
 .button {
