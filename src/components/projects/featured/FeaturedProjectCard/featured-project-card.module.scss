@@ -38,10 +38,6 @@
             grid-column: 3 / -1;
         }
     }
-
-    :nth-of-type(odd) > & .logos div {
-        flex-direction: row-reverse;
-    }
 }
 
 .description {
