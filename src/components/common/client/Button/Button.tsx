@@ -1,9 +1,9 @@
 "use client";
 
+import { Loader } from "@/components/common/server";
 import { useDictionary } from "@/hooks/useDictionary";
 import { formatClassNames } from "@/lib/utils";
 import type { FC, PropsWithChildren } from "react";
-import { ClipLoader } from "react-spinners";
 
 import styles from "./button.module.scss";
 
@@ -24,12 +24,12 @@ export const Button: FC<PropsWithChildren<Props>> = props => {
     return (
         <button
             className={formatClassNames(props.className, styles.button)}
-            onClick={!props.loading ? props.handleClick : undefined}
+            onClick={props.loading ? undefined : props.handleClick}
         >
             {props.loading
                 ? (
                     <>
-                        <ClipLoader size={20} color="hsl(var(--secondary-1))" />
+                        <Loader size={20} color="hsl(var(--secondary-1))" />
                         {dico.loading}
                     </>
                 )

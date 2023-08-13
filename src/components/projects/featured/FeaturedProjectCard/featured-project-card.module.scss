@@ -140,7 +140,9 @@
 .image {
     grid-column: 1 / 5;
     grid-row: 1 / -1;
+    width: 100%;
     max-width: 650px;
+    aspect-ratio: 16 / 10;
     display: flex;
     border: 2px solid hsl(var(--primary-2));
     border-radius: 6px;
