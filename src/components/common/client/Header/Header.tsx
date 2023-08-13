@@ -1,6 +1,8 @@
 "use client";
 
 import { Link } from "@/components/common/server";
+import { useI18nContext } from "@/contexts/I18nContext";
+import { useDictionary } from "@/hooks/useDictionary";
 import { formatClassNames } from "@/lib/utils";
 import logo from "@/public/logo.svg";
 import NextImage from "next/image";
@@ -9,14 +11,24 @@ import { useEffect, useState } from "react";
 
 import styles from "./header.module.scss";
 
+const anchors = [ "home", "about", "projects" ] as const;
+type Anchor = typeof anchors[number];
+
+export type HeaderDictionary = {
+    anchors: Record<Anchor, string>;
+    logoAlt: string;
+};
+
 type HeaderState = {
     isOnTop: boolean;
     isScrolling: boolean;
 };
 
-const anchors = [ "home", "about", "projects" ];
-
 export const Header: FC = () => {
+
+    const locale = useI18nContext();
+
+    const dico = useDictionary("header");
 
     const [ headerState, setHeaderState ] = useState<HeaderState>({
         isOnTop: true,
@@ -70,10 +82,10 @@ export const Header: FC = () => {
             <nav className={styles.content}>
                 <div className={styles.left}>
                     <div className={styles.logo}>
-                        <Link href="/">
+                        <Link href={`/${locale}`}>
                             <NextImage
                                 src={logo}
-                                alt="Albert Vaillon's logo"
+                                alt={dico.logoAlt}
                                 height={50}
                                 priority
                             />
@@ -81,8 +93,8 @@ export const Header: FC = () => {
                     </div>
                     <div className={styles.links}>
                         {anchors.map(a => (
-                            <Link key={a} href={`/#${a}`}>
-                                {a}
+                            <Link key={a} href={`/${locale}#${a}`}>
+                                {dico.anchors[a]}
                             </Link>
                         ))}
                     </div>

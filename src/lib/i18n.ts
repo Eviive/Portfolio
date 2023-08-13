@@ -13,6 +13,6 @@ export const localeDictionary: Record<Locale, string> = {
 
 const dictionaries: Record<Locale, Dictionary> = { en, fr };
 
-export const getDictionary = <K extends keyof Dictionary>(locale: Locale, dictionaryKey: K): Dictionary[K] => {
-    return dictionaries[locale][dictionaryKey];
+export const getDictionary = <K extends keyof Dictionary>(locale: Locale, key: K): Dictionary[K] => {
+    return dictionaries[locale][key];
 };
