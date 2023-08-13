@@ -23,7 +23,7 @@ export const About: FC = () => {
                         multiple
                         content={
                             thingsData.map(content => (
-                                <Thing key={content.name} {...content} />
+                                <Thing key={content.name.en} {...content} />
                             ))
                         }
                     />
