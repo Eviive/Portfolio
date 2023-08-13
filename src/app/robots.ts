@@ -5,7 +5,8 @@ const robots = (): MetadataRoute.Robots => ({
         userAgent: "*",
         allow: [ "/", "/api/og/*" ]
     },
-    host: process.env.BASE_URL
+    host: process.env.BASE_URL,
+    sitemap: `${process.env.BASE_URL}/sitemap.xml`
 });
 
 export default robots;
