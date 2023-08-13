@@ -32,6 +32,10 @@
             @include mixins.media-query(m) {
                 grid-column: 1 / 5;
             }
+
+            .logos > div {
+                justify-content: flex-start;
+            }
         }
 
         .image {
@@ -114,8 +118,9 @@
     align-items: inherit;
     gap: var(--gap);
 
-    div {
+    > div {
         display: flex;
+        justify-content: flex-end;
         align-items: center;
         flex-wrap: wrap;
         gap: var(--gap);
