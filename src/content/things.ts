@@ -1,4 +1,4 @@
-import type { Locale } from "@/lib/i18n";
+import type { Locale } from "@/libs/i18n";
 import type { IconType } from "react-icons";
 import { FaLaptopCode, FaMicrochip, FaSquareJs } from "react-icons/fa6";
 

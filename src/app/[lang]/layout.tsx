@@ -1,10 +1,10 @@
 import { Header } from "@/components/common/client";
 import { Footer } from "@/components/common/server";
 import { I18nContextProvider } from "@/contexts/I18nContext";
-import { inter, montserrat, sourceCodePro } from "@/lib/fonts";
-import type { Locale } from "@/lib/i18n";
-import { getDictionary, locales } from "@/lib/i18n";
-import { formatClassNames } from "@/lib/utils";
+import { inter, montserrat, sourceCodePro } from "@/libs/fonts";
+import type { Locale } from "@/libs/i18n";
+import { getDictionary, locales } from "@/libs/i18n";
+import { formatClassNames } from "@/libs/utils";
 import "@/styles/reset.scss";
 import type { Metadata } from "next";
 import type { FC, PropsWithChildren } from "react";

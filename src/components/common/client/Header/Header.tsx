@@ -3,7 +3,7 @@
 import { Link } from "@/components/common/server";
 import { useI18nContext } from "@/contexts/I18nContext";
 import { useDictionary } from "@/hooks/useDictionary";
-import { formatClassNames } from "@/lib/utils";
+import { formatClassNames } from "@/libs/utils";
 import logo from "@/public/logo.svg";
 import NextImage from "next/image";
 import type { FC } from "react";

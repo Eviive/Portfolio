@@ -1,4 +1,4 @@
-import { formatClassNames } from "@/lib/utils";
+import { formatClassNames } from "@/libs/utils";
 import type { CSSProperties, FC, PropsWithChildren } from "react";
 
 import styles from "./grid.module.scss";

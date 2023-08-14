@@ -1,4 +1,4 @@
-import { defaultLocale, locales } from "@/lib/i18n";
+import { defaultLocale, locales } from "@/libs/i18n";
 import { match } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
 import type { NextMiddleware, NextRequest } from "next/server";
