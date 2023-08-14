@@ -10,7 +10,7 @@ export const fr: Dictionary = {
     },
 
     home: {
-        hi: "Salut, je suis",
+        hi: "Salut, je m'appelle",
         occupation: "Étudiant en informatique"
     },
     about: {
