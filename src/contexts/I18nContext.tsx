@@ -7,7 +7,7 @@ export const I18nContextProvider = I18nContext.Provider;
 
 export const useI18nContext = () => {
     const i18nContext = useContext(I18nContext);
-    if (!i18nContext) {
+    if (i18nContext === null) {
         throw new Error("useI18nContext called without I18nContextProvider");
     }
     return i18nContext;
