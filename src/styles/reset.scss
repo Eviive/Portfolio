@@ -50,6 +50,10 @@ html {
         --header-height: 80px;
 
         background-color: hsl(var(--primary-1));
+
+        background-image: url('/pattern.svg');
+        background-attachment: fixed;
+
         color: hsl(var(--secondary-1));
         font-size: 16px;
         -webkit-font-smoothing: antialiased;
