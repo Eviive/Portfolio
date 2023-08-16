@@ -61,15 +61,19 @@ export const Header: FC = () => {
                 isScrolling: isScrolling ?? prevState.isScrolling
             }));
         };
+        let animationFrameId: number;
         const onScroll = () => {
             if (!ticking) {
-                window.requestAnimationFrame(updateScroll);
+                animationFrameId = window.requestAnimationFrame(updateScroll);
                 ticking = true;
             }
         };
         window.addEventListener("scroll", onScroll);
 
-        return () => window.removeEventListener("scroll", onScroll);
+        return () => {
+            window.cancelAnimationFrame(animationFrameId);
+            window.removeEventListener("scroll", onScroll);
+        };
     }, []);
 
     const headerClassName = formatClassNames(
