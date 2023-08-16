@@ -16,18 +16,18 @@ const getLocale = (req: NextRequest): string => {
 export const middleware: NextMiddleware = req => {
     const { pathname } = req.nextUrl;
 
-    const pathnameIsMissingLocale = locales.every(
-        locale => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
-    );
+    const isLocaleMissing = !locales.some(locale => pathname.startsWith(`/${locale}`));
 
-    if (!pathnameIsMissingLocale) {
+    if (!isLocaleMissing) {
         return;
     }
 
-    const locale = getLocale(req);
-    const newUrl = new URL(`/${locale}${pathname.startsWith("/") ? "" : "/"}${pathname}`, req.url);
+    const locale = getLocale(req),
+          newUrl = new URL(`/${locale}${pathname.startsWith("/") ? "" : "/"}${pathname}`, req.url);
 
-    return NextResponse.redirect(newUrl);
+    return pathname === "/"
+        ? NextResponse.rewrite(newUrl)
+        : NextResponse.redirect(newUrl);
 };
 
 export const config = {
