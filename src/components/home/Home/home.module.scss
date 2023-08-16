@@ -2,8 +2,9 @@
 
 .home {
     box-sizing: border-box;
-    min-height: calc(100vh - var(--header-height));
-    min-height: calc(100svh - var(--header-height));
+    padding-top: var(--header-height);
+    min-height: 100vh;
+    min-height: 100svh;
     display: flex;
     flex-direction: column;
 
@@ -20,12 +21,12 @@
 
 .hello {
     width: max-content;
-    padding: 20vh 0 0 15%;
+    margin: 20vh 0 0 15%;
     display: flex;
     flex-direction: column;
 
     @include mixins.media-query(s) {
-        padding-left: 0;
+        margin-left: 0;
         font-size: clamp(10px, 3vw, 15px);
     }
 
