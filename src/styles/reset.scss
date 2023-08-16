@@ -47,11 +47,11 @@ html {
         --accent-1: 193deg, 95%, 68%;
         --accent-2: 230deg, 84%, 69%;
 
-        --header-height: 80px;
+        --header-gap: 10px;
+        --header-height: 60px;
 
         background-color: hsl(var(--primary-1));
-
-        background-image: url('/pattern.svg');
+        background-image: url(/pattern.svg);
         background-attachment: fixed;
 
         color: hsl(var(--secondary-1));

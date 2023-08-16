@@ -78,19 +78,21 @@ export const Header: FC = () => {
 
     const headerClassName = formatClassNames(
         styles.header,
-        headerState.isOnTop ? styles.top : (headerState.isScrolling && styles.hidden)
+        headerState.isOnTop
+            ? styles.top
+            : (headerState.isScrolling && styles.hidden)
     );
 
     return (
         <header className={headerClassName}>
-            <nav className={styles.content}>
+            <nav className={styles.nav}>
                 <div className={styles.left}>
                     <div className={styles.logo}>
                         <Link href={`/${locale}`}>
                             <NextImage
                                 src={logo}
                                 alt={dico.logoAlt}
-                                height={50}
+                                height={40}
                                 priority
                             />
                         </Link>

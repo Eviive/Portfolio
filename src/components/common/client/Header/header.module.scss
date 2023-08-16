@@ -2,35 +2,28 @@
 
 .header {
     z-index: 100;
-    position: fixed;
+    position: sticky;
+    top: var(--header-gap);
+    margin: 0 auto;
     padding: 0 10%;
-    @include mixins.size(100%, var(--header-height));
+    height: var(--header-height);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: hsl(var(--primary-1), 0.7);
-    backdrop-filter: blur(8px);
+    border-radius: 8px;
+    background-color: hsl(0deg, 0%, 8%, 0.9);
+    backdrop-filter: blur(10px);
     color: hsl(var(--secondary-1));
     font-family: var(--font-mono);
     transition: background-color 0.35s, translate 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
-
-    @include mixins.pseudo($pos: 0 0 0 0) {
-        z-index: -1;
-        @include mixins.box-shadow();
-        transition: opacity 0.5s;
-    }
-
-    &.top::after {
-        opacity: 0;
-    }
+    @include mixins.box-shadow($down: 2px, $blur: 5px, $spread: 2px, $color: hsl(0deg, 0%, 8%, 0.7));
 
     &.hidden {
         --translateY: calc(var(--header-height) * -1);
         translate: 0 var(--translateY);
     }
 
-    .content {
-        width: 100%;
+    .nav {
         display: flex;
         justify-content: space-between;
         align-items: center;

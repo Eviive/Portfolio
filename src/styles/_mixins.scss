@@ -3,8 +3,8 @@
     height: $height;
 }
 
-@mixin box-shadow($right: 0px, $down: 10px, $blur: 30px, $spread: -15px) {
-    box-shadow: $right $down $blur $spread hsl(0deg, 0%, 0%, 0.7);
+@mixin box-shadow($right: 0px, $down: 10px, $blur: 30px, $spread: -15px, $color: hsl(0deg, 0%, 0%, 0.7)) {
+    box-shadow: $right $down $blur $spread $color;
 }
 
 @mixin media-query($size) {
