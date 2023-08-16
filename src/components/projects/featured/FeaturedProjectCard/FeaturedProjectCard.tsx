@@ -1,5 +1,6 @@
 import { Image } from "@/components/common/client";
 import { Link } from "@/components/common/server";
+import { useI18nContext } from "@/contexts/I18nContext";
 import { useDictionary } from "@/hooks/useDictionary";
 import { ImageService } from "@/services";
 import type { Project } from "@/types/entities";
@@ -18,6 +19,8 @@ type Props = {
 
 export const FeaturedProjectCard: FC<Props> = ({ project }) => {
 
+    const locale = useI18nContext();
+
     const dico = useDictionary("featuredProjectCard");
 
     project.skills.sort((a, b) => a.sort - b.sort);
@@ -31,14 +34,14 @@ export const FeaturedProjectCard: FC<Props> = ({ project }) => {
                         <h3>{project.title}</h3>
                     </Link>
                 </div>
-                <p>{project.description}</p>
+                <p>{locale === "en" ? project.descriptionEn : project.descriptionFr}</p>
                 <div className={styles.logos}>
                     <div className={styles.skills}>
                         {project.skills.map(s => (
                             <Image
                                 key={s.id}
                                 src={ImageService.getImageUrl(s.image) ?? ""}
-                                alt={s.image.alt}
+                                alt={locale === "en" ? s.image.altEn : s.image.altFr}
                                 title={s.name}
                                 width={36}
                             />
@@ -58,7 +61,7 @@ export const FeaturedProjectCard: FC<Props> = ({ project }) => {
                 <Link href={project.demoUrl} blank>
                     <Image
                         src={ImageService.getImageUrl(project.image) ?? ""}
-                        alt={project.image.alt}
+                        alt={locale === "en" ? project.image.altEn : project.image.altFr}
                         width={1080}
                         height={675}
                     />
