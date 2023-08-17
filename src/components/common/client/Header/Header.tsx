@@ -1,11 +1,14 @@
 "use client";
 
+import { Dropdown } from "@/components/common/client";
 import { Link } from "@/components/common/server";
 import { useI18nContext } from "@/contexts/I18nContext";
 import { useDictionary } from "@/hooks/useDictionary";
+import { defaultLocale, isLocale, Locale, localeDictionary, locales } from "@/libs/i18n";
 import { formatClassNames } from "@/libs/utils";
 import logo from "@/public/logo.svg";
 import NextImage from "next/image";
+import { usePathname } from "next/navigation";
 import type { FC } from "react";
 import { useEffect, useState } from "react";
 
@@ -29,6 +32,27 @@ export const Header: FC = () => {
     const locale = useI18nContext();
 
     const dico = useDictionary("header");
+
+    const pathname = usePathname();
+
+    const getLocaleLink = (linkLocale: Locale): string => {
+        const segments = pathname.split("/"),
+              firstSegment = segments[1];
+
+        segments[1] = linkLocale;
+
+        if (linkLocale === defaultLocale) {
+            if (isLocale(firstSegment)) {
+                if (firstSegment !== defaultLocale) {
+                    segments[1] = "";
+                }
+            } else {
+                segments[1] = "";
+            }
+        }
+
+        return segments.join("/");
+    };
 
     const [ headerState, setHeaderState ] = useState<HeaderState>({
         isOnTop: true,
@@ -104,6 +128,15 @@ export const Header: FC = () => {
                             </Link>
                         ))}
                     </div>
+                </div>
+                <div className={styles.right}>
+                    <Dropdown
+                        items={locales.map(l => ({
+                            text: localeDictionary[l],
+                            href: getLocaleLink(l),
+                            isSelected: l === locale
+                        }))}
+                    />
                 </div>
             </nav>
         </header>

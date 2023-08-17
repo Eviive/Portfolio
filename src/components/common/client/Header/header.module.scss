@@ -5,35 +5,30 @@
     position: sticky;
     top: var(--header-gap);
     margin: 0 auto;
-    padding: 0 10%;
+    padding: 10px 20px;
     height: var(--header-height);
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-radius: 8px;
-    background-color: hsl(0deg, 0%, 8%, 0.9);
-    backdrop-filter: blur(10px);
+    background-color: hsl(0deg, 0%, 6%, 0.8);
+    backdrop-filter: blur(8px);
     color: hsl(var(--secondary-1));
     font-family: var(--font-mono);
-    transition: background-color 0.35s, translate 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
-    @include mixins.box-shadow($down: 2px, $blur: 5px, $spread: 2px, $color: hsl(0deg, 0%, 8%, 0.7));
-
-    &.hidden {
-        --translateY: calc(var(--header-height) * -1);
-        translate: 0 var(--translateY);
-    }
+    @include mixins.box-shadow($down: 2px, $blur: 5px, $spread: 2px, $color: hsl(0deg, 0%, 6%, 0.6));
 
     .nav {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        gap: 50px;
     }
 }
 
 .left {
     display: flex;
     align-items: center;
-    gap: 50px;
+    gap: 20px;
 
     .logo a {
         display: flex;
@@ -41,7 +36,7 @@
 
     .links {
         display: flex;
-        gap: 25px;
+        gap: 20px;
         text-transform: capitalize;
     }
 }
