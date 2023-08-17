@@ -1,0 +1,62 @@
+@use "@/mixins";
+
+.dropdown {
+    --item-padding: 8px 16px;
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: stretch;
+
+    .button {
+        padding: var(--item-padding);
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        svg {
+            transition: rotate 0.2s;
+        }
+    }
+
+    .menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        min-width: 100%;
+        display: none;
+        background-color: hsl(var(--header-bg), 0.9);
+        border-radius: 0 0 8px 8px;
+        @include mixins.box-shadow($down: 2px, $blur: 5px, $spread: 2px, $color: hsl(var(--header-bg), 0.6));
+
+        @include mixins.pseudo($loc: before, $pos: 0 0 0 0) {
+            z-index: -1;
+            backdrop-filter: blur(var(--header-blur));
+            border-radius: inherit;
+        }
+
+        li {
+            height: var(--header-height);
+
+            a {
+                padding: var(--item-padding);
+                @include mixins.size();
+                display: flex;
+                align-items: center;
+            }
+
+            &:last-child {
+                border-radius: inherit;
+            }
+        }
+    }
+
+    &.open {
+        .button svg {
+            rotate: 180deg;
+        }
+
+        .menu {
+            display: block;
+        }
+    }
+}

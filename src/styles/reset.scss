@@ -47,8 +47,8 @@ html {
         --accent-1: 193deg, 95%, 68%;
         --accent-2: 230deg, 84%, 69%;
 
-        --header-gap: 10px;
         --header-height: 60px;
+        --header-gap: 21px;
 
         background-color: hsl(var(--primary-1));
         background-image: url(/pattern.svg);
@@ -59,7 +59,6 @@ html {
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
 
-        min-height: 100vh;
         min-height: 100dvh;
         display: flex;
         flex-direction: column;

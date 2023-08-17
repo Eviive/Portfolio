@@ -1,7 +1,11 @@
 "use client";
 
+import { formatClassNames } from "@/libs/utils";
 import type { FC } from "react";
 import { useState } from "react";
+import { FaChevronDown } from "react-icons/fa6";
+
+import styles from "./dropdown.module.scss";
 
 type DropdownItem = {
     text: string;
@@ -18,12 +22,23 @@ export const Dropdown: FC<Props> = props => {
     const [ isOpen, setIsOpen ] = useState(false);
 
     return (
-        <>
-            {props.items.map(i => (
-                <a key={i.text} href={i.href}>
-                    {i.text}
-                </a>
-            ))}
-        </>
+        <div className={formatClassNames(styles.dropdown, isOpen && styles.open)}>
+            <button className={styles.button} onClick={() => setIsOpen(prevOpen => !prevOpen)}>
+                {props.items.find(i => i.isSelected)?.text ?? props.items[0].text}
+                <FaChevronDown size={15} />
+            </button>
+            <ul className={styles.menu}>
+                {props.items
+                    .filter(i => !i.isSelected)
+                    .map(i => (
+                        <li key={i.text}>
+                            <a href={i.href}>
+                                {i.text}
+                            </a>
+                        </li>
+                    ))
+                }
+            </ul>
+        </div>
     );
 };

@@ -1,41 +1,57 @@
 @use "@/mixins";
 
 .header {
+    --header-bg: 0deg, 0%, 6%;
+    --header-blur: 8px;
     z-index: 100;
-    position: sticky;
+    position: fixed;
     top: var(--header-gap);
+    left: 50%;
+    translate: -50%;
     margin: 0 auto;
-    padding: 10px 20px;
+    padding: 0 20px;
     height: var(--header-height);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    background-color: hsl(var(--header-bg), 0.9);
     border-radius: 8px;
-    background-color: hsl(0deg, 0%, 6%, 0.8);
-    backdrop-filter: blur(8px);
     color: hsl(var(--secondary-1));
     font-family: var(--font-mono);
-    @include mixins.box-shadow($down: 2px, $blur: 5px, $spread: 2px, $color: hsl(0deg, 0%, 6%, 0.6));
+
+    @include mixins.pseudo($loc: before, $pos: 0 0 0 0) {
+        z-index: -1;
+        backdrop-filter: blur(var(--header-blur));
+        border-radius: inherit;
+        @include mixins.box-shadow($down: 2px, $blur: 5px, $spread: 2px, $color: hsl(var(--header-bg), 0.6));
+    }
 
     .nav {
+        height: var(--header-height);
         display: flex;
         justify-content: space-between;
-        align-items: center;
-        gap: 50px;
+        align-items: stretch;
+        gap: 40px;
+
+        .left, .right {
+            display: flex;
+            align-items: stretch;
+            gap: 20px;
+        }
     }
 }
 
 .left {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-
-    .logo a {
+    .logo {
         display: flex;
+        align-items: stretch;
+
+        a {
+            display: flex;
+            align-items: center;
+        }
     }
 
     .links {
         display: flex;
+        align-items: center;
         gap: 20px;
         text-transform: capitalize;
     }

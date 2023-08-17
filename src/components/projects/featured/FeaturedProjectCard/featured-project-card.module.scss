@@ -68,8 +68,8 @@
         min-width: 30ch;
         color: hsl(var(--secondary-1));
         line-height: 1.35em;
-        border-radius: 5px;
         background-color: hsl(var(--primary-2));
+        border-radius: 5px;
         @include mixins.box-shadow();
         transition: color 0.35s;
 
