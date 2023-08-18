@@ -14,7 +14,7 @@
 
         @include mixins.media-query(s) {
             margin-left: 0;
-            font-size: 1.3em;
+            font-size: 1.1em;
         }
 
         @include mixins.pseudo($pos: 40% auto auto 0) {

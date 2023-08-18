@@ -2,6 +2,7 @@
 
 import { Button, ScrollReveal } from "@/components/common/client";
 import { OtherProjectCard } from "@/components/projects/other/server";
+import { useDictionary } from "@/hooks/useDictionary";
 import { GridLayout } from "@/layouts";
 import { ProjectService } from "@/services";
 import type { PaginationState } from "@/types/app";
@@ -11,11 +12,17 @@ import { useState } from "react";
 
 import styles from "./other-projects-wrapper.module.scss";
 
+export type OtherProjectsWrapperDictionary = {
+    loadMoreButton: string;
+};
+
 type Props = {
     initialPage: Page<Project>
 };
 
 export const OtherProjectsWrapper: FC<Props> = props => {
+
+    const dico = useDictionary("otherProjectsWrapper");
 
     const [ pagination, setPagination ] = useState<PaginationState<Project>>({
         data: props.initialPage.content,
@@ -60,7 +67,7 @@ export const OtherProjectsWrapper: FC<Props> = props => {
                     loading={pagination.isLoadingMore}
                     handleClick={handleClick}
                 >
-                    Load more
+                    {dico.loadMoreButton}
                 </Button>
             )}
         </>

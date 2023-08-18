@@ -1,91 +1,66 @@
 "use client";
 
+import { Dropdown } from "@/components/common/client";
 import { Link } from "@/components/common/server";
-import { formatClassNames } from "@/lib/utils";
+import { useI18nContext } from "@/contexts/I18nContext";
+import { useDictionary } from "@/hooks/useDictionary";
+import { localeDictionary, locales } from "@/libs/i18n";
+import { extractLocaleFromPathname, formatUriWithLocale } from "@/libs/utils";
 import logo from "@/public/logo.svg";
 import NextImage from "next/image";
+import { usePathname } from "next/navigation";
 import type { FC } from "react";
-import { useEffect, useState } from "react";
 
 import styles from "./header.module.scss";
 
-type HeaderState = {
-    isOnTop: boolean;
-    isScrolling: boolean;
-};
+const anchors = [ "home", "about", "projects" ] as const;
+type Anchor = typeof anchors[number];
 
-const anchors = [ "home", "about", "projects" ];
+export type HeaderDictionary = {
+    anchors: Record<Anchor, string>;
+    logoAlt: string;
+};
 
 export const Header: FC = () => {
 
-    const [ headerState, setHeaderState ] = useState<HeaderState>({
-        isOnTop: true,
-        isScrolling: false
-    });
+    const locale = useI18nContext();
 
-    useEffect(() => {
-        setHeaderState(prevState => ({
-            ...prevState,
-            isOnTop: window.scrollY === 0
-        }));
-    }, []);
+    const dico = useDictionary("header");
 
-    useEffect(() => {
-        let lastScrollY = window.scrollY;
-        let ticking = false;
-        const updateScroll = () => {
-            const scrollY = window.scrollY;
-            let isScrolling: boolean | undefined = undefined;
-            if (Math.abs(scrollY - lastScrollY) < 0) {
-                ticking = false;
-            } else {
-                isScrolling = scrollY > lastScrollY;
-                lastScrollY = scrollY > 0 ? scrollY : 0;
-                ticking = false;
-            }
-            setHeaderState(prevState => ({
-                ...prevState,
-                isOnTop: scrollY === 0,
-                isScrolling: isScrolling ?? prevState.isScrolling
-            }));
-        };
-        const onScroll = () => {
-            if (!ticking) {
-                window.requestAnimationFrame(updateScroll);
-                ticking = true;
-            }
-        };
-        window.addEventListener("scroll", onScroll);
-
-        return () => window.removeEventListener("scroll", onScroll);
-    }, []);
-
-    const headerClassName = formatClassNames(
-        styles.header,
-        headerState.isOnTop ? styles.top : (headerState.isScrolling && styles.hidden)
-    );
+    const pathname = usePathname();
 
     return (
-        <header className={headerClassName}>
-            <nav className={styles.content}>
+        <header className={styles.header}>
+            <nav className={styles.nav}>
                 <div className={styles.left}>
                     <div className={styles.logo}>
-                        <Link href="/">
+                        <Link href={`/${extractLocaleFromPathname(pathname)}`}>
                             <NextImage
                                 src={logo}
-                                alt="Albert Vaillon's logo"
-                                height={50}
+                                alt={dico.logoAlt}
+                                height={40}
                                 priority
                             />
                         </Link>
                     </div>
                     <div className={styles.links}>
                         {anchors.map(a => (
-                            <Link key={a} href={`/#${a}`}>
-                                {a}
+                            <Link key={a} href={`/${extractLocaleFromPathname(pathname)}#${a}`}>
+                                {dico.anchors[a]}
                             </Link>
                         ))}
                     </div>
+                </div>
+                <div className={styles.right}>
+                    <Dropdown
+                        items={
+                            locales.map(l => ({
+                                text: localeDictionary[l],
+                                href: formatUriWithLocale(pathname, l),
+                                isSelected: l === locale
+                            }))
+                        }
+                    />
                 </div>
             </nav>
         </header>

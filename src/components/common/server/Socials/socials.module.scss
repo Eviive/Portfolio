@@ -15,9 +15,9 @@
     }
 
     @include mixins.pseudo($abs: false) {
-        @include mixins.size(.5px, 80px);
-        border-radius: 10px;
+        @include mixins.size(1px, 80px);
         background-color: hsl(var(--secondary-2));
+        border-radius: 10px;
 
         @include mixins.media-query(s) {
             display: none;

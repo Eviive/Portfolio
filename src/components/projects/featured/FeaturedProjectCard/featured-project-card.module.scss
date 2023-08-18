@@ -32,15 +32,15 @@
             @include mixins.media-query(m) {
                 grid-column: 1 / 5;
             }
+
+            .logos > div {
+                justify-content: flex-start;
+            }
         }
 
         .image {
             grid-column: 3 / -1;
         }
-    }
-
-    :nth-of-type(odd) > & .logos div {
-        flex-direction: row-reverse;
     }
 }
 
@@ -68,10 +68,10 @@
         min-width: 30ch;
         color: hsl(var(--secondary-1));
         line-height: 1.35em;
-        border-radius: 5px;
         background-color: hsl(var(--primary-2));
+        border-radius: 5px;
         @include mixins.box-shadow();
-        transition: color 0.35s;
+        transition: color 0.3s;
 
         @include mixins.media-query(s) {
             color: hsl(0deg, 0%, 95%);
@@ -118,8 +118,9 @@
     align-items: inherit;
     gap: var(--gap);
 
-    div {
+    > div {
         display: flex;
+        justify-content: flex-end;
         align-items: center;
         flex-wrap: wrap;
         gap: var(--gap);
@@ -139,7 +140,9 @@
 .image {
     grid-column: 1 / 5;
     grid-row: 1 / -1;
+    width: 100%;
     max-width: 650px;
+    aspect-ratio: 16 / 10;
     display: flex;
     border: 2px solid hsl(var(--primary-2));
     border-radius: 6px;
@@ -149,6 +152,7 @@
         z-index: -1;
         position: absolute;
         inset: 0 0 0 0;
+        aspect-ratio: unset;
         background-color: hsl(0deg, 0%, 14%, 0.6);
     }
 

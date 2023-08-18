@@ -1,4 +1,4 @@
-import { formatClassNames } from "@/lib/utils";
+import { formatClassNames } from "@/libs/utils";
 import NextLink from "next/link";
 import type { ComponentPropsWithRef, FC } from "react";
 
