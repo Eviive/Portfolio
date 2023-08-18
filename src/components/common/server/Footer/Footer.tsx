@@ -15,11 +15,7 @@ export const Footer: FC = () => {
     return (
         <footer className={styles.footer}>
             <Socials />
-            <Link
-                className={styles.link}
-                href="https://github.com/Eviive/Portfolio"
-                blank
-            >
+            <Link href="https://github.com/Eviive/Portfolio" blank>
                 {dico.portfolioGitHubLink} Albert Vaillon
             </Link>
         </footer>

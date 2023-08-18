@@ -35,6 +35,12 @@
             align-items: stretch;
             gap: 20px;
         }
+
+        .right {
+            @include mixins.media-query(xs) {
+                display: none;
+            }
+        }
     }
 }
 

@@ -9,7 +9,7 @@
 
 @mixin media-query($size) {
     @if $size == xs {
-        @media (max-width: 300px) {
+        @media (max-width: 500px) {
             @content;
         }
     } @else if $size == s {
