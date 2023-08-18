@@ -33,7 +33,7 @@ export const Dropdown: FC<Props> = props => {
                     setIsOpen(prevOpen => !prevOpen);
                 }}
             >
-                {props.items.find(i => i.isSelected)?.text ?? props.items[0].text}
+                {props.items.find(i => i.isSelected)?.text}
                 <FaChevronDown size={16} />
             </button>
             <ul ref={ref} className={styles.menu}>

@@ -8,31 +8,38 @@ export const formatClassNames = (...classNames: (string | Falsy)[]) => className
 
 export const isNotNullOrUndefined = <V>(value: V | null | undefined): value is V => value !== null && value !== undefined;
 
-export const formatAnchorWithLocale = (linkLocale: Locale, pathname: string, anchor?: `#${string}`): string => {
-    const segments = pathname.split("/"),
-          firstSegment = segments[1];
+export const extractLocaleFromPathname = (pathname: string): Locale | "" => {
+    const firstSegment = pathname.split("/").at(1);
 
-    segments[1] = linkLocale;
+    if (firstSegment && isLocale(firstSegment)) {
+        return firstSegment;
+    }
 
-    if (linkLocale === defaultLocale) {
-        if (isLocale(firstSegment)) {
-            if (firstSegment !== defaultLocale) {
-                segments[1] = "";
-            }
-        } else if (anchor !== undefined) {
-            segments[1] = "";
+    return "";
+};
+
+export const formatUriWithLocale = (pathname: string, targetLocale: Locale): string => {
+    const currentLocale = extractLocaleFromPathname(pathname);
+
+    if (currentLocale === targetLocale) {
+        return pathname;
+    }
+
+    const segments = pathname.split("/");
+
+    if (currentLocale) {
+        if (currentLocale !== defaultLocale && targetLocale === defaultLocale) {
+            segments.splice(1, 1);
         } else {
-            segments[1] = firstSegment;
+            segments.splice(1, 1, targetLocale);
+        }
+    } else if (targetLocale !== defaultLocale) {
+        if (segments.at(1) === "") {
+            segments.splice(1, 1, targetLocale);
+        } else {
+            segments.splice(1, 0, targetLocale);
         }
     }
 
-    const joinedSegments = segments.join("/");
-
-    if (anchor === undefined) {
-        return joinedSegments;
-    }
-
-    return `/${isLocale(firstSegment) ? firstSegment : ""}${anchor}`;
+    return segments.join("/") || "/";
 };
-
-export const formatUriWithLocale = (linkLocale: Locale, pathname: string): string => formatAnchorWithLocale(linkLocale, pathname);
