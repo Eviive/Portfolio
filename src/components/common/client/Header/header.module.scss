@@ -14,7 +14,7 @@
     background-color: hsl(var(--header-bg), 0.9);
     border-radius: 8px;
     color: hsl(var(--secondary-1));
-    font-family: var(--font-mono);
+    font-weight: 500;
 
     @include mixins.pseudo($loc: before, $pos: 0 0 0 0) {
         z-index: -1;

@@ -1,5 +1,6 @@
 "use client";
 
+import { useCloseEvents } from "@/hooks/useCloseEvents";
 import { formatClassNames } from "@/libs/utils";
 import type { FC } from "react";
 import { useState } from "react";
@@ -21,13 +22,21 @@ export const Dropdown: FC<Props> = props => {
 
     const [ isOpen, setIsOpen ] = useState(false);
 
+    const ref = useCloseEvents<HTMLUListElement>(() => setIsOpen(false), { isOpen });
+
     return (
         <div className={formatClassNames(styles.dropdown, isOpen && styles.open)}>
-            <button className={styles.button} onClick={() => setIsOpen(prevOpen => !prevOpen)}>
+            <button
+                className={styles.button}
+                onClick={e => {
+                    e.stopPropagation();
+                    setIsOpen(prevOpen => !prevOpen);
+                }}
+            >
                 {props.items.find(i => i.isSelected)?.text ?? props.items[0].text}
                 <FaChevronDown size={15} />
             </button>
-            <ul className={styles.menu}>
+            <ul ref={ref} className={styles.menu}>
                 {props.items
                     .filter(i => !i.isSelected)
                     .map(i => (

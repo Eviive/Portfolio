@@ -2,7 +2,7 @@ import { Inter, Montserrat, Source_Code_Pro as SourceCodePro } from "next/font/g
 
 const inter = Inter({
     variable: "--font-sans",
-    weight: [ "400", "700" ],
+    weight: [ "400", "500", "700" ],
     subsets: [ "latin" ]
 });
 
