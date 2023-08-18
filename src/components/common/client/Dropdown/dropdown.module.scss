@@ -29,16 +29,11 @@
         left: 0;
         min-width: 100%;
         background-color: hsl(var(--header-bg), 0.9);
+        backdrop-filter: blur(var(--header-blur));
         border-radius: 0 0 8px 8px;
         @include mixins.box-shadow($down: 2px, $blur: 5px, $spread: 2px, $color: hsl(var(--header-bg), 0.6));
         transform-origin: top;
-        transition: 0.3s opacity, 0.3s scale;
-
-        @include mixins.pseudo($loc: before, $pos: 0 0 0 0) {
-            z-index: -1;
-            backdrop-filter: blur(var(--header-blur));
-            border-radius: inherit;
-        }
+        transition: 0.15s opacity, 0.3s scale;
 
         li {
             height: var(--header-height);
