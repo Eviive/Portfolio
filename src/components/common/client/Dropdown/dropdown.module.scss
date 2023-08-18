@@ -12,6 +12,11 @@
         display: flex;
         align-items: center;
         gap: 8px;
+        transition: 0.3s color;
+
+        &:hover {
+            color: hsl(var(--accent-1));
+        }
 
         svg {
             transition: rotate 0.2s;
@@ -43,6 +48,11 @@
                 @include mixins.size();
                 display: flex;
                 align-items: center;
+                transition: 0.3s color;
+
+                &:hover {
+                    color: hsl(var(--accent-1));
+                }
             }
 
             &:last-child {
