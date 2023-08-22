@@ -3,7 +3,7 @@ import type { MetadataDictionary } from "@/app/[lang]/layout";
 import type { AboutDictionary } from "@/components/about";
 import type { ButtonDictionary, HeaderDictionary } from "@/components/common/client";
 import type { FooterDictionary } from "@/components/common/server";
-import type { HomeDictionary } from "@/components/home/server";
+import type { HomeDictionary } from "@/components/home";
 import type { FeaturedProjectCardDictionary, FeaturedProjectsDictionary } from "@/components/projects/featured";
 import type { OtherProjectsWrapperDictionary } from "@/components/projects/other/client";
 import type { OtherProjectsDictionary } from "@/components/projects/other/server";

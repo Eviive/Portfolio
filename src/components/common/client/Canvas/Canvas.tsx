@@ -3,16 +3,17 @@ import { useCanvas } from "@/hooks/useCanvas";
 import type { FC } from "react";
 
 type Props = {
+    className?: string;
     init: useCanvasParams[0];
     resize: useCanvasParams[1];
     draw: useCanvasParams[2];
 };
 
-export const Canvas: FC<Props> = ({ init, resize, draw }) => {
+export const Canvas: FC<Props> = ({ className, init, resize, draw }) => {
 
     const canvasRef = useCanvas(init, resize, draw);
 
     return (
-        <canvas ref={canvasRef}></canvas>
+        <canvas ref={canvasRef} className={className}></canvas>
     );
 };

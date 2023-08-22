@@ -1,13 +1,17 @@
-@use "@/mixins";
+@use "@/styles/mixins";
 
 .home {
-    box-sizing: border-box;
+    position: relative;
     min-height: 100svh;
     display: flex;
     flex-direction: column;
 
     @include mixins.media-query(s) {
         align-items: center;
+    }
+
+    .canvas {
+        position: absolute;
     }
 }
 
