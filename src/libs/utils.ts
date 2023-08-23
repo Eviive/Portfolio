@@ -43,3 +43,14 @@ export const formatUriWithLocale = (pathname: string, targetLocale: Locale): str
 
     return segments.join("/") || "/";
 };
+
+export const getOptimizedImageSrc = (src: string, width: number, height?: number): string => {
+    const url = new URL("/_next/image", window.location.origin);
+
+    url.searchParams.set("url", encodeURI(src));
+    url.searchParams.set("w", width.toString());
+    height && url.searchParams.set("h", height.toString());
+    url.searchParams.set("q", "75");
+
+    return url.toString();
+};

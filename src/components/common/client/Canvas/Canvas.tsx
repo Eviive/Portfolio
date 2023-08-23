@@ -1,19 +1,44 @@
-import type { useCanvasParams } from "@/hooks/useCanvas";
-import { useCanvas } from "@/hooks/useCanvas";
-import type { FC } from "react";
+import type { EffectCallback, FC } from "react";
+import { useEffect, useRef } from "react";
 
 type Props = {
     className?: string;
-    init: useCanvasParams[0];
-    resize: useCanvasParams[1];
-    draw: useCanvasParams[2];
+    init: (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) => ReturnType<EffectCallback>;
+    resize: (canvas: HTMLCanvasElement) => void;
+    draw: (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) => void;
 };
 
-export const Canvas: FC<Props> = ({ className, init, resize, draw }) => {
+export const Canvas: FC<Props> = props => {
 
-    const canvasRef = useCanvas(init, resize, draw);
+    const canvasRef = useRef<HTMLCanvasElement>(null);
+
+    useEffect(() => {
+        const canvas = canvasRef.current;
+        const ctx = canvas?.getContext("2d", { willReadFrequently: true });
+
+        if (!canvas || !ctx) return;
+
+        const resizeCanvas = () => props.resize(canvas);
+        resizeCanvas();
+        window.addEventListener("resize", resizeCanvas);
+
+        const clean = props.init(canvas, ctx);
+
+        let animationFrameId: number;
+        const render = () => {
+            props.draw(canvas, ctx);
+            animationFrameId = window.requestAnimationFrame(render);
+        };
+        animationFrameId = window.requestAnimationFrame(render);
+
+        return () => {
+            window.removeEventListener("resize", resizeCanvas);
+            clean?.();
+            window.cancelAnimationFrame(animationFrameId);
+        };
+    }, [ props ]);
 
     return (
-        <canvas ref={canvasRef} className={className}></canvas>
+        <canvas ref={canvasRef} className={props.className}></canvas>
     );
 };

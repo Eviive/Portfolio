@@ -2,9 +2,10 @@
 
 import { Canvas } from "@/components/common/client";
 import { useDictionary } from "@/hooks/useDictionary";
-import { Particle } from "@/libs/Particle";
-import { useRef } from "react";
+import { getOptimizedImageSrc } from "@/libs/utils";
+import { SkillService } from "@/services";
 import type { FC } from "react";
+import { useEffect, useMemo, useRef } from "react";
 
 import styles from "./home.module.scss";
 
@@ -13,69 +14,51 @@ export type HomeDictionary = {
     occupation: string;
 };
 
-export const Home: FC = () => {
+export const Home: FC = async () => {
+
+    const skills = await SkillService.findAll();
 
     const dico = useDictionary("home");
 
     const ref = useRef<HTMLElement>(null);
 
-    const init = (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) => {
-        const isInCanvas = (x: number, y: number) => x > canvas.offsetLeft && x < canvas.offsetWidth + canvas.offsetLeft && y > canvas.offsetTop && y < canvas.offsetHeight + canvas.offsetTop;
-        const isButton = (path: EventTarget[]) => path.some(el => el instanceof HTMLButtonElement || el instanceof HTMLAnchorElement);
-        const newParticle = (e: MouseEvent) => {
-            if (!isButton(e.composedPath()) && isInCanvas(e.pageX, e.pageY)) {
-                const n = e.type === "click" ? 20 : 2;
-                for (let i = 0; i < n; i++) {
-                    new Particle(ctx, e.pageX, e.pageY);
-                }
-            }
-        };
-        window.addEventListener("mousemove", newParticle);
-        window.addEventListener("click", newParticle);
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            console.log("skills", skills);
+        }, 1000);
 
         return () => {
-            window.removeEventListener("mousemove", newParticle);
-            window.removeEventListener("click", newParticle);
+            clearInterval(intervalId);
         };
+    }, [ skills ]);
+
+    let imageSrc = "http://localhost:8080/image/0ae39343-d03b-41e0-8390-8e80dfc77c47";
+    const image = useMemo(() => {
+        const image = new Image();
+        image.src = getOptimizedImageSrc(imageSrc, 1080);
+        return image;
+    }, [ imageSrc ]);
+
+    const init = (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) => {
+
     };
 
     const resize = (canvas: HTMLCanvasElement) => {
         canvas.width = ref.current?.clientWidth ?? 0;
         canvas.height = ref.current?.clientHeight ?? 0;
-
-        // const homeWidth = ref.current?.clientWidth || 0;
-        // canvas.width = homeWidth;
-
-        // const homeHeight = ref.current?.clientHeight || 0;
-        // const top = ref.current?.clientHeight || 0;
-        // const middle = homeHeight;
-        // const hypothenuse = homeWidth / 2;
-        // const bottom = 100 + Math.tan(2 * (Math.PI / 180)) * hypothenuse;
-        // canvas.height = Math.ceil(top + middle + bottom);
     };
 
     const draw = (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        for (let i = 0; i < Particle.particles.length; i++) {
-            if (!Particle.particles[i].update()) {
-                Particle.particles.splice(i, 1);
-            } else {
-                for (let j = i+1; j < Particle.particles.length; j++) {
-                    const dx = Particle.particles[i].x - Particle.particles[j].x;
-                    const dy = Particle.particles[i].y - Particle.particles[j].y;
-                    const distance = Math.sqrt(dx * dx + dy * dy);
-                    if (distance > 40 && distance < 100 && Particle.particles[i].size > 1 && Particle.particles[j].size > 1) {
-                        ctx.beginPath();
-                        ctx.strokeStyle = Particle.particles[i].color;
-                        ctx.lineWidth = .2;
-                        ctx.moveTo(Particle.particles[i].x, Particle.particles[i].y);
-                        ctx.lineTo(Particle.particles[j].x, Particle.particles[j].y);
-                        ctx.stroke();
-                        ctx.closePath();
-                    }
-                }
-            }
+
+        if (image.width && image.height) {
+            ctx.drawImage(image, 0, 0, image.width, image.height);
+            const pixels = ctx.getImageData(0, 0, image.width, image.height);
         }
+
+        ctx.fillRect(25, 25, 100, 100);
+        ctx.clearRect(45, 45, 60, 60);
+        ctx.strokeRect(50, 50, 50, 50);
     };
 
     return (
