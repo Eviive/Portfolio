@@ -13,8 +13,8 @@ export const Canvas: FC<Props> = props => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
     useEffect(() => {
-        const canvas = canvasRef.current;
-        const ctx = canvas?.getContext("2d", { willReadFrequently: true });
+        const canvas = canvasRef.current,
+              ctx = canvas?.getContext("2d", { willReadFrequently: true });
 
         if (!canvas || !ctx) return;
 

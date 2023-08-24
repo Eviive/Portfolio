@@ -30,7 +30,7 @@ export const ScrollReveal: FC<Props> = props => {
 
             refs.current
                 .filter(isNotNullOrUndefined)
-                .filter(el => !el.hasAttribute("data-sr"))
+                .filter(el => !el.dataset.sr)
                 .forEach((el, i) => {
                     const {
                         intervalDelay,
@@ -62,7 +62,7 @@ export const ScrollReveal: FC<Props> = props => {
                         delay: delay
                     });
 
-                    el.setAttribute("data-sr", "");
+                    el.dataset.sr = "";
                 });
         })();
 

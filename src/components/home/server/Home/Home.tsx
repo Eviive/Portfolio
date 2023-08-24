@@ -1,5 +1,6 @@
 import { HomeCanvas } from "@/components/home/client";
 import { HomeTitle } from "@/components/home/server";
+import { shuffleArray } from "@/libs/utils";
 import { SkillService } from "@/services";
 import type { FC } from "react";
 
@@ -12,7 +13,7 @@ export type HomeDictionary = {
 
 export const Home: FC = async () => {
 
-    const skills = await SkillService.findAll();
+    const skills = shuffleArray(await SkillService.findAll());
 
     return (
         <section id="home" className={styles.home}>

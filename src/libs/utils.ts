@@ -44,13 +44,25 @@ export const formatUriWithLocale = (pathname: string, targetLocale: Locale): str
     return segments.join("/") || "/";
 };
 
-export const getOptimizedImageSrc = (src: string, width: number, height?: number): string => {
-    const url = new URL("/_next/image", window.location.origin);
+export const getOptimizedImageUrl = (url: string, width: number, height?: number): string => {
+    const nextUrl = new URL("/_next/image", window.location.origin);
 
-    url.searchParams.set("url", encodeURI(src));
-    url.searchParams.set("w", width.toString());
-    height && url.searchParams.set("h", height.toString());
-    url.searchParams.set("q", "75");
+    nextUrl.searchParams.set("url", encodeURI(url));
+    nextUrl.searchParams.set("w", width.toString());
+    height && nextUrl.searchParams.set("h", height.toString());
+    nextUrl.searchParams.set("q", "75");
 
-    return url.toString();
+    return nextUrl.toString();
+};
+
+export const shuffleArray = <T>(array: T[]): T[] => {
+    const shuffledArray = [ ...array ];
+
+    for (let i = shuffledArray.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+
+        [ shuffledArray[i], shuffledArray[j] ] = [ shuffledArray[j], shuffledArray[i] ];
+    }
+
+    return shuffledArray;
 };

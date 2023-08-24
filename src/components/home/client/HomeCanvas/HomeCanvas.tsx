@@ -1,10 +1,11 @@
 "use client";
 
 import { Canvas } from "@/components/common/client";
-import { getOptimizedImageSrc } from "@/libs/utils";
+import { getOptimizedImageUrl } from "@/libs/utils";
+import { ImageService } from "@/services";
 import type { Skill } from "@/types/entities";
 import type { FC } from "react";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 
 import styles from "./home-canvas.module.scss";
 
@@ -14,22 +15,31 @@ type Props = {
 
 export const HomeCanvas: FC<Props> = props => {
 
+    const [ selectedSkillIndex, setSelectedSkillIndex ] = useState(0);
+
     useEffect(() => {
-        const intervalId = setInterval(() => {
-            console.log("skills", props.skills);
+        const interval = setInterval(() => {
+            setSelectedSkillIndex(prevIndex => prevIndex + 1);
         }, 1000);
 
         return () => {
-            clearInterval(intervalId);
+            clearInterval(interval);
         };
     }, [ props.skills ]);
 
-    let imageSrc = "http://localhost:8080/image/0ae39343-d03b-41e0-8390-8e80dfc77c47";
     const image = useMemo(() => {
+        if (typeof window === "undefined") return null;
+
+        const selectedSkill = props.skills.at(selectedSkillIndex % props.skills.length);
+        if (!selectedSkill) return null;
+
+        const imageUrl = ImageService.getImageUrl(selectedSkill.image);
+        if (!imageUrl) return null;
+
         const image = new Image();
-        image.src = getOptimizedImageSrc(imageSrc, 1080);
+        image.src = getOptimizedImageUrl(imageUrl, 64);
         return image;
-    }, [ imageSrc ]);
+    }, [ props.skills, selectedSkillIndex ]);
 
     const init = (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) => {
 
@@ -43,14 +53,10 @@ export const HomeCanvas: FC<Props> = props => {
     const draw = (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        if (image.width && image.height) {
-            ctx.drawImage(image, 0, 0, image.width, image.height);
+        if (image?.width && image?.height) {
+            ctx.drawImage(image, 0, 0, 500, 500);
             const pixels = ctx.getImageData(0, 0, image.width, image.height);
         }
-
-        ctx.fillRect(25, 25, 100, 100);
-        ctx.clearRect(45, 45, 60, 60);
-        ctx.strokeRect(50, 50, 50, 50);
     };
 
     return (
