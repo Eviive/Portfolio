@@ -1,36 +1,28 @@
 "use client";
 
 import { Canvas } from "@/components/common/client";
-import { useDictionary } from "@/hooks/useDictionary";
 import { getOptimizedImageSrc } from "@/libs/utils";
-import { SkillService } from "@/services";
+import type { Skill } from "@/types/entities";
 import type { FC } from "react";
-import { useEffect, useMemo, useRef } from "react";
+import { useEffect, useMemo } from "react";
 
-import styles from "./home.module.scss";
+import styles from "./home-canvas.module.scss";
 
-export type HomeDictionary = {
-    hi: string;
-    occupation: string;
+type Props = {
+    skills: Skill[];
 };
 
-export const Home: FC = async () => {
-
-    const skills = await SkillService.findAll();
-
-    const dico = useDictionary("home");
-
-    const ref = useRef<HTMLElement>(null);
+export const HomeCanvas: FC<Props> = props => {
 
     useEffect(() => {
         const intervalId = setInterval(() => {
-            console.log("skills", skills);
+            console.log("skills", props.skills);
         }, 1000);
 
         return () => {
             clearInterval(intervalId);
         };
-    }, [ skills ]);
+    }, [ props.skills ]);
 
     let imageSrc = "http://localhost:8080/image/0ae39343-d03b-41e0-8390-8e80dfc77c47";
     const image = useMemo(() => {
@@ -44,8 +36,8 @@ export const Home: FC = async () => {
     };
 
     const resize = (canvas: HTMLCanvasElement) => {
-        canvas.width = ref.current?.clientWidth ?? 0;
-        canvas.height = ref.current?.clientHeight ?? 0;
+        canvas.width = canvas.parentElement?.clientWidth ?? 0;
+        canvas.height = canvas.parentElement?.clientHeight ?? 0;
     };
 
     const draw = (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) => {
@@ -62,18 +54,11 @@ export const Home: FC = async () => {
     };
 
     return (
-        <section id="home" ref={ref} className={styles.home}>
-            <div className={styles.hello}>
-                <span>{dico.hi}</span>
-                <h1>Albert Vaillon</h1>
-                <h2>{dico.occupation}</h2>
-            </div>
-            <Canvas
-                className={styles.canvas}
-                init={init}
-                resize={resize}
-                draw={draw}
-            ></Canvas>
-        </section>
+        <Canvas
+            className={styles.canvas}
+            init={init}
+            resize={resize}
+            draw={draw}
+        ></Canvas>
     );
 };
