@@ -1,16 +1,7 @@
+import type { RevalidateRequest, RevalidateResponse } from "@/types/api";
 import { revalidatePath } from "next/cache";
 import type { NextRequest } from "next/server";
 import { NextResponse } from "next/server";
-
-type RevalidateRequest = {
-    path?: string;
-    secret?: string;
-};
-
-type RevalidateResponse = {
-    revalidated: boolean;
-    timestamp: number;
-};
 
 export const POST = async (req: NextRequest): Promise<NextResponse<RevalidateResponse>> => {
     let reqBody: RevalidateRequest;
