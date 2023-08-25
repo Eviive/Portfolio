@@ -110,9 +110,10 @@
 
 .logos {
     flex-grow: 0;
+    --columns: 6;
     --gap: 15px;
     z-index: 3;
-    max-width: calc(5 * 36px + 4 * var(--gap));
+    max-width: calc(var(--columns) * 36px + (var(--columns) - 1) * var(--gap));
     display: flex;
     flex-direction: column;
     align-items: inherit;
@@ -124,6 +125,10 @@
         align-items: center;
         flex-wrap: wrap;
         gap: var(--gap);
+
+        @include mixins.media-query(s) {
+            justify-content: flex-start;
+        }
     }
 
     .links a {
