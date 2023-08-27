@@ -69,6 +69,7 @@
         color: hsl(var(--secondary-1));
         line-height: 1.35em;
         background-color: hsl(var(--primary-2));
+        border: 1px solid hsl(var(--primary-3));
         border-radius: 5px;
         @include mixins.box-shadow();
         transition: color 0.3s;
