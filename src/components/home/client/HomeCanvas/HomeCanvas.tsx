@@ -1,7 +1,7 @@
 "use client";
 
 import { Canvas } from "@/components/common/client";
-import { getOptimizedImageUrl } from "@/libs/utils";
+import { getNextImageUrl } from "@/libs/utils";
 import { ImageService } from "@/services";
 import type { Skill } from "@/types/entities";
 import type { FC } from "react";
@@ -37,7 +37,7 @@ export const HomeCanvas: FC<Props> = props => {
         if (!imageUrl) return null;
 
         const image = new Image();
-        image.src = getOptimizedImageUrl(imageUrl, 64);
+        image.src = getNextImageUrl(imageUrl, 64);
         return image;
     }, [ props.skills, selectedSkillIndex ]);
 
