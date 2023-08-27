@@ -1,6 +1,6 @@
 import type { Locale } from "@/libs/i18n";
 import { defaultLocale, isLocale } from "@/libs/i18n";
-import type { Falsy } from "@/types/app";
+import type { Falsy } from "@/types/utils";
 
 const isNotFalsy = <V>(value: V | Falsy): value is V => Number.isNaN(value) ? false : !!value;
 

@@ -6,6 +6,7 @@ import type { Locale } from "@/libs/i18n";
 import { getDictionary, locales } from "@/libs/i18n";
 import { formatClassNames } from "@/libs/utils";
 import "@/styles/reset.scss";
+import type { PropsWithParams } from "@/types/app";
 import type { Metadata } from "next";
 import type { FC, PropsWithChildren } from "react";
 
@@ -20,7 +21,7 @@ export const generateMetadata = ({ params: { lang } }: { params: RootParams }): 
     const dico = getDictionary(lang, "metadata");
 
     return {
-        metadataBase: process.env.BASE_URL ? new URL(process.env.BASE_URL) : undefined,
+        metadataBase: process.env.NEXT_PUBLIC_BASE_URL ? new URL(process.env.NEXT_PUBLIC_BASE_URL) : undefined,
         title: {
             default: "Albert Vaillon - Portfolio",
             template: "%s - Portfolio"
@@ -38,7 +39,7 @@ export const generateMetadata = ({ params: { lang } }: { params: RootParams }): 
         ],
         authors: {
             name: "Albert Vaillon",
-            url: process.env.BASE_URL
+            url: process.env.NEXT_PUBLIC_BASE_URL
         },
         colorScheme: "dark",
         themeColor: "#1a1a1a",
@@ -97,11 +98,7 @@ export const generateStaticParams = (): RootParams[] => {
     return locales.map(lang => ({ lang }));
 };
 
-type RootProps = {
-    params: RootParams;
-};
-
-const RootLayout: FC<PropsWithChildren<RootProps>> = ({ children, params }) => {
+const RootLayout: FC<PropsWithParams<PropsWithChildren, RootParams>> = ({ children, params }) => {
     return (
         <html lang={params.lang} className="sr">
             <body className={formatClassNames(inter.className, sourceCodePro.variable, montserrat.variable)}>

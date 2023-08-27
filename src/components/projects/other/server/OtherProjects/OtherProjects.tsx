@@ -12,7 +12,7 @@ type Props = {
 
 export const OtherProjects: FC<Props> = async ({ dico }) => {
 
-    const otherProjectsPage = await ProjectService.findAllNotFeaturedPaginated();
+    const otherProjectsPage = await ProjectService.findAllNotFeaturedPaginatedFromNext();
 
     return (
         <>

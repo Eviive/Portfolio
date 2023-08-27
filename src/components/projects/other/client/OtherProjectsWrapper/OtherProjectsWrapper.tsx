@@ -5,7 +5,6 @@ import { OtherProjectCard } from "@/components/projects/other/server";
 import { useDictionary } from "@/hooks/useDictionary";
 import { GridLayout } from "@/layouts";
 import { ProjectService } from "@/services";
-import type { PaginationState } from "@/types/app";
 import type { Page, Project } from "@/types/entities";
 import type { FC } from "react";
 import { useState } from "react";
@@ -20,13 +19,20 @@ type Props = {
     initialPage: Page<Project>
 };
 
+type PaginationState<E> = {
+    data: E[];
+    page: number;
+    isLastPage: boolean;
+    isLoadingMore: boolean;
+};
+
 export const OtherProjectsWrapper: FC<Props> = props => {
 
     const dico = useDictionary("otherProjectsWrapper");
 
     const [ pagination, setPagination ] = useState<PaginationState<Project>>({
         data: props.initialPage.content,
-        page: props.initialPage.number,
+        page: props.initialPage.number + 1,
         isLastPage: props.initialPage.last,
         isLoadingMore: false
     });
@@ -34,11 +40,11 @@ export const OtherProjectsWrapper: FC<Props> = props => {
     const handleClick = async () => {
         setPagination({ ...pagination, isLoadingMore: true });
 
-        const nextPage = await ProjectService.findAllNotFeaturedPaginated(pagination.page + 1);
+        const nextPage = await ProjectService.findAllNotFeaturedPaginatedFromNext(pagination.page + 1);
 
         setPagination(prevState => ({
             data: [ ...prevState.data, ...nextPage.content ],
-            page: nextPage.number,
+            page: nextPage.number + 1,
             isLastPage: nextPage.last,
             isLoadingMore: false
         }));
