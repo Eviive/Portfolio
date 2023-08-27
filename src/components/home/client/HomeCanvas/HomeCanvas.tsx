@@ -1,7 +1,7 @@
 "use client";
 
 import { Canvas } from "@/components/common/client";
-import { getNextImageUrl } from "@/libs/utils";
+import { getNextImageUrl, isNotNullOrUndefined } from "@/libs/utils";
 import { ImageService } from "@/services";
 import type { Skill } from "@/types/entities";
 import type { FC } from "react";
@@ -15,34 +15,41 @@ type Props = {
 
 export const HomeCanvas: FC<Props> = props => {
 
-    const [ selectedSkillIndex, setSelectedSkillIndex ] = useState(0);
+    const skillsImages = useMemo<HTMLImageElement[]>(
+        () => {
+            if (typeof window === "undefined") return [];
+
+            return props.skills
+                .map(skill => {
+                    const imageUrl = ImageService.getImageUrl(skill.image);
+                    if (!imageUrl) return null;
+
+                    const image = new Image();
+                    image.src = getNextImageUrl(imageUrl, 64);
+                    return image;
+                })
+                .filter(isNotNullOrUndefined);
+        },
+        [ props.skills ]
+    );
+
+    const [ selectedSkillIndex, setSelectedSkillIndex ] = useState<number | null>(skillsImages.length > 0 ? 0 : null);
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setSelectedSkillIndex(prevIndex => prevIndex + 1);
+            setSelectedSkillIndex(prevIndex => {
+                if (prevIndex === null) return null;
+                if (prevIndex + 1 >= skillsImages.length) return 0;
+                return prevIndex + 1;
+            });
         }, 1000);
 
         return () => {
             clearInterval(interval);
         };
-    }, [ props.skills ]);
-
-    const image = useMemo(() => {
-        if (typeof window === "undefined") return null;
-
-        const selectedSkill = props.skills.at(selectedSkillIndex % props.skills.length);
-        if (!selectedSkill) return null;
-
-        const imageUrl = ImageService.getImageUrl(selectedSkill.image);
-        if (!imageUrl) return null;
-
-        const image = new Image();
-        image.src = getNextImageUrl(imageUrl, 64);
-        return image;
-    }, [ props.skills, selectedSkillIndex ]);
-
+    }, [ skillsImages.length ]);
     const init = (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) => {
-
+        // Nothing to do
     };
 
     const resize = (canvas: HTMLCanvasElement) => {
@@ -53,7 +60,11 @@ export const HomeCanvas: FC<Props> = props => {
     const draw = (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        if (image?.width && image?.height) {
+        if (selectedSkillIndex === null) return;
+
+        const image = skillsImages[selectedSkillIndex];
+
+        if (image.width && image.height) {
             ctx.drawImage(image, 0, 0, 500, 500);
             const pixels = ctx.getImageData(0, 0, image.width, image.height);
         }
