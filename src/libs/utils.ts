@@ -6,7 +6,9 @@ const isNotFalsy = <V>(value: V | Falsy): value is V => Number.isNaN(value) ? fa
 
 export const formatClassNames = (...classNames: (string | Falsy)[]) => classNames.filter(isNotFalsy).join(" ");
 
-export const isNotNullOrUndefined = <V>(value: V | null | undefined): value is V => value !== null && value !== undefined;
+export const isNullOrUndefined = <V>(value: V | null | undefined): value is null | undefined => value === null || value === undefined;
+
+export const isNotNullOrUndefined = <V>(value: V | null | undefined): value is V => !isNullOrUndefined(value);
 
 export const extractLocaleFromPathname = (pathname: string): Locale | "" => {
     const firstSegment = pathname.split("/").at(1);
