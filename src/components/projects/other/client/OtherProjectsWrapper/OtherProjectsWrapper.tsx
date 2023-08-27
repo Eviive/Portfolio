@@ -48,7 +48,7 @@ export const OtherProjectsWrapper: FC<Props> = props => {
 
     return (
         <>
-            <GridLayout className={styles.projects} size="300px">
+            <GridLayout className={styles.projects} minWidth="300px" columnCount={4}>
                 <ScrollReveal
                     multiple
                     content={

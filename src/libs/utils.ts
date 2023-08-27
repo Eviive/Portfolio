@@ -44,7 +44,7 @@ export const formatUriWithLocale = (pathname: string, targetLocale: Locale): str
     return segments.join("/") || "/";
 };
 
-export const getOptimizedImageUrl = (url: string, width: number, height?: number): string => {
+export const getNextImageUrl = (url: string, width: number, height?: number): string => {
     const nextUrl = new URL("/_next/image", window.location.origin);
 
     nextUrl.searchParams.set("url", encodeURI(url));
