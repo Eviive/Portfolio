@@ -1,8 +1,10 @@
+import type { SearchParamsRecord } from "@/types/utils";
+
 type RequestConfig = RequestInit & {
     fetchFromNext?: boolean;
 };
 
-export const request = async <T>(requestUrl: string, searchParams?: Record<string, string>, config?: RequestConfig): Promise<T> => {
+export const request = async <T>(requestUrl: string, searchParams?: SearchParamsRecord, config?: RequestConfig): Promise<T> => {
     const {
         fetchFromNext = false,
         ...restConfig
