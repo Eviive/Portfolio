@@ -1,6 +1,6 @@
 import { HomeCanvas } from "@/components/home/client";
 import { HomeTitle } from "@/components/home/server";
-import { shuffleArray } from "@/libs/utils";
+import { shuffleArray } from "@/libs/utils/array";
 import { SkillService } from "@/services";
 import type { FC } from "react";
 

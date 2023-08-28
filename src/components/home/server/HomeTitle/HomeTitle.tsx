@@ -4,6 +4,7 @@ import type { FC } from "react";
 import styles from "./home-title.module.scss";
 
 export const HomeTitle: FC = () => {
+
     const dico = useDictionary("home");
 
     return (

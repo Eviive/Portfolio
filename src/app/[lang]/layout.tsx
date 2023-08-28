@@ -4,7 +4,7 @@ import { I18nContextProvider } from "@/contexts/I18nContext";
 import { inter, montserrat, sourceCodePro } from "@/libs/fonts";
 import type { Locale } from "@/libs/i18n";
 import { getDictionary, locales } from "@/libs/i18n";
-import { formatClassNames } from "@/libs/utils";
+import { formatClassNames } from "@/libs/utils/react";
 import "@/styles/reset.scss";
 import type { PropsWithParams } from "@/types/app";
 import type { Metadata } from "next";

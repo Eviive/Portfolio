@@ -1,4 +1,4 @@
-import { isNotNullOrUndefined } from "@/libs/utils";
+import { isNotNullOrUndefined } from "@/libs/utils/assertion";
 import { request } from "@/services/client";
 import type { Page, Project } from "@/types/entities";
 import type { SearchParamsRecord } from "@/types/utils";

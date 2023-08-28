@@ -1,14 +1,6 @@
 import type { Locale } from "@/libs/i18n";
 import { defaultLocale, isLocale } from "@/libs/i18n";
-import type { Falsy } from "@/types/utils";
-
-const isNotFalsy = <V>(value: V | Falsy): value is V => Number.isNaN(value) ? false : !!value;
-
-export const formatClassNames = (...classNames: (string | Falsy)[]) => classNames.filter(isNotFalsy).join(" ");
-
-export const isNullOrUndefined = <V>(value: V | null | undefined): value is null | undefined => value === null || value === undefined;
-
-export const isNotNullOrUndefined = <V>(value: V | null | undefined): value is V => !isNullOrUndefined(value);
+import type { NextRequest } from "next/server";
 
 export const extractLocaleFromPathname = (pathname: string): Locale | "" => {
     const firstSegment = pathname.split("/").at(1);
@@ -57,14 +49,8 @@ export const getNextImageUrl = (url: string, width: number, height?: number): st
     return nextUrl.toString();
 };
 
-export const shuffleArray = <T>(array: T[]): T[] => {
-    const shuffledArray = [ ...array ];
+export const removePrefixSlash = (pathname: string): string => pathname.startsWith("/") ? pathname.substring(1) : pathname;
 
-    for (let i = shuffledArray.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
+export const removeTrailingSlash = (pathname: string): string => pathname.endsWith("/") ? pathname.substring(0, pathname.length - 1) : pathname;
 
-        [ shuffledArray[i], shuffledArray[j] ] = [ shuffledArray[j], shuffledArray[i] ];
-    }
-
-    return shuffledArray;
-};
+export const createUrl = (pathname: string, base?: NextRequest | string): URL => new URL(removeTrailingSlash(pathname), typeof base === "object" ? base.nextUrl : base);

@@ -1,6 +1,6 @@
 "use client";
 
-import { isNotNullOrUndefined, isNullOrUndefined } from "@/libs/utils";
+import { isNotNullOrUndefined, isNullOrUndefined } from "@/libs/utils/assertion";
 import type { FC, ReactElement } from "react";
 import { useEffect, useRef } from "react";
 

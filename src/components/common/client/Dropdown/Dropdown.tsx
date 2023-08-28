@@ -1,7 +1,7 @@
 "use client";
 
 import { useCloseEvents } from "@/hooks/useCloseEvents";
-import { formatClassNames } from "@/libs/utils";
+import { formatClassNames } from "@/libs/utils/react";
 import type { FC } from "react";
 import { useState } from "react";
 import { FaChevronDown } from "react-icons/fa6";
