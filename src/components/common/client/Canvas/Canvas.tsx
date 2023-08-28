@@ -1,11 +1,15 @@
 import type { EffectCallback, FC } from "react";
 import { useEffect, useRef } from "react";
 
+export type InitCanvasCallback = (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) => ReturnType<EffectCallback>;
+export type ResizeCanvasCallback = (canvas: HTMLCanvasElement) => void;
+export type DrawCanvasCallback = (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) => void;
+
 type Props = {
     className?: string;
-    init: (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) => ReturnType<EffectCallback>;
-    resize: (canvas: HTMLCanvasElement) => void;
-    draw: (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) => void;
+    init: InitCanvasCallback;
+    resize: ResizeCanvasCallback;
+    draw: DrawCanvasCallback;
 };
 
 export const Canvas: FC<Props> = props => {
