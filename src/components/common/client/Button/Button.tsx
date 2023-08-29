@@ -23,7 +23,7 @@ export const Button: FC<PropsWithChildren<Props>> = props => {
 
     return (
         <button
-            className={formatClassNames(props.className, styles.button)}
+            className={formatClassNames(styles.button, props.className)}
             onClick={props.loading ? undefined : props.handleClick}
         >
             {props.loading

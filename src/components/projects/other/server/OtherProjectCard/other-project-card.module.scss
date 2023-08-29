@@ -13,6 +13,10 @@
     border-radius: 5px;
     transition: translate 0.5s;
 
+    @include mixins.media-query(s) {
+        max-width: unset;
+    }
+
     &:hover {
         translate: 0 -5px;
 

@@ -16,7 +16,7 @@ export const Link: FC<Props> = props => {
     return (
         <NextLink
             {...linkProps}
-            className={formatClassNames(linkProps.className, styles.link)}
+            className={formatClassNames(styles.link, linkProps.className)}
             target={blank ? "_blank" : linkProps.target}
         >
             {linkProps.children}

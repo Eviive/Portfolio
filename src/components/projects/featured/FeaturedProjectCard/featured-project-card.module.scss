@@ -79,6 +79,7 @@
             padding: 1em 0;
             min-width: unset;
             background-color: unset;
+            border: unset;
             box-shadow: unset;
         }
     }
@@ -164,7 +165,7 @@
 
     a {
         @include mixins.size();
-        border-radius: inherit;
+        border-radius: 4px;
 
         @include mixins.media-query(s) {
             filter: brightness(0.3);

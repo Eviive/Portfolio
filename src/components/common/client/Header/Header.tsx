@@ -53,6 +53,7 @@ export const Header: FC = () => {
                 </div>
                 <div className={styles.right}>
                     <Dropdown
+                        menuClassName={styles.menu}
                         items={
                             locales.map(l => ({
                                 text: localeDictionary[l],

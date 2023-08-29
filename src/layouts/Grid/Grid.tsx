@@ -15,7 +15,7 @@ type Props = {
 export const Grid: FC<PropsWithChildren<Props>> = props => {
     return (
         <ul
-            className={formatClassNames(props.className, styles.layout)}
+            className={formatClassNames(styles.layout, props.className)}
             style={{
                 "--item-min-width": props.minWidth,
                 "--gap": props.gap,
