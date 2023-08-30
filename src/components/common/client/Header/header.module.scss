@@ -43,8 +43,13 @@
 
             .menu {
                 background-color: var(--header-bg);
-                backdrop-filter: var(--header-filters);
-                @include mixins.box-shadow($down: 3px, $blur: 10px, $spread: 0px, $color: var(--header-bg));
+
+                @include mixins.pseudo($loc: before, $pos: 0 0 0 0) {
+                    z-index: -1;
+                    backdrop-filter: var(--header-filters);
+                    border-radius: inherit;
+                    @include mixins.box-shadow($down: 3px, $blur: 10px, $spread: 0px, $color: var(--header-bg));
+                }
 
                 li {
                     height: var(--header-height);
@@ -70,6 +75,7 @@
         align-items: stretch;
         gap: 20px;
         text-transform: capitalize;
+        white-space: nowrap;
 
         a {
             display: flex;

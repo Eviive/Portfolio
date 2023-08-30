@@ -92,10 +92,10 @@ export const HomeCanvas: FC<Props> = props => {
             let [ r, g, b, a ] = [ imgData.data[i], imgData.data[i + 1], imgData.data[i + 2], imgData.data[i + 3] ];
 
             if (a !== 0) {
-                r = 32;
-                g = 32;
-                b = 32;
-                a = 255;
+                // r = 32;
+                // g = 32;
+                // b = 32;
+                // a = 255;
 
                 imgData.data[i] = r;
                 imgData.data[i + 1] = g;
