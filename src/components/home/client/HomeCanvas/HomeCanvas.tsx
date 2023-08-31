@@ -18,7 +18,11 @@ type Props = {
 
 type CanvasState = {
     selectedSkillIndex: number | null;
-    currentSize?: number;
+};
+
+type CanvasContextValues = {
+    size: number | null;
+    alpha: number | null;
 };
 
 export const HomeCanvas: FC<Props> = props => {
@@ -39,37 +43,37 @@ export const HomeCanvas: FC<Props> = props => {
     }, [ props.skills ]);
 
     const [ canvasState, setCanvasState ] = useState<CanvasState>({
-        selectedSkillIndex: skillsImages.length > 0 ? 0 : null
+        selectedSkillIndex: null
     });
 
     useEffect(() => {
         const interval = setInterval(() => {
             setCanvasState(prevState => {
-                const { selectedSkillIndex: prevIndex } = prevState;
+                const prevIndex = prevState.selectedSkillIndex ?? -1;
 
-                if (prevIndex === null) return prevState;
-
-                // Resets every other property
                 return { selectedSkillIndex: prevIndex + 1 < skillsImages.length ? prevIndex + 1 : 0 };
             });
-        }, 1000);
+        }, 1500);
 
         return () => {
             clearInterval(interval);
         };
     }, [ skillsImages.length ]);
 
-    const init: InitCanvasCallback = (canvas, ctx) => {
-        // Nothing to do
-    };
+    const init: InitCanvasCallback<CanvasContextValues> = () => ({
+        contextValues: {
+            size: null,
+            alpha: null
+        }
+    });
 
     const resize: ResizeCanvasCallback = (canvas) => {
         canvas.width = canvas.parentElement?.clientWidth ?? 0;
         canvas.height = canvas.parentElement?.clientHeight ?? 0;
     };
 
-    const draw: DrawCanvasCallback = (canvas, ctx) => {
-        const { selectedSkillIndex, currentSize } = canvasState;
+    const draw: DrawCanvasCallback<CanvasContextValues> = (canvas, ctx, canvasContextValues) => {
+        const { selectedSkillIndex } = canvasState;
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
@@ -79,28 +83,21 @@ export const HomeCanvas: FC<Props> = props => {
 
         if (!image.complete || !image.width || !image.height) return;
 
-        const size = currentSize ?? getRandomInt(50, 350);
-
-        if (size !== currentSize) {
-            setCanvasState(prevState => ({ ...prevState, currentSize: size }));
+        canvasContextValues.size ??= getRandomInt(30, 350);
+        canvasContextValues.alpha ??= 0;
+        if (canvasContextValues.alpha < 255) {
+            canvasContextValues.alpha += 3;
         }
+        const { size, alpha } = canvasContextValues;
 
         ctx.drawImage(image, 0, 0, size, size);
         const imgData = ctx.getImageData(0, 0, size, size);
 
         for (let i = 0; i < imgData.data.length; i+=4) {
-            let [ r, g, b, a ] = [ imgData.data[i], imgData.data[i + 1], imgData.data[i + 2], imgData.data[i + 3] ];
+            const a = imgData.data[i + 3];
 
-            if (a !== 0) {
-                // r = 32;
-                // g = 32;
-                // b = 32;
-                // a = 255;
-
-                imgData.data[i] = r;
-                imgData.data[i + 1] = g;
-                imgData.data[i + 2] = b;
-                imgData.data[i + 3] = a;
+            if (a > alpha) {
+                imgData.data[i + 3] = alpha;
             }
         }
 

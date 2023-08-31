@@ -1,18 +1,20 @@
-import type { EffectCallback, FC } from "react";
 import { useEffect, useRef } from "react";
 
-export type InitCanvasCallback = (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) => ReturnType<EffectCallback>;
+export type InitCanvasCallback<C extends Record<string, unknown>> = (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) => {
+    contextValues: C
+    destructor?: () => void;
+};
 export type ResizeCanvasCallback = (canvas: HTMLCanvasElement) => void;
-export type DrawCanvasCallback = (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D) => void;
+export type DrawCanvasCallback<C extends Record<string, unknown>> = (canvas: HTMLCanvasElement, ctx: CanvasRenderingContext2D, contextValues: C) => void;
 
-type Props = {
-    className?: string;
-    init: InitCanvasCallback;
+type Props<C extends Record<string, unknown>> = {
+    init: InitCanvasCallback<C>;
     resize: ResizeCanvasCallback;
-    draw: DrawCanvasCallback;
+    draw: DrawCanvasCallback<C>;
+    className?: string;
 };
 
-export const Canvas: FC<Props> = props => {
+export const Canvas = <C extends Record<string, unknown>>(props: Props<C>) => {
 
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -26,18 +28,21 @@ export const Canvas: FC<Props> = props => {
         resizeCanvas();
         window.addEventListener("resize", resizeCanvas);
 
-        const clean = props.init(canvas, ctx);
+        const {
+            destructor,
+            contextValues
+        } = props.init(canvas, ctx);
 
         let animationFrameId: number;
         const render = () => {
-            props.draw(canvas, ctx);
+            props.draw(canvas, ctx, contextValues);
             animationFrameId = window.requestAnimationFrame(render);
         };
         animationFrameId = window.requestAnimationFrame(render);
 
         return () => {
             window.removeEventListener("resize", resizeCanvas);
-            clean?.();
+            destructor?.();
             window.cancelAnimationFrame(animationFrameId);
         };
     }, [ props ]);
