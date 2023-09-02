@@ -38,7 +38,7 @@ export const Header: FC = () => {
                             <NextImage
                                 src={logo}
                                 alt={dico.logoAlt}
-                                height={40}
+                                height={35}
                                 priority
                             />
                         </Link>

@@ -22,6 +22,10 @@ a, button {
     cursor: pointer;
 }
 
+p {
+    line-height: 1.4;
+}
+
 progress, input:is([type="checkbox"], [type="radio"], [type="range"]) {
     accent-color: hsl(var(--accent-1));
 }

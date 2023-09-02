@@ -16,9 +16,9 @@ const findAllNotFeaturedPaginated = (page?: number | string | null, size?: numbe
     return request<Page<Project>>(`/${URL}/not-featured/paginated`, searchParams);
 };
 
-const findAllNotFeaturedPaginatedFromNext = (page: number = 1) => request<Page<Project>>(
+const findAllNotFeaturedPaginatedFromNext = (page?: number) => request<Page<Project>>(
     `/api/${URL}/not-featured/paginated`,
-    { page: page.toString() },
+    page ? { page: page.toString() } : undefined,
     { fetchFromNext: true }
 );
 
