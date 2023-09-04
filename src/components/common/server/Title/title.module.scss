@@ -1,6 +1,7 @@
 @use "@/mixins";
 
 .title {
+    isolation: isolate;
     align-self: flex-start;
     width: 100%;
     padding: 0 12%;
