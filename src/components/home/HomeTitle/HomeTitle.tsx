@@ -3,6 +3,11 @@ import type { FC } from "react";
 
 import styles from "./home-title.module.scss";
 
+export type HomeDictionary = {
+    hi: string;
+    occupation: string;
+};
+
 export const HomeTitle: FC = () => {
 
     const dico = useDictionary("home");
