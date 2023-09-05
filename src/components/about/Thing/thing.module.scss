@@ -1,20 +1,25 @@
 @use "@/mixins";
 
+$card-padding: 25px;
+$card-gap: 1.2em;
+$circle-size: 60px;
+$title-font-size: 1.2em;
+
 .card {
     position: relative;
-    padding: 25px;
+    padding: $card-padding;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    gap: 1.2em;
+    gap: $card-gap;
     background-color: hsl(var(--primary-1));
     border: 1px solid hsl(var(--primary-2));
     border-radius: 7px;
     @include mixins.box-shadow();
     transition: translate 0.3s;
 
-    @include mixins.hover-shard($top: calc(25px + 60px + 1em + 1.2em * 0.75));
+    @include mixins.hover-shard($top: calc($card-padding + $circle-size + $card-gap + $title-font-size * 0.75));
 
     &:hover {
         translate: 0 -5px;
@@ -22,7 +27,7 @@
 
     .circle {
         position: relative;
-        @include mixins.size(60px);
+        @include mixins.size($circle-size);
         aspect-ratio: 1/1;
         color: hsl(var(--accent-1));
 
@@ -36,7 +41,7 @@
     }
 
     h3 {
-        font-size: 1.2em;
+        font-size: $title-font-size;
     }
 
     p {

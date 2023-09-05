@@ -1,9 +1,14 @@
 @use "@/mixins";
 
+$card-padding-vertical: 2em;
+$folder-size: 40px;
+$icons-margin-bottom: 1.3em;
+$title-font-size: 1.2em;
+
 .card {
     position: relative;
     margin: 0 auto;
-    padding: 2em 1.75em;
+    padding: $card-padding-vertical 1.75em;
     @include mixins.size();
     max-width: 500px;
     display: flex;
@@ -26,7 +31,7 @@
         transition: opacity 0.5s;
     }
 
-    @include mixins.hover-shard($top: calc(2em + 40px + 1.3em + 1.2em * 0.75));
+    @include mixins.hover-shard($top: calc($card-padding-vertical + $folder-size + $icons-margin-bottom + $title-font-size * 0.75));
 
     &:hover {
         translate: 0 -5px;
@@ -43,7 +48,7 @@
     .title {
         width: fit-content;
         display: flex;
-        font-size: 1.2em;
+        font-size: $title-font-size;
         transition: color 0.3s;
     }
 
@@ -55,7 +60,7 @@
 }
 
 .icons {
-    margin-bottom: 1.3em;
+    margin-bottom: $icons-margin-bottom;
     display: flex;
     justify-content: space-between;
     align-items: center;
