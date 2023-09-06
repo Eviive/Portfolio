@@ -1,6 +1,6 @@
 import type { Locale } from "@/libs/i18n";
 import { defaultLocale, isLocale } from "@/libs/i18n";
-import { NextRequest } from "next/server";
+import type { NextRequest } from "next/server";
 
 export const extractLocaleFromPathname = (pathname: string): Locale | "" => {
     const firstSegment = pathname.split("/").at(1);
