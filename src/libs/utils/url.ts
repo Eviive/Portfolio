@@ -1,6 +1,5 @@
 import type { Locale } from "@/libs/i18n";
 import { defaultLocale, isLocale } from "@/libs/i18n";
-import type { NextRequest } from "next/server";
 
 export const extractLocaleFromPathname = (pathname: string): Locale | "" => {
     const firstSegment = pathname.split("/").at(1);
@@ -42,4 +41,4 @@ export const removePrefixSlash = (pathname: string): string => pathname.startsWi
 
 export const removeTrailingSlash = (pathname: string): string => pathname.endsWith("/") ? pathname.substring(0, pathname.length - 1) : pathname;
 
-export const createUrl = (pathname: string, base?: NextRequest | string): URL => new URL(removeTrailingSlash(pathname), typeof base === "object" ? base.nextUrl.origin : base);
+export const createUrl = (pathname: string, base?: string): URL => new URL(removeTrailingSlash(pathname), base);
