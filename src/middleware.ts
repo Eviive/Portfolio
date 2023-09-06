@@ -46,6 +46,8 @@ export const middleware: NextMiddleware = req => {
     console.log(rewriteUrl.origin, rewriteUrl.toString());
 
     rewriteUrl.protocol = "http";
+    rewriteUrl.host = "localhost";
+    rewriteUrl.port = "3000";
 
     console.log(rewriteUrl.origin, rewriteUrl.toString());
 
