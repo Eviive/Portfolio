@@ -3,9 +3,10 @@ import { Footer } from "@/components/common/server";
 import { I18nContextProvider } from "@/contexts/I18nContext";
 import { inter, montserrat, sourceCodePro } from "@/libs/fonts";
 import type { Locale } from "@/libs/i18n";
-import { getDictionary, locales } from "@/libs/i18n";
-import { formatClassNames } from "@/libs/utils";
+import { defaultLocale, getDictionary, locales } from "@/libs/i18n";
+import { formatClassNames } from "@/libs/utils/react";
 import "@/styles/reset.scss";
+import type { PropsWithParams } from "@/types/app";
 import type { Metadata } from "next";
 import type { FC, PropsWithChildren } from "react";
 
@@ -19,8 +20,15 @@ export const generateMetadata = ({ params: { lang } }: { params: RootParams }): 
 
     const dico = getDictionary(lang, "metadata");
 
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ? new URL(process.env.NEXT_PUBLIC_BASE_URL) : undefined;
+
+    const localesUrl: Record<string, string> = {};
+    for (const locale of locales) {
+        localesUrl[locale] = new URL(locale === defaultLocale ? "" : locale, baseUrl).toString();
+    }
+
     return {
-        metadataBase: process.env.BASE_URL ? new URL(process.env.BASE_URL) : undefined,
+        metadataBase: baseUrl,
         title: {
             default: "Albert Vaillon - Portfolio",
             template: "%s - Portfolio"
@@ -34,17 +42,18 @@ export const generateMetadata = ({ params: { lang } }: { params: RootParams }): 
             "Albert Vaillon's portfolio", "Portfolio de Albert Vaillon", "Portfolio",
             "Computer science", "Student", "Étudiant en informatique", "Étudiant",
             "Software development", "Web development", "Développement logiciel", "Développement web",
-            "Next.js", "Next.js 13", "React", "JavaScript", "TypeScript", "SCSS", "App Router"
+            "Next.js", "Next.js 13", "React", "JavaScript", "TypeScript", "SCSS", "App Router",
+            "IUT", "IUT Lyon 1", "Institut Universitaire de Technologie Lyon 1", "IUT Lyon 1 - Département Informatique",
+            "BUT", "BUT Informatique", "Bachelor Universitaire de Technologie"
         ],
         authors: {
             name: "Albert Vaillon",
-            url: process.env.BASE_URL
+            url: process.env.NEXT_PUBLIC_BASE_URL
         },
-        colorScheme: "dark",
         themeColor: "#1a1a1a",
+        colorScheme: "dark",
         creator: "Albert Vaillon",
         publisher: "Albert Vaillon",
-        manifest: "/manifest.json",
         robots: {
             index: true,
             follow: true,
@@ -53,9 +62,14 @@ export const generateMetadata = ({ params: { lang } }: { params: RootParams }): 
                 follow: true
             }
         },
+        alternates: {
+            canonical: baseUrl?.toString(),
+            languages: localesUrl
+        },
+        manifest: "/manifest.json",
         openGraph: {
             title: "Albert Vaillon - Portfolio",
-            description: "Albert Vaillon's portfolio",
+            description: dico.description,
             url: "/",
             siteName: "Portfolio",
             images: [
@@ -73,7 +87,7 @@ export const generateMetadata = ({ params: { lang } }: { params: RootParams }): 
         twitter: {
             card: "summary_large_image",
             title: "Albert Vaillon - Portfolio",
-            description: "Albert Vaillon's portfolio",
+            description: dico.description,
             images: {
                 url: "/api/og",
                 alt: "Albert Vaillon - Portfolio",
@@ -97,11 +111,7 @@ export const generateStaticParams = (): RootParams[] => {
     return locales.map(lang => ({ lang }));
 };
 
-type RootProps = {
-    params: RootParams;
-};
-
-const RootLayout: FC<PropsWithChildren<RootProps>> = ({ children, params }) => {
+const RootLayout: FC<PropsWithParams<PropsWithChildren, RootParams>> = ({ children, params }) => {
     return (
         <html lang={params.lang} className="sr">
             <body className={formatClassNames(inter.className, sourceCodePro.variable, montserrat.variable)}>

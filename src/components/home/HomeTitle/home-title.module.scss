@@ -1,0 +1,34 @@
+@use "@/mixins";
+
+.hello {
+    width: max-content;
+    margin: 30svh 0 0 15%;
+    display: flex;
+    flex-direction: column;
+
+    @include mixins.media-query(s) {
+        margin-left: 0;
+        font-size: clamp(10px, 3vw, 15px);
+    }
+
+    span {
+        font-family: var(--font-mono);
+        color: hsl(var(--accent-1));
+    }
+
+    h1 {
+        font-family: var(--font-title);
+        font-size: 2.5em;
+        font-weight: 900;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        line-height: 1.4;
+    }
+
+    h2 {
+        font-size: 1.15em;
+        font-weight: 400;
+        letter-spacing: .17em;
+        text-transform: uppercase;
+    }
+}

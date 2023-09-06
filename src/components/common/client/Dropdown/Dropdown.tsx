@@ -1,7 +1,7 @@
 "use client";
 
 import { useCloseEvents } from "@/hooks/useCloseEvents";
-import { formatClassNames } from "@/libs/utils";
+import { formatClassNames } from "@/libs/utils/react";
 import type { FC } from "react";
 import { useState } from "react";
 import { FaChevronDown } from "react-icons/fa6";
@@ -16,6 +16,7 @@ type DropdownItem = {
 
 type Props = {
     items: DropdownItem[];
+    menuClassName?: string;
 };
 
 export const Dropdown: FC<Props> = props => {
@@ -36,7 +37,7 @@ export const Dropdown: FC<Props> = props => {
                 {props.items.find(i => i.isSelected)?.text}
                 <FaChevronDown size={16} />
             </button>
-            <ul ref={ref} className={styles.menu}>
+            <ul ref={ref} className={formatClassNames(styles.menu, props.menuClassName)}>
                 {props.items
                     .filter(i => !i.isSelected)
                     .map(i => (

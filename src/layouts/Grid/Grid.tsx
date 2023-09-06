@@ -1,21 +1,27 @@
-import { formatClassNames } from "@/libs/utils";
+import { formatClassNames } from "@/libs/utils/react";
 import type { CSSProperties, FC, PropsWithChildren } from "react";
 
 import styles from "./grid.module.scss";
 
 type Props = {
     className?: string;
+    minWidth?: string;
     gap?: string;
-    size?: string;
+    columnCount?: number | "infinity";
+    centerVertically?: boolean;
+    centerHorizontally?: boolean;
 };
 
 export const Grid: FC<PropsWithChildren<Props>> = props => {
     return (
         <ul
-            className={formatClassNames(props.className, styles.layout)}
+            className={formatClassNames(styles.layout, props.className)}
             style={{
-                "--size": props.size,
-                "--gap": props.gap
+                "--item-min-width": props.minWidth,
+                "--gap": props.gap,
+                "--column-count": props.columnCount,
+                justifyItems: props.centerHorizontally ? "center" : undefined,
+                alignItems: props.centerVertically ? "center" : undefined
             } as CSSProperties}
         >
             {props.children}

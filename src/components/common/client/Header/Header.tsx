@@ -5,7 +5,7 @@ import { Link } from "@/components/common/server";
 import { useI18nContext } from "@/contexts/I18nContext";
 import { useDictionary } from "@/hooks/useDictionary";
 import { localeDictionary, locales } from "@/libs/i18n";
-import { extractLocaleFromPathname, formatUriWithLocale } from "@/libs/utils";
+import { extractLocaleFromPathname, formatUriWithLocale } from "@/libs/utils/url";
 import logo from "@/public/logo.svg";
 import NextImage from "next/image";
 import { usePathname } from "next/navigation";
@@ -38,7 +38,7 @@ export const Header: FC = () => {
                             <NextImage
                                 src={logo}
                                 alt={dico.logoAlt}
-                                height={40}
+                                height={35}
                                 priority
                             />
                         </Link>
@@ -53,6 +53,7 @@ export const Header: FC = () => {
                 </div>
                 <div className={styles.right}>
                     <Dropdown
+                        menuClassName={styles.menu}
                         items={
                             locales.map(l => ({
                                 text: localeDictionary[l],

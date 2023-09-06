@@ -14,7 +14,7 @@ export const Thing: FC<Props> = props => {
     return (
         <div className={styles.card}>
             <div className={styles.circle}>
-                <BsFillCircleFill size={70} />
+                <BsFillCircleFill size={60} />
                 <props.icon size={35} className={styles.icon} />
             </div>
             <h3>{props.name[locale]}</h3>

@@ -2,7 +2,7 @@
 
 import { Loader } from "@/components/common/server";
 import { useDictionary } from "@/hooks/useDictionary";
-import { formatClassNames } from "@/libs/utils";
+import { formatClassNames } from "@/libs/utils/react";
 import type { FC, PropsWithChildren } from "react";
 
 import styles from "./button.module.scss";
@@ -23,7 +23,7 @@ export const Button: FC<PropsWithChildren<Props>> = props => {
 
     return (
         <button
-            className={formatClassNames(props.className, styles.button)}
+            className={formatClassNames(styles.button, props.className)}
             onClick={props.loading ? undefined : props.handleClick}
         >
             {props.loading

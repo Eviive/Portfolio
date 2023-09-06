@@ -1,4 +1,5 @@
 import { defaultLocale, locales } from "@/libs/i18n";
+import { createUrl, extractLocaleFromPathname, removePrefixSlash } from "@/libs/utils/url";
 import { match } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
 import type { NextMiddleware, NextRequest } from "next/server";
@@ -16,18 +17,28 @@ const getLocale = (req: NextRequest): string => {
 export const middleware: NextMiddleware = req => {
     const { pathname } = req.nextUrl;
 
-    const isLocaleMissing = !locales.some(locale => pathname.startsWith(`/${locale}`));
+    const isLocalePresent = locales.some(locale => pathname.startsWith(`/${locale}`));
 
-    if (!isLocaleMissing) {
-        return;
+    if (isLocalePresent) {
+        if (extractLocaleFromPathname(pathname) !== defaultLocale) {
+            return NextResponse.next();
+        }
+
+        const newPathname = pathname.replace(`/${defaultLocale}`, "");
+
+        return NextResponse.redirect(createUrl(`/${removePrefixSlash(newPathname)}`, req));
     }
 
-    const locale = getLocale(req),
-          newUrl = new URL(`/${locale}${pathname.startsWith("/") ? "" : "/"}${pathname}`, req.url);
+    const preferredLocale = getLocale(req),
+          pathnameLocale = preferredLocale === defaultLocale ? "" : preferredLocale;
 
-    return pathname === "/"
-        ? NextResponse.rewrite(newUrl)
-        : NextResponse.redirect(newUrl);
+    const newPathname = removePrefixSlash(pathname);
+
+    if (pathnameLocale !== "") {
+        return NextResponse.redirect(createUrl(`/${pathnameLocale}/${newPathname}`, req));
+    }
+
+    return NextResponse.rewrite(createUrl(`/${defaultLocale}/${newPathname}`, req));
 };
 
 export const config = {

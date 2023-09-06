@@ -27,7 +27,6 @@ export const Image: FC<Props> = props => {
         <div className={styles.wrapper}>
             {loading && <Loader size={Math.min(props.width / 2, 50)} absolute />}
             <NextImage
-                className={styles.image}
                 src={props.src}
                 alt={props.alt}
                 width={props.width}

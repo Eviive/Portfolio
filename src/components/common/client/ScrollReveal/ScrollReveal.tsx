@@ -1,6 +1,6 @@
 "use client";
 
-import { isNotNullOrUndefined } from "@/libs/utils";
+import { isNotNullOrUndefined, isNullOrUndefined } from "@/libs/utils/assertion";
 import type { FC, ReactElement } from "react";
 import { useEffect, useRef } from "react";
 
@@ -30,7 +30,7 @@ export const ScrollReveal: FC<Props> = props => {
 
             refs.current
                 .filter(isNotNullOrUndefined)
-                .filter(el => !el.hasAttribute("data-sr"))
+                .filter(el => isNullOrUndefined(el.dataset.revealed))
                 .forEach((el, i) => {
                     const {
                         intervalDelay,
@@ -62,7 +62,7 @@ export const ScrollReveal: FC<Props> = props => {
                         delay: delay
                     });
 
-                    el.setAttribute("data-sr", "");
+                    el.dataset.revealed = "";
                 });
         })();
 

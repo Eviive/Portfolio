@@ -1,15 +1,24 @@
-export const request = async <T>(requestUrl: string, searchParams?: Record<string, string>, config?: RequestInit): Promise<T> => {
+import type { SearchParamsRecord } from "@/types/utils";
 
-    const url = new URL(requestUrl, process.env.NEXT_PUBLIC_API_BASE_URL);
-    const urlSearchParams = new URLSearchParams(searchParams);
+type RequestConfig = RequestInit & {
+    fetchFromNext?: boolean;
+};
 
-    const completeUrl = url + (urlSearchParams.size > 0 ? `?${urlSearchParams}` : "");
+export const request = async <T>(requestUrl: string, searchParams?: SearchParamsRecord, config?: RequestConfig): Promise<T> => {
+    const {
+        fetchFromNext = false,
+        ...restConfig
+    } = config ?? {};
 
-    const res = await fetch(completeUrl, {
+    const url = new URL(requestUrl, fetchFromNext ? process.env.NEXT_PUBLIC_BASE_URL : process.env.NEXT_PUBLIC_API_BASE_URL);
+
+    url.search = new URLSearchParams(searchParams).toString();
+
+    const res = await fetch(url, {
         headers: {
             "Content-Type": "application/json"
         },
-        ...config
+        ...restConfig
     });
     return res.json();
 };

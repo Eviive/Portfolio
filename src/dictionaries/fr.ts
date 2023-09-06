@@ -43,6 +43,6 @@ export const fr: Dictionary = {
     },
 
     button: {
-        loading: "chargement en cours..."
+        loading: "chargement..."
     }
 };
