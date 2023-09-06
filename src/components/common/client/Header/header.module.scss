@@ -1,54 +1,85 @@
 @use "@/mixins";
 
 .header {
+    --header-bg: hsl(var(--primary-1), 0.6);
+    --header-filters: blur(60px) saturate(200%) brightness(0.6);
     z-index: 100;
     position: fixed;
-    padding: 0 10%;
-    @include mixins.size(100%, var(--header-height));
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: hsl(var(--primary-1), 0.7);
-    backdrop-filter: blur(8px);
+    top: var(--header-gap);
+    left: 50%;
+    translate: -50%;
+    margin: 0 auto;
+    padding: 0 20px;
+    height: var(--header-height);
+    background-color: var(--header-bg);
+    border-radius: 8px;
     color: hsl(var(--secondary-1));
-    font-family: var(--font-mono);
-    transition: background-color 0.35s, translate 0.4s cubic-bezier(0.645, 0.045, 0.355, 1);
+    font-weight: 500;
 
-    @include mixins.pseudo($pos: 0 0 0 0) {
+    @include mixins.pseudo($loc: before, $pos: 0 0 0 0) {
         z-index: -1;
-        @include mixins.box-shadow();
-        transition: opacity 0.5s;
+        backdrop-filter: var(--header-filters);
+        border-radius: inherit;
+        @include mixins.box-shadow($down: 3px, $blur: 10px, $spread: 0px, $color: var(--header-bg));
     }
 
-    &.top::after {
-        opacity: 0;
-    }
-
-    &.hidden {
-        --translateY: calc(var(--header-height) * -1);
-        translate: 0 var(--translateY);
-    }
-
-    .content {
-        width: 100%;
+    .nav {
+        height: var(--header-height);
         display: flex;
         justify-content: space-between;
-        align-items: center;
+        align-items: stretch;
+        gap: 40px;
+
+        .left, .right {
+            display: flex;
+            align-items: stretch;
+            gap: 20px;
+        }
+
+        .right {
+            @include mixins.media-query(xs) {
+                display: none;
+            }
+
+            .menu {
+                background-color: var(--header-bg);
+
+                @include mixins.pseudo($loc: before, $pos: 0 0 0 0) {
+                    z-index: -1;
+                    backdrop-filter: var(--header-filters);
+                    border-radius: inherit;
+                    @include mixins.box-shadow($down: 3px, $blur: 10px, $spread: 0px, $color: var(--header-bg));
+                }
+
+                li {
+                    height: var(--header-height);
+                }
+            }
+        }
     }
 }
 
 .left {
-    display: flex;
-    align-items: center;
-    gap: 50px;
-
-    .logo a {
+    .logo {
         display: flex;
+        align-items: stretch;
+
+        a {
+            display: flex;
+            align-items: center;
+        }
     }
 
     .links {
         display: flex;
-        gap: 25px;
+        align-items: stretch;
+        gap: 20px;
         text-transform: capitalize;
+        white-space: nowrap;
+
+        a {
+            display: flex;
+            align-items: center;
+        }
     }
 }

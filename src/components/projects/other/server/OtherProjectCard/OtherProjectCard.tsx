@@ -1,4 +1,5 @@
 import { Link } from "@/components/common/server";
+import { useI18nContext } from "@/contexts/I18nContext";
 import type { Project } from "@/types/entities";
 import type { FC } from "react";
 import { FiExternalLink, FiFolder, FiGithub } from "react-icons/fi";
@@ -10,6 +11,8 @@ type Props = {
 };
 
 export const OtherProjectCard: FC<Props> = ({ project }) => {
+
+    const locale = useI18nContext();
 
     project.skills.sort((a, b) => a.sort - b.sort);
 
@@ -30,7 +33,7 @@ export const OtherProjectCard: FC<Props> = ({ project }) => {
                 <Link className={styles.title} href={project.demoUrl}>
                     <h3>{project.title}</h3>
                 </Link>
-                <p>{project.description}</p>
+                <p>{locale === "en" ? project.descriptionEn : project.descriptionFr}</p>
             </div>
             <ul className={styles.skills}>
                 {project.skills.map(s => (

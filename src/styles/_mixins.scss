@@ -3,13 +3,13 @@
     height: $height;
 }
 
-@mixin box-shadow($right: 0px, $down: 10px, $blur: 30px, $spread: -15px) {
-    box-shadow: $right $down $blur $spread hsl(0deg, 0%, 0%, 0.7);
+@mixin box-shadow($right: 0px, $down: 10px, $blur: 30px, $spread: -15px, $color: hsl(0deg, 0%, 0%, 0.7)) {
+    box-shadow: $right $down $blur $spread $color;
 }
 
 @mixin media-query($size) {
     @if $size == xs {
-        @media (max-width: 300px) {
+        @media (max-width: 500px) {
             @content;
         }
     } @else if $size == s {
@@ -37,5 +37,38 @@
             inset: $pos;
         }
         @content;
+    }
+}
+
+@mixin hover-shard($width: 1px, $side: left, $top: 25%) {
+    $shift: -$width;
+    $inset: if($side == left, 65% auto auto $shift, 65% $shift auto auto);
+
+    @include pseudo($loc: after, $pos: $inset) {
+        opacity: 0;
+        @include size($width, 70px);
+        background: linear-gradient(
+            transparent,
+            hsl(var(--accent-1)),
+            transparent
+        );
+        translate: 0 -50%;
+        transition: opacity 0.6s ease, top 0.6s ease;
+
+        @if ($width == 1px) {
+            @media (min-resolution: 125dpi) {
+                // https://stackoverflow.com/questions/42710882/css-border-1px-appear-as-0-667px-or-1px-depending-on-the-computer-display-res
+                $width: 0.667px;
+                $shift: -$width;
+
+                inset: if($side == left, 65% auto auto $shift, 65% $shift auto auto);
+                width: $width;
+            }
+        }
+    }
+
+    &:hover::after {
+        opacity: 1;
+        top: $top;
     }
 }

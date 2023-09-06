@@ -2,7 +2,7 @@
   "extends": "next/core-web-vitals",
   "plugins": ["@typescript-eslint"],
   "rules": {
-    "indent": ["error", 4, { "SwitchCase": 1 }],
+    "indent": ["error", 4, { "SwitchCase": 1, "VariableDeclarator": "first" }],
     "quotes": ["error", "double"],
     "semi": ["error", "always"],
     "array-bracket-newline": ["error", "consistent"],

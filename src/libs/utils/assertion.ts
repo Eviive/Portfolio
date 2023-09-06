@@ -1,8 +1,6 @@
-import type { Falsy } from "@/types/app";
+import type { Falsy } from "@/types/utils";
 
-const isNotFalsy = <V>(value: V | Falsy): value is V => !!value;
-
-export const formatClassNames = (...classNames: (string | Falsy)[]) => classNames.filter(isNotFalsy).join(" ");
+export const isNotFalsy = <V>(value: V | Falsy): value is V => Number.isNaN(value) ? false : !!value;
 
 export const isNullOrUndefined = <V>(value: V | null | undefined): value is null | undefined => value === null || value === undefined;
 

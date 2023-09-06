@@ -1,4 +1,4 @@
-import { formatClassNames } from "@/lib/utils";
+import { formatClassNames } from "@/libs/utils/react";
 import NextLink from "next/link";
 import type { ComponentPropsWithRef, FC } from "react";
 
@@ -16,7 +16,7 @@ export const Link: FC<Props> = props => {
     return (
         <NextLink
             {...linkProps}
-            className={formatClassNames(linkProps.className, styles.link)}
+            className={formatClassNames(styles.link, linkProps.className)}
             target={blank ? "_blank" : linkProps.target}
         >
             {linkProps.children}

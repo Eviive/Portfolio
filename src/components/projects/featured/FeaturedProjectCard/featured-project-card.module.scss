@@ -7,7 +7,6 @@
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(5, 1fr);
     align-items: center;
-    justify-items: end;
 
     @include mixins.media-query(l) {
         gap: 0;
@@ -22,6 +21,23 @@
         display: flex;
     }
 
+    :nth-of-type(odd) > & {
+        justify-items: end;
+
+        .description {
+            grid-column: 4 / -1;
+            align-items: flex-end;
+
+            .logos > div {
+                justify-content: flex-end;
+            }
+        }
+
+        .image {
+            grid-column: 1 / 5;
+        }
+    }
+
     :nth-of-type(even) > & {
         justify-items: start;
 
@@ -32,25 +48,23 @@
             @include mixins.media-query(m) {
                 grid-column: 1 / 5;
             }
+
+            .logos > div {
+                justify-content: flex-start;
+            }
         }
 
         .image {
             grid-column: 3 / -1;
         }
     }
-
-    :nth-of-type(odd) > & .logos div {
-        flex-direction: row-reverse;
-    }
 }
 
 .description {
-    grid-column: 4 / -1;
     grid-row: 2 / 5;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: flex-end;
     gap: 30px;
 
     @include mixins.media-query(s) {
@@ -67,17 +81,18 @@
         max-width: 50ch;
         min-width: 30ch;
         color: hsl(var(--secondary-1));
-        line-height: 1.35em;
-        border-radius: 5px;
         background-color: hsl(var(--primary-2));
+        border: 1px solid hsl(var(--primary-3));
+        border-radius: 5px;
         @include mixins.box-shadow();
-        transition: color 0.35s;
+        transition: color 0.3s;
 
         @include mixins.media-query(s) {
             color: hsl(0deg, 0%, 95%);
             padding: 1em 0;
             min-width: unset;
             background-color: unset;
+            border: unset;
             box-shadow: unset;
         }
     }
@@ -110,19 +125,24 @@
 
 .logos {
     flex-grow: 0;
+    --columns: 6;
     --gap: 15px;
     z-index: 3;
-    max-width: calc(5 * 36px + 4 * var(--gap));
+    max-width: calc(var(--columns) * 36px + (var(--columns) - 1) * var(--gap));
     display: flex;
     flex-direction: column;
     align-items: inherit;
     gap: var(--gap);
 
-    div {
+    > div {
         display: flex;
         align-items: center;
         flex-wrap: wrap;
         gap: var(--gap);
+
+        @include mixins.media-query(s) {
+            justify-content: flex-start;
+        }
     }
 
     .links a {
@@ -137,11 +157,13 @@
 }
 
 .image {
-    grid-column: 1 / 5;
     grid-row: 1 / -1;
+    position: relative;
+    width: 100%;
     max-width: 650px;
+    aspect-ratio: 16 / 10;
     display: flex;
-    border: 2px solid hsl(var(--primary-2));
+    border: 2px solid hsl(var(--primary-3));
     border-radius: 6px;
     @include mixins.box-shadow();
 
@@ -149,12 +171,13 @@
         z-index: -1;
         position: absolute;
         inset: 0 0 0 0;
+        aspect-ratio: unset;
         background-color: hsl(0deg, 0%, 14%, 0.6);
     }
 
     a {
         @include mixins.size();
-        border-radius: inherit;
+        border-radius: 4px;
 
         @include mixins.media-query(s) {
             filter: brightness(0.3);
@@ -165,6 +188,7 @@
 
             img {
                 @include mixins.size();
+                background-color: hsl(var(--primary-1));
                 border-radius: inherit;
 
                 @include mixins.media-query(s) {
