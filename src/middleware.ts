@@ -26,7 +26,7 @@ export const middleware: NextMiddleware = req => {
 
         const newPathname = pathname.replace(`/${defaultLocale}`, "");
 
-        return NextResponse.redirect(createUrl(`/${removePrefixSlash(newPathname)}`, req));
+        return NextResponse.redirect(createUrl(`/${removePrefixSlash(newPathname)}`, process.env.NEXT_PUBLIC_BASE_URL));
     }
 
     const preferredLocale = getLocale(req),
@@ -35,10 +35,10 @@ export const middleware: NextMiddleware = req => {
     const newPathname = removePrefixSlash(pathname);
 
     if (pathnameLocale !== "") {
-        return NextResponse.redirect(createUrl(`/${pathnameLocale}/${newPathname}`, req));
+        return NextResponse.redirect(createUrl(`/${pathnameLocale}/${newPathname}`, process.env.NEXT_PUBLIC_BASE_URL));
     }
 
-    return NextResponse.rewrite(`/${defaultLocale}/${newPathname}`);
+    return NextResponse.rewrite(createUrl(`/${defaultLocale}/${newPathname}`, process.env.NEXT_PUBLIC_BASE_URL));
 };
 
 export const config = {
