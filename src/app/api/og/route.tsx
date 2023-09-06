@@ -3,7 +3,7 @@ import { ImageResponse } from "next/server";
 
 export const GET = async (req: NextRequest): Promise<ImageResponse> => {
 
-    const logoUrl = new URL("/logo.svg", req.nextUrl.origin).toString();
+    const logoUrl = new URL("/logo.svg", req.nextUrl).toString();
 
     return new ImageResponse(
         (

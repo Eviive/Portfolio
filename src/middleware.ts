@@ -40,20 +40,9 @@ export const middleware: NextMiddleware = req => {
 
     // rewrite to 172.
     // Failed to proxy blablabla
+    // rewrite to 172. but http
 
-    const rewriteUrl = createUrl(`/${defaultLocale}/${newPathname}`, req);
-
-    console.log(rewriteUrl.origin, rewriteUrl.toString());
-
-    rewriteUrl.protocol = "http";
-    rewriteUrl.host = "localhost";
-    rewriteUrl.port = "3000";
-
-    console.log(rewriteUrl.origin, rewriteUrl.toString());
-
-    console.log({ rewriteUrl: rewriteUrl.toString(), origin: rewriteUrl.origin, url: createUrl(`/${defaultLocale}/${newPathname}`, req).toString() });
-
-    return NextResponse.rewrite(rewriteUrl);
+    return NextResponse.rewrite(createUrl(`/${defaultLocale}/${newPathname}`, req));
 };
 
 export const config = {
