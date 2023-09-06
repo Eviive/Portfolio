@@ -42,7 +42,7 @@ export const middleware: NextMiddleware = req => {
     // Failed to proxy blablabla
     // rewrite to 172. but http
 
-    return NextResponse.rewrite(createUrl(`/${defaultLocale}/${newPathname}`, req));
+    return NextResponse.rewrite(createUrl(`/${defaultLocale}/${newPathname}`, req).toString().replace("https", "http"));
 };
 
 export const config = {
