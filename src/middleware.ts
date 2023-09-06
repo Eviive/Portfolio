@@ -38,7 +38,7 @@ export const middleware: NextMiddleware = req => {
         return NextResponse.redirect(createUrl(`/${pathnameLocale}/${newPathname}`, req));
     }
 
-    return NextResponse.rewrite(createUrl(`/${defaultLocale}/${newPathname}`, req));
+    return NextResponse.rewrite(`/${defaultLocale}/${newPathname}`);
 };
 
 export const config = {
