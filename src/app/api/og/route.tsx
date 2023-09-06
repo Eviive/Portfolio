@@ -1,8 +1,9 @@
+import type { NextRequest } from "next/server";
 import { ImageResponse } from "next/server";
 
-export const GET = async (): Promise<ImageResponse> => {
+export const GET = async (req: NextRequest): Promise<ImageResponse> => {
 
-    const logoUrl = new URL("/logo.svg", process.env.NEXT_PUBLIC_BASE_URL).toString();
+    const logoUrl = new URL("/logo.svg", req.nextUrl.origin).toString();
 
     return new ImageResponse(
         (
