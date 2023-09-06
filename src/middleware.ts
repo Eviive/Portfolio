@@ -17,6 +17,12 @@ const getLocale = (req: NextRequest): string => {
 export const middleware: NextMiddleware = req => {
     const { pathname } = req.nextUrl;
 
+    console.log({
+        url: req.url.toString(),
+        nextUrl: req.nextUrl.toString(),
+        originalUrl: req.nextUrl.origin.toString()
+    });
+
     const isLocalePresent = locales.some(locale => pathname.startsWith(`/${locale}`));
 
     if (isLocalePresent) {
@@ -38,7 +44,9 @@ export const middleware: NextMiddleware = req => {
         return NextResponse.redirect(createUrl(`/${pathnameLocale}/${newPathname}`, process.env.NEXT_PUBLIC_BASE_URL));
     }
 
-    return NextResponse.rewrite(createUrl(`/${defaultLocale}/${newPathname}`, process.env.NEXT_PUBLIC_BASE_URL));
+    req.nextUrl.protocol = "http";
+
+    return NextResponse.rewrite(createUrl(`/${defaultLocale}/${newPathname}`, req));
 };
 
 export const config = {
