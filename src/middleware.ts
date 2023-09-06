@@ -26,7 +26,7 @@ export const middleware: NextMiddleware = req => {
     const locale = getLocale(req),
           newPathname = removePrefixSlash(pathname);
 
-    return NextResponse.redirect(createUrl(`/${locale}/${newPathname}`, req));
+    return NextResponse.redirect(createUrl(`/${locale}/${newPathname}`, process.env.NEXT_PUBLIC_BASE_URL));
 };
 
 export const config = {
