@@ -39,14 +39,19 @@ export const middleware: NextMiddleware = req => {
     }
 
     // rewrite to 172.
+    // Failed to proxy blablabla
 
-    const rewriteUrl = req.nextUrl.clone();
+    const rewriteUrl = createUrl(`/${defaultLocale}/${newPathname}`, req);
+
+    console.log(rewriteUrl.origin, rewriteUrl.toString());
 
     rewriteUrl.protocol = "http";
 
+    console.log(rewriteUrl.origin, rewriteUrl.toString());
+
     console.log({ rewriteUrl: rewriteUrl.toString(), origin: rewriteUrl.origin, url: createUrl(`/${defaultLocale}/${newPathname}`, req).toString() });
 
-    return NextResponse.rewrite(createUrl(`/${defaultLocale}/${newPathname}`, req));
+    return NextResponse.rewrite(rewriteUrl);
 };
 
 export const config = {
