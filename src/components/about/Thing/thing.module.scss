@@ -17,7 +17,7 @@ $title-font-size: 1.2em;
     border: 1px solid hsl(var(--primary-2));
     border-radius: 7px;
     @include mixins.box-shadow();
-    transition: translate 0.3s;
+    transition: translate 0.5s;
 
     @include mixins.hover-shard($top: calc($card-padding + $circle-size + $card-gap + $title-font-size * 0.75));
 
