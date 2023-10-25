@@ -13,7 +13,6 @@ export const extractLocaleFromPathname = (pathname: string): Locale | "" => {
 
 export const formatUriWithLocale = (pathname: string, targetLocale: Locale): string => {
     const currentLocale = extractLocaleFromPathname(pathname);
-
     if (currentLocale === targetLocale) {
         return pathname;
     }
@@ -21,11 +20,7 @@ export const formatUriWithLocale = (pathname: string, targetLocale: Locale): str
     const segments = pathname.split("/");
 
     if (currentLocale) {
-        if (currentLocale !== defaultLocale && targetLocale === defaultLocale) {
-            segments.splice(1, 1);
-        } else {
-            segments.splice(1, 1, targetLocale);
-        }
+        segments.splice(1, 1, targetLocale);
     } else if (targetLocale !== defaultLocale) {
         if (segments.at(1) === "") {
             segments.splice(1, 1, targetLocale);
