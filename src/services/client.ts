@@ -10,7 +10,12 @@ export const request = async <T>(requestUrl: string, searchParams?: SearchParams
         ...restConfig
     } = config ?? {};
 
-    const url = new URL(requestUrl, fetchFromNext ? process.env.NEXT_PUBLIC_BASE_URL : process.env.NEXT_PUBLIC_API_BASE_URL);
+    const url = new URL(
+        requestUrl,
+        fetchFromNext
+            ? process.env.NEXT_PUBLIC_BASE_URL
+            : process.env.NEXT_PUBLIC_API_BASE_URL
+    );
 
     url.search = new URLSearchParams(searchParams).toString();
 
@@ -20,5 +25,6 @@ export const request = async <T>(requestUrl: string, searchParams?: SearchParams
         },
         ...restConfig
     });
+
     return res.json();
 };

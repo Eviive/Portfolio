@@ -40,7 +40,7 @@ export const FeaturedProjectCard: FC<Props> = ({ project }) => {
                         {project.skills.map(s => (
                             <Image
                                 key={s.id}
-                                src={ImageService.getImageUrl(s.image) ?? ""}
+                                src={ImageService.getImageUrl(s.image, "skills") ?? ""}
                                 alt={locale === "en" ? s.image.altEn : s.image.altFr}
                                 title={s.name}
                                 width={36}
@@ -60,7 +60,7 @@ export const FeaturedProjectCard: FC<Props> = ({ project }) => {
             <div className={styles.image}>
                 <Link href={project.demoUrl} blank>
                     <Image
-                        src={ImageService.getImageUrl(project.image) ?? ""}
+                        src={ImageService.getImageUrl(project.image, "projects") ?? ""}
                         alt={locale === "en" ? project.image.altEn : project.image.altFr}
                         width={1080}
                         height={675}

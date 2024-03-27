@@ -1,8 +1,10 @@
 import type { Image } from "@/types/entities";
 
-const URL = "image";
+const getImageUrl = (image: Image, type: "skills" | "projects") => {
+    if (!image.uuid) return null;
 
-const getImageUrl = (image: Image) => image.uuid ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/${URL}/${image.uuid}` : null;
+    return `${process.env.AZURE_ASSETS_BASE_URL}/${type}/${image.uuid}`;
+};
 
 export const ImageService = {
     getImageUrl
