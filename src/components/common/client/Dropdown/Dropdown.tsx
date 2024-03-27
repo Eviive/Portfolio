@@ -1,5 +1,6 @@
 "use client";
 
+import { Link } from "@/components/common/server";
 import { useCloseEvents } from "@/hooks/useCloseEvents";
 import { formatClassNames } from "@/libs/utils/react";
 import type { FC } from "react";
@@ -42,9 +43,9 @@ export const Dropdown: FC<Props> = props => {
                     .filter(i => !i.isSelected)
                     .map(i => (
                         <li key={i.text}>
-                            <a href={i.href}>
+                            <Link href={i.href}>
                                 {i.text}
-                            </a>
+                            </Link>
                         </li>
                     ))
                 }

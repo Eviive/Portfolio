@@ -1,6 +1,6 @@
 {
   "name": "portfolio",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -11,25 +11,25 @@
     "fix": "eslint --fix ."
   },
   "dependencies": {
-    "@formatjs/intl-localematcher": "^0.4.0",
+    "@formatjs/intl-localematcher": "^0.4.2",
     "negotiator": "^0.6.3",
-    "next": "^13.4.19",
+    "next": "^13.5.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-icons": "^4.10.1",
+    "react-icons": "^4.11.0",
     "scrollreveal": "^4.0.9",
-    "sharp": "^0.32.5"
+    "sharp": "^0.32.6"
   },
   "devDependencies": {
-    "@types/negotiator": "^0.6.1",
-    "@types/node": "^20.5.9",
-    "@types/react": "^18.2.21",
-    "@types/react-dom": "^18.2.7",
-    "@types/scrollreveal": "^0.0.8",
-    "@typescript-eslint/eslint-plugin": "^6.6.0",
-    "eslint": "^8.48.0",
-    "eslint-config-next": "^13.4.19",
-    "sass": "^1.66.1",
+    "@types/negotiator": "^0.6.2",
+    "@types/node": "^20.8.8",
+    "@types/react": "^18.2.31",
+    "@types/react-dom": "^18.2.14",
+    "@types/scrollreveal": "^0.0.10",
+    "@typescript-eslint/eslint-plugin": "^6.9.0",
+    "eslint": "^8.52.0",
+    "eslint-config-next": "^13.5.6",
+    "sass": "^1.69.4",
     "typescript": "^5.2.2"
   }
 }
