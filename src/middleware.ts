@@ -11,7 +11,7 @@ const getLocale = (req: NextRequest): string => {
 
     const languages = new Negotiator({ headers }).languages();
 
-    return match(languages, [ ...locales ], defaultLocale);
+    return match(languages, locales, defaultLocale);
 };
 
 export const middleware: NextMiddleware = req => {
@@ -23,8 +23,9 @@ export const middleware: NextMiddleware = req => {
         return NextResponse.next();
     }
 
-    const locale = getLocale(req),
-          newPathname = removePrefixSlash(pathname);
+    const locale = getLocale(req);
+
+    const newPathname = removePrefixSlash(pathname);
 
     return NextResponse.redirect(createUrl(`/${locale}/${newPathname}`, process.env.NEXT_PUBLIC_BASE_URL));
 };
