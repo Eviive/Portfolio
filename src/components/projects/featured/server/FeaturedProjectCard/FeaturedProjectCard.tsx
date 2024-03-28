@@ -4,7 +4,7 @@ import { useI18nContext } from "@/contexts/I18nContext";
 import { useDictionary } from "@/hooks/useDictionary";
 import { ImageService } from "@/services";
 import type { Project } from "@/types/entities";
-import type { FC } from "react";
+import { forwardRef } from "react";
 import { FiExternalLink, FiGithub } from "react-icons/fi";
 
 import styles from "./featured-project-card.module.scss";
@@ -17,7 +17,7 @@ type Props = {
     project: Project;
 };
 
-export const FeaturedProjectCard: FC<Props> = ({ project }) => {
+const FeaturedProjectCard = forwardRef<HTMLDivElement, Props>(({ project }, ref) => {
 
     const locale = useI18nContext();
 
@@ -26,7 +26,7 @@ export const FeaturedProjectCard: FC<Props> = ({ project }) => {
     project.skills.sort((a, b) => a.sort - b.sort);
 
     return (
-        <div className={styles.card}>
+        <div ref={ref} className={styles.card}>
             <div className={styles.description}>
                 <div className={styles.title}>
                     <span>{dico.subtitle}</span>
@@ -69,4 +69,8 @@ export const FeaturedProjectCard: FC<Props> = ({ project }) => {
             </div>
         </div>
     );
-};
+});
+
+FeaturedProjectCard.displayName = "FeaturedProjectCard";
+
+export { FeaturedProjectCard };

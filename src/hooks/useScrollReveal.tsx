@@ -1,45 +1,31 @@
-"use client";
-
 import { isNotNullOrUndefined, isNullOrUndefined } from "@/libs/utils/assertion";
-import type { FC, ReactNode } from "react";
 import { useEffect, useRef } from "react";
 
-type SingleRevealProps = {
-    multiple?: false;
-    content: ReactNode;
+type ScrollRevealConfig = scrollReveal.ScrollRevealObjectOptions & {
+    intervalDelay?: number;
+    multiple?: boolean;
 };
 
-type MultipleRevealProps = {
-    multiple: true;
-    content: ReactNode[];
-};
-
-type Props = {
-    options?: scrollReveal.ScrollRevealObjectOptions & {
-        intervalDelay?: number;
-    };
-} & (SingleRevealProps | MultipleRevealProps);
-
-export const ScrollReveal: FC<Props> = props => {
+export const useScrollReveal = (config: ScrollRevealConfig) => {
 
     const refs = useRef<(HTMLElement | null)[]>([]);
 
     useEffect(() => {
-        let scrollRevealObject: scrollReveal.ScrollRevealObject;
+        let sr: scrollReveal.ScrollRevealObject;
 
         const setUpScrollReveal = (el: HTMLElement, i: number) => {
             const {
                 intervalDelay,
                 ...options
-            } = props?.options ?? {};
+            } = config ?? {};
 
-            let delay = props.options?.delay ?? 100;
+            let delay = config?.delay ?? 100;
 
-            if (props.multiple) {
+            if (config.multiple) {
                 delay += i * (intervalDelay ?? 100);
             }
 
-            scrollRevealObject.reveal(el, {
+            sr.reveal(el, {
                 origin: "bottom",
                 duration: 500,
                 easing: "ease",
@@ -51,7 +37,7 @@ export const ScrollReveal: FC<Props> = props => {
                 ...options,
                 afterReveal: (el: HTMLElement) => {
                     options?.afterReveal?.(el);
-                    scrollRevealObject.clean(el);
+                    sr.clean(el);
                     el.removeAttribute("style");
                     el.classList.remove("reveal-hidden");
                 },
@@ -62,26 +48,23 @@ export const ScrollReveal: FC<Props> = props => {
         };
 
         (async () => {
-            scrollRevealObject = (await import("scrollreveal")).default();
+            sr = (await import("scrollreveal")).default();
 
             refs.current
                 .filter(isNotNullOrUndefined)
                 .filter(el => isNullOrUndefined(el.dataset.revealed))
                 .forEach(setUpScrollReveal);
         })();
-    }, [ props.content, props.multiple, props.options ]);
+    }, [ config ]);
 
-    const wrapComponent = (component: ReactNode, i: number = 0) => (
-        <li
-            key={i}
-            ref={el => refs.current[i] = el}
-            className="reveal-hidden"
-        >
-            {component}
-        </li>
-    );
+    if (typeof window === "undefined") {
+        refs.current
+            .filter(isNotNullOrUndefined)
+            .filter(el => isNullOrUndefined(el.dataset.revealed))
+            .forEach((el, i) => {
+                el.classList.add("reveal-hidden");
+            });
+    }
 
-    return Array.isArray(props.content)
-        ? props.content.map(wrapComponent)
-        : wrapComponent(props.content);
+    return refs;
 };

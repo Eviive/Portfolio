@@ -3,8 +3,8 @@ const nextConfig = {
     images: {
         remotePatterns: [
             {
-                protocol: process.env.AZURE_ASSETS_PROTOCOL,
-                hostname: process.env.AZURE_ASSETS_HOSTNAME
+                protocol: process.env.NEXT_PUBLIC_AZURE_ASSETS_PROTOCOL,
+                hostname: process.env.NEXT_PUBLIC_AZURE_ASSETS_HOSTNAME
             }
         ],
         dangerouslyAllowSVG: true,
