@@ -17,7 +17,10 @@ type Props = {
     project: Project;
 };
 
-const FeaturedProjectCard = forwardRef<HTMLDivElement, Props>(({ project }, ref) => {
+const FeaturedProjectCard = forwardRef<
+    HTMLLIElement,
+    Props
+>(({ project }, ref) => {
 
     const locale = useI18nContext();
 
@@ -26,7 +29,7 @@ const FeaturedProjectCard = forwardRef<HTMLDivElement, Props>(({ project }, ref)
     project.skills.sort((a, b) => a.sort - b.sort);
 
     return (
-        <div ref={ref} className={styles.card}>
+        <li ref={ref} className={styles.card}>
             <div className={styles.description}>
                 <div className={styles.title}>
                     <span>{dico.subtitle}</span>
@@ -67,7 +70,7 @@ const FeaturedProjectCard = forwardRef<HTMLDivElement, Props>(({ project }, ref)
                     />
                 </Link>
             </div>
-        </div>
+        </li>
     );
 });
 

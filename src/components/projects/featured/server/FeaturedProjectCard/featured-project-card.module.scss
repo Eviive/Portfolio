@@ -21,7 +21,7 @@
         display: flex;
     }
 
-    :nth-of-type(odd) > & {
+    &:nth-of-type(odd) {
         justify-items: end;
 
         .description {
@@ -38,7 +38,7 @@
         }
     }
 
-    :nth-of-type(even) > & {
+    &:nth-of-type(even) {
         justify-items: start;
 
         .description {
@@ -168,11 +168,12 @@
     @include mixins.box-shadow();
 
     @include mixins.media-query(s) {
-        z-index: -1;
+        z-index: 0;
         position: absolute;
         inset: 0 0 0 0;
         aspect-ratio: unset;
         background-color: hsl(0deg, 0%, 14%, 0.6);
+        pointer-events: none;
     }
 
     a {
