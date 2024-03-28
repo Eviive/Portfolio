@@ -1,6 +1,6 @@
 import type { ErrorDictionary } from "@/app/[lang]/error";
 import type { MetadataDictionary } from "@/app/[lang]/layout";
-import type { AboutDictionary } from "@/components/about";
+import type { AboutDictionary } from "@/components/about/About/About";
 import type { ButtonDictionary, HeaderDictionary } from "@/components/common/client";
 import type { FooterDictionary } from "@/components/common/server";
 import type { HomeDictionary } from "@/components/home";

@@ -3,10 +3,8 @@ const nextConfig = {
     images: {
         remotePatterns: [
             {
-                protocol: process.env.NEXT_PUBLIC_API_PROTOCOL,
-                hostname: process.env.NEXT_PUBLIC_API_HOSTNAME,
-                port: process.env.NEXT_PUBLIC_API_PORT,
-                pathname: process.env.API_PATHNAME_IMAGE
+                protocol: process.env.NEXT_PUBLIC_AZURE_ASSETS_PROTOCOL,
+                hostname: process.env.NEXT_PUBLIC_AZURE_ASSETS_HOSTNAME
             }
         ],
         dangerouslyAllowSVG: true,

@@ -1,7 +1,7 @@
 import { Link } from "@/components/common/server";
 import { useI18nContext } from "@/contexts/I18nContext";
 import type { Project } from "@/types/entities";
-import type { FC } from "react";
+import { forwardRef } from "react";
 import { FiExternalLink, FiFolder, FiGithub } from "react-icons/fi";
 
 import styles from "./other-project-card.module.scss";
@@ -10,14 +10,17 @@ type Props = {
     project: Project;
 };
 
-export const OtherProjectCard: FC<Props> = ({ project }) => {
+const OtherProjectCard = forwardRef<
+    HTMLLIElement,
+    Props
+>(({ project }, ref) => {
 
     const locale = useI18nContext();
 
     project.skills.sort((a, b) => a.sort - b.sort);
 
     return (
-        <div className={styles.card}>
+        <li ref={ref} className={styles.card}>
             <div>
                 <div className={styles.icons}>
                     <FiFolder size={40} strokeWidth={1} className={styles.folder} />
@@ -40,6 +43,10 @@ export const OtherProjectCard: FC<Props> = ({ project }) => {
                     <li key={s.id}>{s.name}</li>
                 ))}
             </ul>
-        </div>
+        </li>
     );
-};
+});
+
+OtherProjectCard.displayName = "OtherProjectCard";
+
+export { OtherProjectCard };
