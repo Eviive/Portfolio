@@ -1,4 +1,5 @@
-import { en, fr } from "@/dictionaries";
+import { en } from "@/dictionaries/en";
+import { fr } from "@/dictionaries/fr";
 import type { Dictionary } from "@/types/i18n";
 
 export const locales = [ "en", "fr" ] as const;

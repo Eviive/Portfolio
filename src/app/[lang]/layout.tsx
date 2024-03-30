@@ -1,5 +1,5 @@
-import { Header } from "@/components/common/client";
-import { Footer } from "@/components/common/server";
+import { Footer } from "@/components/common/footer";
+import { Header } from "@/components/common/header";
 import { I18nContextProvider } from "@/contexts/I18nContext";
 import { inter, montserrat, sourceCodePro } from "@/libs/fonts";
 import type { Locale } from "@/libs/i18n";

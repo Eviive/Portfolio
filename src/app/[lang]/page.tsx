@@ -1,6 +1,6 @@
-import { About } from "@/components/about/About/About";
-import { Home } from "@/components/home";
-import { Projects } from "@/components/projects";
+import { About } from "@/components/about/about";
+import { Home } from "@/components/home/home";
+import { Projects } from "@/components/projects/projects";
 import type { NextPage } from "next";
 
 const Index: NextPage = () => {

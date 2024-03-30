@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/components/common/client";
+import { Button } from "@/components/ui/button";
 import { useDictionary } from "@/hooks/useDictionary";
 import type { DictionaryWithTitle } from "@/types/i18n";
 import type { FC } from "react";
