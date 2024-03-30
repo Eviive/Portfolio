@@ -11,6 +11,7 @@ const nextConfig = {
         contentDispositionType: "attachment",
         contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;"
     },
+    productionBrowserSourceMaps: true,
     output: "standalone"
 };
 
