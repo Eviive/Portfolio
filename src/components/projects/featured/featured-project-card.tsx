@@ -20,11 +20,7 @@ type Props = {
     dict: FeaturedProjectCardDictionary;
 };
 
-const FeaturedProjectCard = forwardRef<
-    HTMLLIElement,
-    Props
->(({ project, dict }, ref) => {
-
+const FeaturedProjectCard = forwardRef<HTMLLIElement, Props>(({ project, dict }, ref) => {
     const i18n = useI18nContext();
 
     project.skills.sort((a, b) => a.sort - b.sort);

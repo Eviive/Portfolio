@@ -7,7 +7,10 @@ const URL = "project";
 
 const findAllFeatured = () => request<Project[]>(`/${URL}/featured`);
 
-const findAllNotFeaturedPaginated = (page?: number | string | null, size?: number | string | null) => {
+const findAllNotFeaturedPaginated = (
+    page?: number | string | null,
+    size?: number | string | null
+) => {
     const searchParams: SearchParamsRecord = {};
 
     isNotNullOrUndefined(page) && (searchParams.page = page.toString());
@@ -16,11 +19,12 @@ const findAllNotFeaturedPaginated = (page?: number | string | null, size?: numbe
     return request<Page<Project>>(`/${URL}/not-featured/paginated`, searchParams);
 };
 
-const findAllNotFeaturedPaginatedFromNext = (page?: number) => request<Page<Project>>(
-    `/api/${URL}/not-featured/paginated`,
-    page ? { page: page.toString() } : undefined,
-    { fetchFromNext: true }
-);
+const findAllNotFeaturedPaginatedFromNext = (page?: number) =>
+    request<Page<Project>>(
+        `/api/${URL}/not-featured/paginated`,
+        page ? { page: page.toString() } : undefined,
+        { fetchFromNext: true }
+    );
 
 export const ProjectService = {
     findAllFeatured,

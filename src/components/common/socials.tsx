@@ -28,12 +28,7 @@ export const Socials: FC = () => {
     return (
         <div className={styles.socials}>
             {links.map(s => (
-                <Link
-                    key={s.href}
-                    className={styles.link}
-                    href={s.href}
-                    blank
-                >
+                <Link key={s.href} className={styles.link} href={s.href} blank>
                     {s.icon}
                 </Link>
             ))}

@@ -10,7 +10,6 @@ type Props = {
 } & LinkProps;
 
 export const Link: FC<Props> = props => {
-
     const { blank, ...linkProps } = props;
 
     return (

@@ -9,7 +9,6 @@ export type HomeDictionary = {
 };
 
 export const HomeTitle: FC = () => {
-
     const dict = getDictionary("home");
 
     return (

@@ -7,7 +7,9 @@
     --mask-size: calc(100% - var(--line-size));
 
     @include mixins.size(var(--size));
-    background: radial-gradient(farthest-side, var(--color) 94%, transparent) top / var(--line-size) var(--line-size) no-repeat,
+    background:
+        radial-gradient(farthest-side, var(--color) 94%, transparent) top / var(--line-size)
+            var(--line-size) no-repeat,
         conic-gradient(transparent 30%, var(--color));
     -webkit-mask: radial-gradient(farthest-side, transparent var(--mask-size), black 0);
     border-radius: 50%;

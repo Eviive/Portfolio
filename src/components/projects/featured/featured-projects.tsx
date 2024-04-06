@@ -8,7 +8,6 @@ import type { FC } from "react";
 export type FeaturedProjectsDictionary = DictionaryWithTitle;
 
 export const FeaturedProjects: FC = async () => {
-
     const featuredProjects = await ProjectService.findAllFeatured();
 
     featuredProjects.sort((a, b) => a.sort - b.sort);

@@ -30,12 +30,12 @@
         align-items: stretch;
         gap: 40px;
 
-        .left, .right {
+        .left,
+        .right {
             display: flex;
             align-items: stretch;
             gap: 20px;
         }
-
     }
 }
 
@@ -47,7 +47,12 @@
             z-index: -1;
             backdrop-filter: var(--header-filters);
             border-radius: inherit;
-            @include mixins.box-shadow($down: 3px, $blur: 10px, $spread: 0px, $color: var(--header-bg));
+            @include mixins.box-shadow(
+                $down: 3px,
+                $blur: 10px,
+                $spread: 0px,
+                $color: var(--header-bg)
+            );
         }
 
         li {

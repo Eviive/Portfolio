@@ -23,11 +23,13 @@
     box-sizing: border-box;
 }
 
-ol, ul {
+ol,
+ul {
     list-style: none;
 }
 
-a, button {
+a,
+button {
     color: inherit;
     font-weight: inherit;
     text-decoration: none;
@@ -40,7 +42,8 @@ p {
     line-height: 1.4;
 }
 
-progress, input:is([type="checkbox"], [type="radio"], [type="range"]) {
+progress,
+input:is([type="checkbox"], [type="radio"], [type="range"]) {
     accent-color: hsl(var(--accent-1));
 }
 
@@ -118,7 +121,6 @@ html {
 ::-webkit-scrollbar-thumb:hover {
     background-color: hsl(0deg, 0%, 25%);
 }
-
 
 ::-webkit-scrollbar-corner {
     background-color: hsl(var(--primary-1));

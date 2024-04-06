@@ -18,7 +18,6 @@ type Props = {
 };
 
 export const Button: FC<PropsWithChildren<Props>> = props => {
-
     const i18n = useI18nContext();
 
     const dict = i18n.dictionaries.button;
@@ -28,15 +27,14 @@ export const Button: FC<PropsWithChildren<Props>> = props => {
             className={formatClassNames(styles.button, props.className)}
             onClick={props.loading ? undefined : props.handleClick}
         >
-            {props.loading
-                ? (
-                    <>
-                        <Loader size={20} color="hsl(var(--secondary-1))" />
-                        {dict.loading}
-                    </>
-                )
-                : props.children
-            }
+            {props.loading ? (
+                <>
+                    <Loader size={20} color="hsl(var(--secondary-1))" />
+                    {dict.loading}
+                </>
+            ) : (
+                props.children
+            )}
         </button>
     );
 };

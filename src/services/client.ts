@@ -4,17 +4,16 @@ type RequestConfig = RequestInit & {
     fetchFromNext?: boolean;
 };
 
-export const request = async <T>(requestUrl: string, searchParams?: SearchParamsRecord, config?: RequestConfig): Promise<T> => {
-    const {
-        fetchFromNext = false,
-        ...restConfig
-    } = config ?? {};
+export const request = async <T>(
+    requestUrl: string,
+    searchParams?: SearchParamsRecord,
+    config?: RequestConfig
+): Promise<T> => {
+    const { fetchFromNext = false, ...restConfig } = config ?? {};
 
     const url = new URL(
         requestUrl,
-        fetchFromNext
-            ? process.env.NEXT_PUBLIC_BASE_URL
-            : process.env.NEXT_PUBLIC_API_BASE_URL
+        fetchFromNext ? process.env.NEXT_PUBLIC_BASE_URL : process.env.NEXT_PUBLIC_API_BASE_URL
     );
 
     url.search = new URLSearchParams(searchParams).toString();

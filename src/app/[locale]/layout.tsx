@@ -20,15 +20,18 @@ export type MetadataDictionary = {
     description: string;
 };
 
-export const generateMetadata = ({ params: { locale } }: PropsWithParams<EmptyRecord, LocaleParams>): Metadata => {
-
+export const generateMetadata = ({
+    params: { locale }
+}: PropsWithParams<EmptyRecord, LocaleParams>): Metadata => {
     const i18n = getI18nServerContext();
 
     i18n.locale = locale;
 
     const dict = getDictionary("metadata");
 
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ? new URL(process.env.NEXT_PUBLIC_BASE_URL) : undefined;
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
+        ? new URL(process.env.NEXT_PUBLIC_BASE_URL)
+        : undefined;
 
     const localesUrl: Record<string, string> = {};
     for (const locale of locales) {
@@ -46,13 +49,34 @@ export const generateMetadata = ({ params: { locale } }: PropsWithParams<EmptyRe
         applicationName: "Albert Vaillon - Portfolio",
         referrer: "origin-when-cross-origin",
         keywords: [
-            "Albert Vaillon", "Albert", "Vaillon",
-            "Albert Vaillon's portfolio", "Portfolio de Albert Vaillon", "Portfolio",
-            "Computer science", "Student", "Étudiant en informatique", "Étudiant",
-            "Software development", "Web development", "Développement logiciel", "Développement web",
-            "Next.js", "Next.js 13", "React", "JavaScript", "TypeScript", "SCSS", "App Router",
-            "IUT", "IUT Lyon 1", "Institut Universitaire de Technologie Lyon 1", "IUT Lyon 1 - Département Informatique",
-            "BUT", "BUT Informatique", "Bachelor Universitaire de Technologie"
+            "Albert Vaillon",
+            "Albert",
+            "Vaillon",
+            "Albert Vaillon's portfolio",
+            "Portfolio de Albert Vaillon",
+            "Portfolio",
+            "Computer science",
+            "Student",
+            "Étudiant en informatique",
+            "Étudiant",
+            "Software development",
+            "Web development",
+            "Développement logiciel",
+            "Développement web",
+            "Next.js",
+            "Next.js 13",
+            "React",
+            "JavaScript",
+            "TypeScript",
+            "SCSS",
+            "App Router",
+            "IUT",
+            "IUT Lyon 1",
+            "Institut Universitaire de Technologie Lyon 1",
+            "IUT Lyon 1 - Département Informatique",
+            "BUT",
+            "BUT Informatique",
+            "Bachelor Universitaire de Technologie"
         ],
         authors: {
             name: "Albert Vaillon",
@@ -122,8 +146,10 @@ export const generateStaticParams = (): LocaleParams[] => {
     return locales.map(locale => ({ locale }));
 };
 
-const LocaleLayout: FC<PropsWithParams<PropsWithChildren, LocaleParams>> = ({ children, params }) => {
-
+const LocaleLayout: FC<PropsWithParams<PropsWithChildren, LocaleParams>> = ({
+    children,
+    params
+}) => {
     const i18n = getI18nServerContext();
 
     i18n.locale = params.locale;
@@ -132,15 +158,21 @@ const LocaleLayout: FC<PropsWithParams<PropsWithChildren, LocaleParams>> = ({ ch
 
     return (
         <html lang={params.locale} className="sr">
-            <body className={formatClassNames(inter.className, sourceCodePro.variable, montserrat.variable)}>
-                <I18nContextProvider value={{
-                    locale: i18n.locale,
-                    dictionaries: pick(dictionaries[i18n.locale], [ "error", "button" ])
-                }}>
+            <body
+                className={formatClassNames(
+                    inter.className,
+                    sourceCodePro.variable,
+                    montserrat.variable
+                )}
+            >
+                <I18nContextProvider
+                    value={{
+                        locale: i18n.locale,
+                        dictionaries: pick(dictionaries[i18n.locale], ["error", "button"])
+                    }}
+                >
                     <Header dict={headerDict} />
-                    <main className={styles.main}>
-                        {children}
-                    </main>
+                    <main className={styles.main}>{children}</main>
                     <Footer />
                 </I18nContextProvider>
             </body>

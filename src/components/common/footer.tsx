@@ -1,7 +1,6 @@
 import { Socials } from "@/components/common/socials";
 import { Link } from "@/components/ui/link";
 
-
 import { getDictionary } from "@/libs/utils/i18n";
 import type { FC } from "react";
 
@@ -12,7 +11,6 @@ export type FooterDictionary = {
 };
 
 export const Footer: FC = () => {
-
     const dict = getDictionary("footer");
 
     return (

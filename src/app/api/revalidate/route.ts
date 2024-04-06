@@ -9,23 +9,29 @@ export const POST = async (req: NextRequest): Promise<NextResponse<RevalidateRes
     try {
         reqBody = await req.json();
     } catch (error) {
-        return NextResponse.json({
-            revalidated: false,
-            timestamp: Date.now()
-        }, {
-            status: 400,
-            statusText: "Bad Request"
-        });
+        return NextResponse.json(
+            {
+                revalidated: false,
+                timestamp: Date.now()
+            },
+            {
+                status: 400,
+                statusText: "Bad Request"
+            }
+        );
     }
 
     if (!process.env.REVALIDATE_SECRET || reqBody.secret !== process.env.REVALIDATE_SECRET) {
-        return NextResponse.json({
-            revalidated: false,
-            timestamp: Date.now()
-        }, {
-            status: 401,
-            statusText: "Unauthorized"
-        });
+        return NextResponse.json(
+            {
+                revalidated: false,
+                timestamp: Date.now()
+            },
+            {
+                status: 401,
+                statusText: "Unauthorized"
+            }
+        );
     }
 
     revalidatePath(reqBody.path ?? "/");

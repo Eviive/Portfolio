@@ -17,11 +17,7 @@ type Props = {
 };
 
 export const I18nContextProvider: FC<PropsWithChildren<Props>> = props => {
-    return (
-        <I18nContext.Provider value={props.value}>
-            {props.children}
-        </I18nContext.Provider>
-    );
+    return <I18nContext.Provider value={props.value}>{props.children}</I18nContext.Provider>;
 };
 
 export const useI18nContext = (): II18nContext => {

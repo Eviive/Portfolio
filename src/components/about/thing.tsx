@@ -10,11 +10,7 @@ import styles from "./thing.module.scss";
 
 type Props = ThingType;
 
-const Thing = forwardRef<
-    HTMLLIElement,
-    Props
->((props, ref) => {
-
+const Thing = forwardRef<HTMLLIElement, Props>((props, ref) => {
     const i18n = useI18nContext();
 
     return (

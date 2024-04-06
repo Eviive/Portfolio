@@ -13,11 +13,7 @@ type Props = {
     project: Project;
 };
 
-const OtherProjectCard = forwardRef<
-    HTMLLIElement,
-    Props
->(({ project }, ref) => {
-
+const OtherProjectCard = forwardRef<HTMLLIElement, Props>(({ project }, ref) => {
     const i18n = useI18nContext();
 
     project.skills.sort((a, b) => a.sort - b.sort);

@@ -16,8 +16,7 @@ type Props = {
 };
 
 export const Image: FC<Props> = props => {
-
-    const [ loading, setLoading ] = useState<boolean | null>(null);
+    const [loading, setLoading] = useState<boolean | null>(null);
 
     useEffect(() => {
         setLoading(prevState => prevState ?? true);

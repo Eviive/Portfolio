@@ -7,7 +7,7 @@ import { NextResponse } from "next/server";
 
 const getLocale = (req: NextRequest): string => {
     const headers: Negotiator.Headers = {};
-    req.headers.forEach((value, key) => headers[key] = value);
+    req.headers.forEach((value, key) => (headers[key] = value));
 
     const languages = new Negotiator({ headers }).languages();
 
@@ -27,9 +27,13 @@ export const middleware: NextMiddleware = req => {
 
     const newPathname = removePrefixSlash(pathname);
 
-    return NextResponse.redirect(createUrl(`/${locale}/${newPathname}`, process.env.NEXT_PUBLIC_BASE_URL));
+    return NextResponse.redirect(
+        createUrl(`/${locale}/${newPathname}`, process.env.NEXT_PUBLIC_BASE_URL)
+    );
 };
 
 export const config = {
-    matcher: [ "/((?!api|_next/static|_next/image|robots.txt|manifest.json|sitemap.xml|browserconfig.xml|.*\\.ico$|.*\\.png$|.*\\.svg$).*)" ]
+    matcher: [
+        "/((?!api|_next/static|_next/image|robots.txt|manifest.json|sitemap.xml|browserconfig.xml|.*\\.ico$|.*\\.png$|.*\\.svg$).*)"
+    ]
 };
