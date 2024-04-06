@@ -1,8 +1,7 @@
 "use client";
 
+import type { FeaturedProjectCardDictionary } from "@/components/projects/featured/featured-project-card";
 import { FeaturedProjectCard } from "@/components/projects/featured/featured-project-card";
-import type { FeaturedProjectsDictionary } from "@/components/projects/featured/featured-projects";
-import { Title } from "@/components/ui/title";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import type { Project } from "@/types/entities";
 import type { FC } from "react";
@@ -11,10 +10,10 @@ import styles from "./featured-projects-wrapper.module.scss";
 
 type Props = {
     projects: Project[];
-    dico: FeaturedProjectsDictionary;
+    cardDict: FeaturedProjectCardDictionary;
 };
 
-export const FeaturedProjectsWrapper: FC<Props> = ({ projects, dico }) => {
+export const FeaturedProjectsWrapper: FC<Props> = ({ projects, cardDict }) => {
 
     const refs = useScrollReveal({
         multiple: true,
@@ -22,19 +21,17 @@ export const FeaturedProjectsWrapper: FC<Props> = ({ projects, dico }) => {
     });
 
     return (
-        <>
-            <Title title={dico.title} />
-            <ul className={styles.featured}>
-                {projects.map((project, i) => (
-                    <FeaturedProjectCard
-                        key={project.id}
-                        ref={el => {
-                            refs.current[i] = el;
-                        }}
-                        project={project}
-                    />
-                ))}
-            </ul>
-        </>
+        <ul className={styles.featured}>
+            {projects.map((project, i) => (
+                <FeaturedProjectCard
+                    key={project.id}
+                    ref={el => {
+                        refs.current[i] = el;
+                    }}
+                    project={project}
+                    dict={cardDict}
+                />
+            ))}
+        </ul>
     );
 };

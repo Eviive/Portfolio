@@ -1,23 +1,23 @@
 import { OtherProjectsWrapper } from "@/components/projects/other/other-projects-wrapper";
 import { Title } from "@/components/ui/title";
+import { getDictionary } from "@/libs/utils/i18n";
 import { ProjectService } from "@/services/project";
 import type { DictionaryWithTitle } from "@/types/i18n";
 import type { FC } from "react";
 
 export type OtherProjectsDictionary = DictionaryWithTitle;
 
-type Props = {
-    dico: OtherProjectsDictionary;
-};
-
-export const OtherProjects: FC<Props> = async ({ dico }) => {
+export const OtherProjects: FC = async () => {
 
     const otherProjectsPage = await ProjectService.findAllNotFeaturedPaginated();
 
+    const dict = getDictionary("otherProjects");
+    const wrapperDict = getDictionary("otherProjectsWrapper");
+
     return (
         <>
-            <Title title={dico.title} />
-            <OtherProjectsWrapper initialPage={otherProjectsPage} />
+            <Title title={dict.title} />
+            <OtherProjectsWrapper initialPage={otherProjectsPage} dict={wrapperDict} />
         </>
     );
 };

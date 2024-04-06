@@ -2,10 +2,10 @@ import type { Locale } from "@/libs/i18n";
 import { defaultLocale } from "@/libs/i18n";
 import { cache } from "react";
 
-export type II18nContext = {
+type II18nServerContext = {
     locale: Locale;
 };
 
-export const getI18nServerContext = cache((): II18nContext => ({
+export const getI18nServerContext = cache((): II18nServerContext => ({
     locale: defaultLocale
 }));

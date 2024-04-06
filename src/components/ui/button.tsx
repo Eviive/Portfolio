@@ -1,11 +1,8 @@
 "use client";
 
 import { Loader } from "@/components/ui/loader";
-import { useDictionary } from "@/hooks/use-dictionary";
-import { defaultLocale } from "@/libs/i18n";
+import { useI18nContext } from "@/contexts/i18n-context";
 import { formatClassNames } from "@/libs/utils/react";
-import { extractLocaleFromPathname } from "@/libs/utils/url";
-import { usePathname } from "next/navigation";
 import type { FC, PropsWithChildren } from "react";
 
 import styles from "./button.module.scss";
@@ -22,11 +19,9 @@ type Props = {
 
 export const Button: FC<PropsWithChildren<Props>> = props => {
 
-    const pathname = usePathname();
+    const i18n = useI18nContext();
 
-    const locale = extractLocaleFromPathname(pathname) || defaultLocale;
-
-    const dico = useDictionary("button", locale);
+    const dict = i18n.dictionaries.button;
 
     return (
         <button
@@ -37,7 +32,7 @@ export const Button: FC<PropsWithChildren<Props>> = props => {
                 ? (
                     <>
                         <Loader size={20} color="hsl(var(--secondary-1))" />
-                        {dico.loading}
+                        {dict.loading}
                     </>
                 )
                 : props.children

@@ -1,8 +1,8 @@
-import type { ParamsRecord, SearchParamsRecord } from "@/types/utils";
+import type { EmptyRecord, ParamsRecord, SearchParamsRecord } from "@/types/utils";
 import type { NextRequest, NextResponse } from "next/server";
 
 export type PropsWithParams<
-    P = never,
+    P = EmptyRecord,
     R extends ParamsRecord = never,
     S extends SearchParamsRecord = never
 > = P & Params<R> & SearchParams<S>;

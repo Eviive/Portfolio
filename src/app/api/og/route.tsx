@@ -21,6 +21,7 @@ export const GET = async (): Promise<ImageResponse> => {
                     fontFamily: "sans-serif"
                 }}
             >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                     src={logoUrl}
                     alt="Albert Vaillon's logo"

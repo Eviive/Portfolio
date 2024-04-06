@@ -2,14 +2,10 @@
 
 import { OtherProjectCard } from "@/components/projects/other/other-project-card";
 import { Button } from "@/components/ui/button";
-import { useDictionary } from "@/hooks/use-dictionary";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import { Grid } from "@/layouts/grid";
-import { defaultLocale } from "@/libs/i18n";
-import { extractLocaleFromPathname } from "@/libs/utils/url";
 import { ProjectService } from "@/services/project";
 import type { Page, Project } from "@/types/entities";
-import { usePathname } from "next/navigation";
 import type { FC } from "react";
 import { useState } from "react";
 
@@ -20,7 +16,8 @@ export type OtherProjectsWrapperDictionary = {
 };
 
 type Props = {
-    initialPage: Page<Project>
+    initialPage: Page<Project>;
+    dict: OtherProjectsWrapperDictionary;
 };
 
 type PaginationState<E> = {
@@ -30,18 +27,12 @@ type PaginationState<E> = {
     isLoadingMore: boolean;
 };
 
-export const OtherProjectsWrapper: FC<Props> = props => {
-
-    const pathname = usePathname();
-
-    const locale = extractLocaleFromPathname(pathname) || defaultLocale;
-
-    const dico = useDictionary("otherProjectsWrapper", locale);
+export const OtherProjectsWrapper: FC<Props> = ({ initialPage, dict }) => {
 
     const [ pagination, setPagination ] = useState<PaginationState<Project>>({
-        data: props.initialPage.content,
-        page: props.initialPage.number + 1,
-        isLastPage: props.initialPage.last,
+        data: initialPage.content,
+        page: initialPage.number,
+        isLastPage: initialPage.last,
         isLoadingMore: false
     });
 
@@ -52,7 +43,7 @@ export const OtherProjectsWrapper: FC<Props> = props => {
 
         setPagination(prevState => ({
             data: [ ...prevState.data, ...nextPage.content ],
-            page: nextPage.number + 1,
+            page: nextPage.number,
             isLastPage: nextPage.last,
             isLoadingMore: false
         }));
@@ -84,7 +75,7 @@ export const OtherProjectsWrapper: FC<Props> = props => {
                     loading={pagination.isLoadingMore}
                     handleClick={handleClick}
                 >
-                    {dico.loadMoreButton}
+                    {dict.loadMoreButton}
                 </Button>
             )}
         </>

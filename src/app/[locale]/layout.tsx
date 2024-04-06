@@ -1,12 +1,16 @@
 import { Footer } from "@/components/common/footer";
 import { Header } from "@/components/common/header";
+import { I18nContextProvider } from "@/contexts/i18n-context";
 import { getI18nServerContext } from "@/contexts/i18n-server-context";
 import { inter, montserrat, sourceCodePro } from "@/libs/fonts";
 import type { Locale } from "@/libs/i18n";
 import { defaultLocale, dictionaries, locales } from "@/libs/i18n";
+import { getDictionary } from "@/libs/utils/i18n";
+import { pick } from "@/libs/utils/object";
 import { formatClassNames } from "@/libs/utils/react";
 import "@/styles/reset.scss";
 import type { PropsWithParams } from "@/types/app";
+import type { EmptyRecord } from "@/types/utils";
 import type { Metadata, Viewport } from "next";
 import type { FC, PropsWithChildren } from "react";
 
@@ -16,13 +20,13 @@ export type MetadataDictionary = {
     description: string;
 };
 
-export const generateMetadata = ({ params: { lang } }: { params: RootParams }): Metadata => {
+export const generateMetadata = ({ params: { locale } }: PropsWithParams<EmptyRecord, LocaleParams>): Metadata => {
 
     const i18n = getI18nServerContext();
 
-    i18n.locale = lang;
+    i18n.locale = locale;
 
-    const dico = dictionaries[i18n.locale]["metadata"];
+    const dict = getDictionary("metadata");
 
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ? new URL(process.env.NEXT_PUBLIC_BASE_URL) : undefined;
 
@@ -37,7 +41,7 @@ export const generateMetadata = ({ params: { lang } }: { params: RootParams }): 
             default: "Albert Vaillon - Portfolio",
             template: "%s - Portfolio"
         },
-        description: dico.description,
+        description: dict.description,
         generator: "Next.js",
         applicationName: "Albert Vaillon - Portfolio",
         referrer: "origin-when-cross-origin",
@@ -71,7 +75,7 @@ export const generateMetadata = ({ params: { lang } }: { params: RootParams }): 
         manifest: "/manifest.json",
         openGraph: {
             title: "Albert Vaillon - Portfolio",
-            description: dico.description,
+            description: dict.description,
             url: "/",
             siteName: "Portfolio",
             images: [
@@ -89,7 +93,7 @@ export const generateMetadata = ({ params: { lang } }: { params: RootParams }): 
         twitter: {
             card: "summary_large_image",
             title: "Albert Vaillon - Portfolio",
-            description: dico.description,
+            description: dict.description,
             images: {
                 url: "/api/og",
                 alt: "Albert Vaillon - Portfolio",
@@ -110,31 +114,38 @@ export const viewport: Viewport = {
     colorScheme: "dark"
 };
 
-type RootParams = {
-    lang: Locale;
+export type LocaleParams = {
+    locale: Locale;
 };
 
-export const generateStaticParams = (): RootParams[] => {
-    return locales.map(lang => ({ lang }));
+export const generateStaticParams = (): LocaleParams[] => {
+    return locales.map(locale => ({ locale }));
 };
 
-const RootLayout: FC<PropsWithParams<PropsWithChildren, RootParams>> = ({ children, params }) => {
+const LocaleLayout: FC<PropsWithParams<PropsWithChildren, LocaleParams>> = ({ children, params }) => {
 
     const i18n = getI18nServerContext();
 
-    i18n.locale = params.lang;
+    i18n.locale = params.locale;
+
+    const headerDict = getDictionary("header");
 
     return (
-        <html lang={params.lang} className="sr">
+        <html lang={params.locale} className="sr">
             <body className={formatClassNames(inter.className, sourceCodePro.variable, montserrat.variable)}>
-                <Header />
-                <main className={styles.main}>
-                    {children}
-                </main>
-                <Footer />
+                <I18nContextProvider value={{
+                    locale: i18n.locale,
+                    dictionaries: pick(dictionaries[i18n.locale], [ "error", "button" ])
+                }}>
+                    <Header dict={headerDict} />
+                    <main className={styles.main}>
+                        {children}
+                    </main>
+                    <Footer />
+                </I18nContextProvider>
             </body>
         </html>
     );
 };
 
-export default RootLayout;
+export default LocaleLayout;

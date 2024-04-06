@@ -1,6 +1,8 @@
 import { Socials } from "@/components/common/socials";
 import { Link } from "@/components/ui/link";
-import { useDictionary } from "@/hooks/use-dictionary";
+
+
+import { getDictionary } from "@/libs/utils/i18n";
 import type { FC } from "react";
 
 import styles from "./footer.module.scss";
@@ -11,13 +13,13 @@ export type FooterDictionary = {
 
 export const Footer: FC = () => {
 
-    const dico = useDictionary("footer");
+    const dict = getDictionary("footer");
 
     return (
         <footer className={styles.footer}>
             <Socials />
             <Link href="https://github.com/Eviive/Portfolio" blank>
-                {dico.portfolioGitHubLink} Albert Vaillon
+                {dict.portfolioGitHubLink} Albert Vaillon
             </Link>
         </footer>
     );

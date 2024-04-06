@@ -1,11 +1,8 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { useDictionary } from "@/hooks/use-dictionary";
-import { defaultLocale } from "@/libs/i18n";
-import { extractLocaleFromPathname } from "@/libs/utils/url";
+import { useI18nContext } from "@/contexts/i18n-context";
 import type { DictionaryWithTitle } from "@/types/i18n";
-import { usePathname } from "next/navigation";
 import type { FC } from "react";
 import { useEffect } from "react";
 
@@ -22,11 +19,9 @@ type Props = {
 
 const ErrorPage: FC<Props> = props => {
 
-    const pathname = usePathname();
+    const i18n = useI18nContext();
 
-    const locale = extractLocaleFromPathname(pathname) || defaultLocale;
-
-    const dico = useDictionary("error", locale);
+    const dict = i18n.dictionaries.error;
 
     useEffect(() => {
         console.error(props.error);
@@ -34,9 +29,9 @@ const ErrorPage: FC<Props> = props => {
 
     return (
         <div className={styles.wrapper}>
-            <h1 className={styles.title}>{dico.title}</h1>
+            <h1 className={styles.title}>{dict.title}</h1>
             <Button handleClick={props.reset}>
-                {dico.tryAgain}
+                {dict.tryAgain}
             </Button>
         </div>
     );

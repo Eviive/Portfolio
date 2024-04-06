@@ -1,5 +1,5 @@
-import type { ErrorDictionary } from "@/app/[lang]/error";
-import type { MetadataDictionary } from "@/app/[lang]/layout";
+import type { ErrorDictionary } from "@/app/[locale]/error";
+import type { MetadataDictionary } from "@/app/[locale]/layout";
 import type { AboutDictionary } from "@/components/about/about";
 import type { FooterDictionary } from "@/components/common/footer";
 import type { HeaderDictionary } from "@/components/common/header";

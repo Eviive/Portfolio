@@ -1,4 +1,4 @@
-import { useDictionary } from "@/hooks/use-dictionary";
+import { getDictionary } from "@/libs/utils/i18n";
 import type { FC } from "react";
 
 import styles from "./home-title.module.scss";
@@ -10,13 +10,13 @@ export type HomeDictionary = {
 
 export const HomeTitle: FC = () => {
 
-    const dico = useDictionary("home");
+    const dict = getDictionary("home");
 
     return (
         <div className={styles.hello}>
-            <span>{dico.hi}</span>
+            <span>{dict.hi}</span>
             <h1>Albert Vaillon</h1>
-            <h2>{dico.occupation}</h2>
+            <h2>{dict.occupation}</h2>
         </div>
     );
 };

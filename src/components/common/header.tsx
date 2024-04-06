@@ -2,8 +2,8 @@
 
 import { Dropdown } from "@/components/ui/dropdown";
 import { Link } from "@/components/ui/link";
-import { useDictionary } from "@/hooks/use-dictionary";
-import { defaultLocale, localeDictionary, locales } from "@/libs/i18n";
+import { useI18nContext } from "@/contexts/i18n-context";
+import { localeDictionary, locales } from "@/libs/i18n";
 import { extractLocaleFromPathname, formatUriWithLocale } from "@/libs/utils/url";
 import logo from "@/public/logo.svg";
 import NextImage from "next/image";
@@ -20,15 +20,17 @@ export type HeaderDictionary = {
     logoAlt: string;
 };
 
-export const Header: FC = () => {
+type Props = {
+    dict: HeaderDictionary;
+};
+
+export const Header: FC<Props> = ({ dict }) => {
 
     const pathname = usePathname();
 
     const pathnameLocale = extractLocaleFromPathname(pathname);
 
-    const locale = pathnameLocale || defaultLocale;
-
-    const dico = useDictionary("header", locale);
+    const i18n = useI18nContext();
 
     return (
         <header className={styles.header}>
@@ -38,7 +40,7 @@ export const Header: FC = () => {
                         <Link href={`/${pathnameLocale}`}>
                             <NextImage
                                 src={logo}
-                                alt={dico.logoAlt}
+                                alt={dict.logoAlt}
                                 height={35}
                                 priority
                             />
@@ -47,7 +49,7 @@ export const Header: FC = () => {
                     <div className={styles.links}>
                         {anchors.map(a => (
                             <Link key={a} href={`/${pathnameLocale}#${a}`}>
-                                {dico.anchors[a]}
+                                {dict.anchors[a]}
                             </Link>
                         ))}
                     </div>
@@ -59,7 +61,7 @@ export const Header: FC = () => {
                             locales.map(l => ({
                                 text: localeDictionary[l],
                                 href: formatUriWithLocale(pathname, l),
-                                isSelected: l === locale
+                                isSelected: l === i18n.locale
                             }))
                         }
                     />

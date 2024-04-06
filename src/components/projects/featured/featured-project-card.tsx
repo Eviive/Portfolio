@@ -2,12 +2,10 @@
 
 import { Image } from "@/components/ui/image";
 import { Link } from "@/components/ui/link";
-import { useDictionary } from "@/hooks/use-dictionary";
-import { defaultLocale } from "@/libs/i18n";
-import { extractLocaleFromPathname } from "@/libs/utils/url";
+import { useI18nContext } from "@/contexts/i18n-context";
+import { formatClassNames } from "@/libs/utils/react";
 import { ImageService } from "@/services/image";
 import type { Project } from "@/types/entities";
-import { usePathname } from "next/navigation";
 import { forwardRef } from "react";
 import { FiExternalLink, FiGithub } from "react-icons/fi";
 
@@ -19,38 +17,35 @@ export type FeaturedProjectCardDictionary = {
 
 type Props = {
     project: Project;
+    dict: FeaturedProjectCardDictionary;
 };
 
 const FeaturedProjectCard = forwardRef<
     HTMLLIElement,
     Props
->(({ project }, ref) => {
+>(({ project, dict }, ref) => {
 
-    const pathname = usePathname();
-
-    const locale = extractLocaleFromPathname(pathname) || defaultLocale;
-
-    const dico = useDictionary("featuredProjectCard", locale);
+    const i18n = useI18nContext();
 
     project.skills.sort((a, b) => a.sort - b.sort);
 
     return (
-        <li ref={ref} className={styles.card}>
+        <li ref={ref} className={formatClassNames(styles.card, "reveal-hidden")}>
             <div className={styles.description}>
                 <div className={styles.title}>
-                    <span>{dico.subtitle}</span>
+                    <span>{dict.subtitle}</span>
                     <Link href={project.demoUrl} blank>
                         <h3>{project.title}</h3>
                     </Link>
                 </div>
-                <p>{locale === "en" ? project.descriptionEn : project.descriptionFr}</p>
+                <p>{i18n.locale === "en" ? project.descriptionEn : project.descriptionFr}</p>
                 <div className={styles.logos}>
                     <div className={styles.skills}>
                         {project.skills.map(s => (
                             <Image
                                 key={s.id}
                                 src={ImageService.getImageUrl(s.image, "skills") ?? ""}
-                                alt={locale === "en" ? s.image.altEn : s.image.altFr}
+                                alt={i18n.locale === "en" ? s.image.altEn : s.image.altFr}
                                 title={s.name}
                                 width={36}
                             />
@@ -70,7 +65,7 @@ const FeaturedProjectCard = forwardRef<
                 <Link href={project.demoUrl} blank>
                     <Image
                         src={ImageService.getImageUrl(project.image, "projects") ?? ""}
-                        alt={locale === "en" ? project.image.altEn : project.image.altFr}
+                        alt={i18n.locale === "en" ? project.image.altEn : project.image.altFr}
                         width={1080}
                         height={675}
                     />
