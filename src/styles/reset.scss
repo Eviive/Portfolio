@@ -62,7 +62,7 @@ html {
     background-color: hsl(var(--primary-1));
     background-size: 220%;
     background-attachment: fixed;
-    animation: gradient 10s linear infinite;
+    animation: gradient 8s linear infinite;
 
     @keyframes gradient {
         0% { background-position: 110% 50%; }

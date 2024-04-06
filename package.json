@@ -6,9 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "standalone": "node .next/standalone/server.js",
     "lint": "next lint",
-    "fix": "eslint --fix ."
+    "lint:fix": "next lint --fix"
   },
   "dependencies": {
     "@formatjs/intl-localematcher": "~0.5.4",
