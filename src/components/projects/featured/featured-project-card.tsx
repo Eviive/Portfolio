@@ -48,17 +48,17 @@ const FeaturedProjectCard = forwardRef<HTMLLIElement, Props>(({ project, dict },
                         ))}
                     </div>
                     <div className={styles.links}>
-                        <Link href={project.repoUrl} blank>
+                        <Link href={project.repoUrl} aria-label="GitHub repository" blank>
                             <FiGithub size={30} />
                         </Link>
-                        <Link href={project.demoUrl} blank>
+                        <Link href={project.demoUrl} aria-label="Demonstration" blank>
                             <FiExternalLink size={30} />
                         </Link>
                     </div>
                 </div>
             </div>
             <div className={styles.image}>
-                <Link href={project.demoUrl} blank>
+                <Link href={project.demoUrl} aria-label="Demonstration" blank>
                     <Image
                         src={ImageService.getImageUrl(project.image, "projects") ?? ""}
                         alt={i18n.locale === "en" ? project.image.altEn : project.image.altFr}

@@ -13,6 +13,7 @@ type Props = {
     width: number;
     height?: number;
     title?: string;
+    priority?: boolean;
 };
 
 export const Image: FC<Props> = props => {
@@ -31,9 +32,9 @@ export const Image: FC<Props> = props => {
                 width={props.width}
                 height={props.height ?? props.width}
                 title={props.title}
+                priority={props.priority}
                 onLoad={() => setLoading(false)}
                 onError={() => setLoading(false)}
-                priority
             />
         </div>
     );

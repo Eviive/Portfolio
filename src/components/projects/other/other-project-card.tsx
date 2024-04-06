@@ -24,10 +24,10 @@ const OtherProjectCard = forwardRef<HTMLLIElement, Props>(({ project }, ref) => 
                 <div className={styles.icons}>
                     <FiFolder size={40} strokeWidth={1} className={styles.folder} />
                     <div className={styles.links}>
-                        <Link href={project.repoUrl} blank>
+                        <Link href={project.repoUrl} aria-label="GitHub repository" blank>
                             <FiGithub size={22} />
                         </Link>
-                        <Link href={project.demoUrl} blank>
+                        <Link href={project.demoUrl} aria-label="Demonstration" blank>
                             <FiExternalLink size={22} />
                         </Link>
                     </div>

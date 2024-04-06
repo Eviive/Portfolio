@@ -17,6 +17,7 @@ type Anchor = (typeof anchors)[number];
 
 export type HeaderDictionary = {
     anchors: Record<Anchor, string>;
+    logoLinkLabel: string;
     logoAlt: string;
 };
 
@@ -36,7 +37,7 @@ export const Header: FC<Props> = ({ dict }) => {
             <nav className={styles.nav}>
                 <div className={styles.left}>
                     <div className={styles.logo}>
-                        <Link href={`/${pathnameLocale}`}>
+                        <Link href={`/${pathnameLocale}`} aria-label={dict.logoLinkLabel}>
                             <NextImage src={logo} alt={dict.logoAlt} height={35} priority />
                         </Link>
                     </div>
