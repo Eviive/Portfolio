@@ -12,11 +12,12 @@ import type { FC } from "react";
 
 import styles from "./header.module.scss";
 
-const anchors = [ "home", "about", "projects" ] as const;
-type Anchor = typeof anchors[number];
+const anchors = ["home", "about", "projects"] as const;
+type Anchor = (typeof anchors)[number];
 
 export type HeaderDictionary = {
     anchors: Record<Anchor, string>;
+    logoLinkLabel: string;
     logoAlt: string;
 };
 
@@ -25,7 +26,6 @@ type Props = {
 };
 
 export const Header: FC<Props> = ({ dict }) => {
-
     const pathname = usePathname();
 
     const pathnameLocale = extractLocaleFromPathname(pathname);
@@ -37,13 +37,8 @@ export const Header: FC<Props> = ({ dict }) => {
             <nav className={styles.nav}>
                 <div className={styles.left}>
                     <div className={styles.logo}>
-                        <Link href={`/${pathnameLocale}`}>
-                            <NextImage
-                                src={logo}
-                                alt={dict.logoAlt}
-                                height={35}
-                                priority
-                            />
+                        <Link href={`/${pathnameLocale}`} aria-label={dict.logoLinkLabel}>
+                            <NextImage src={logo} alt={dict.logoAlt} height={35} priority />
                         </Link>
                     </div>
                     <div className={styles.links}>
@@ -57,13 +52,11 @@ export const Header: FC<Props> = ({ dict }) => {
                 <div className={styles.right}>
                     <Dropdown
                         menuClassName={styles.menu}
-                        items={
-                            locales.map(l => ({
-                                text: localeDictionary[l],
-                                href: formatUriWithLocale(pathname, l),
-                                isSelected: l === i18n.locale
-                            }))
-                        }
+                        items={locales.map(l => ({
+                            text: localeDictionary[l],
+                            href: formatUriWithLocale(pathname, l),
+                            isSelected: l === i18n.locale
+                        }))}
                     />
                 </div>
             </nav>

@@ -6,6 +6,8 @@ type II18nServerContext = {
     locale: Locale;
 };
 
-export const getI18nServerContext = cache((): II18nServerContext => ({
-    locale: defaultLocale
-}));
+export const getI18nServerContext = cache(
+    (): II18nServerContext => ({
+        locale: defaultLocale
+    })
+);

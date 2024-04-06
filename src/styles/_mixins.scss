@@ -3,7 +3,13 @@
     height: $height;
 }
 
-@mixin box-shadow($right: 0px, $down: 10px, $blur: 30px, $spread: -15px, $color: hsl(0deg, 0%, 0%, 0.7)) {
+@mixin box-shadow(
+    $right: 0px,
+    $down: 10px,
+    $blur: 30px,
+    $spread: -15px,
+    $color: hsl(0deg, 0%, 0%, 0.7)
+) {
     box-shadow: $right $down $blur $spread $color;
 }
 
@@ -27,7 +33,7 @@
     }
 }
 
-@mixin pseudo($loc: after, $content: '', $abs: absolute, $pos: 0 auto auto 0) {
+@mixin pseudo($loc: after, $content: "", $abs: absolute, $pos: 0 auto auto 0) {
     &::#{$loc} {
         content: $content;
         @if $abs {
@@ -47,13 +53,11 @@
     @include pseudo($loc: after, $pos: $inset) {
         opacity: 0;
         @include size($width, 70px);
-        background: linear-gradient(
-            transparent,
-            hsl(var(--accent-1)),
-            transparent
-        );
+        background: linear-gradient(transparent, hsl(var(--accent-1)), transparent);
         translate: 0 -50%;
-        transition: opacity 0.6s ease, top 0.6s ease;
+        transition:
+            opacity 0.6s ease,
+            top 0.6s ease;
 
         @if ($width == 1px) {
             @media (min-resolution: 125dpi) {

@@ -21,8 +21,7 @@ type Props = {
 };
 
 export const Dropdown: FC<Props> = props => {
-
-    const [ isOpen, setIsOpen ] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
 
     const ref = useCloseEvents<HTMLUListElement>(() => setIsOpen(false), { isOpen });
 
@@ -43,12 +42,9 @@ export const Dropdown: FC<Props> = props => {
                     .filter(i => !i.isSelected)
                     .map(i => (
                         <li key={i.text}>
-                            <Link href={i.href}>
-                                {i.text}
-                            </Link>
+                            <Link href={i.href}>{i.text}</Link>
                         </li>
-                    ))
-                }
+                    ))}
             </ul>
         </div>
     );

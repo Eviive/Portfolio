@@ -12,8 +12,10 @@ const defaultConfig: CloseEventsConfig = {
     isOpen: true
 };
 
-export const useCloseEvents = <E extends HTMLElement>(handleClose: () => void, config: Partial<CloseEventsConfig> = defaultConfig) => {
-
+export const useCloseEvents = <E extends HTMLElement>(
+    handleClose: () => void,
+    config: Partial<CloseEventsConfig> = defaultConfig
+) => {
     const ref = useRef<E | null>(null);
 
     const {
@@ -40,12 +42,14 @@ export const useCloseEvents = <E extends HTMLElement>(handleClose: () => void, c
         if (element) {
             element.focus();
 
-            onOutsideClick && window.addEventListener("click", handleOutsideClick, { signal: controller.signal });
-            onEscapePressed && window.addEventListener("keydown", handleKeyDown, { signal: controller.signal });
+            onOutsideClick &&
+                window.addEventListener("click", handleOutsideClick, { signal: controller.signal });
+            onEscapePressed &&
+                window.addEventListener("keydown", handleKeyDown, { signal: controller.signal });
         }
 
         return () => controller.abort();
-    }, [ handleClose, onOutsideClick, onEscapePressed, isOpen ]);
+    }, [handleClose, onOutsideClick, onEscapePressed, isOpen]);
 
     return ref;
 };

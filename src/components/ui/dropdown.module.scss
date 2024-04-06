@@ -30,7 +30,9 @@
         min-width: 100%;
         border-radius: 0 0 8px 8px;
         transform-origin: top;
-        transition: 0.15s opacity, 0.3s scale;
+        transition:
+            0.15s opacity,
+            0.3s scale;
 
         li {
             a {

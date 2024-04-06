@@ -9,14 +9,11 @@ type Props = {
 };
 
 export const Loader: FC<Props> = ({ size, color, absolute }) => {
-
     const loaderStyle = {
-        ...size && { "--loader-size": `${size}px` },
-        ...color && { "--loader-color": color },
-        ...absolute && { position: "absolute" }
+        ...(size && { "--loader-size": `${size}px` }),
+        ...(color && { "--loader-color": color }),
+        ...(absolute && { position: "absolute" })
     } as CSSProperties;
 
-    return (
-        <span className={styles.loader} style={loaderStyle}></span>
-    );
+    return <span className={styles.loader} style={loaderStyle}></span>;
 };

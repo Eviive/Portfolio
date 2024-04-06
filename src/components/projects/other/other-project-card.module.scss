@@ -31,7 +31,13 @@ $title-font-size: 1.2em;
         transition: opacity 0.5s;
     }
 
-    @include mixins.hover-shard($top: calc($card-padding-vertical + $folder-size + $icons-margin-bottom + $title-font-size * 0.75));
+    @include mixins.hover-shard(
+        $top:
+            calc(
+                $card-padding-vertical + $folder-size + $icons-margin-bottom + $title-font-size *
+                    0.75
+            )
+    );
 
     &:hover {
         translate: 0 -5px;
@@ -78,7 +84,9 @@ $title-font-size: 1.2em;
         display: grid;
         place-items: center;
         color: hsl(var(--secondary-2));
-        transition: translate 0.3s, color 0.3s;
+        transition:
+            translate 0.3s,
+            color 0.3s;
 
         &:nth-child(2) {
             margin-bottom: 2px;

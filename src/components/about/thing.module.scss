@@ -19,7 +19,9 @@ $title-font-size: 1.2em;
     @include mixins.box-shadow();
     transition: translate 0.5s;
 
-    @include mixins.hover-shard($top: calc($card-padding + $circle-size + $card-gap + $title-font-size * 0.75));
+    @include mixins.hover-shard(
+        $top: calc($card-padding + $circle-size + $card-gap + $title-font-size * 0.75)
+    );
 
     &:hover {
         translate: 0 -5px;

@@ -13,11 +13,11 @@ type Props = {
     width: number;
     height?: number;
     title?: string;
+    priority?: boolean;
 };
 
 export const Image: FC<Props> = props => {
-
-    const [ loading, setLoading ] = useState<boolean | null>(null);
+    const [loading, setLoading] = useState<boolean | null>(null);
 
     useEffect(() => {
         setLoading(prevState => prevState ?? true);
@@ -32,9 +32,9 @@ export const Image: FC<Props> = props => {
                 width={props.width}
                 height={props.height ?? props.width}
                 title={props.title}
+                priority={props.priority}
                 onLoad={() => setLoading(false)}
                 onError={() => setLoading(false)}
-                priority
             />
         </div>
     );

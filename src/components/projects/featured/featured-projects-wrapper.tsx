@@ -14,7 +14,6 @@ type Props = {
 };
 
 export const FeaturedProjectsWrapper: FC<Props> = ({ projects, cardDict }) => {
-
     const refs = useScrollReveal({
         multiple: true,
         intervalDelay: 0

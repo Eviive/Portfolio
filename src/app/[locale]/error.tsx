@@ -18,21 +18,18 @@ type Props = {
 };
 
 const ErrorPage: FC<Props> = props => {
-
     const i18n = useI18nContext();
 
     const dict = i18n.dictionaries.error;
 
     useEffect(() => {
         console.error(props.error);
-    }, [ props.error ]);
+    }, [props.error]);
 
     return (
         <div className={styles.wrapper}>
             <h1 className={styles.title}>{dict.title}</h1>
-            <Button handleClick={props.reset}>
-                {dict.tryAgain}
-            </Button>
+            <Button handleClick={props.reset}>{dict.tryAgain}</Button>
         </div>
     );
 };

@@ -7,17 +7,13 @@ type ScrollRevealConfig = scrollReveal.ScrollRevealObjectOptions & {
 };
 
 export const useScrollReveal = (config: ScrollRevealConfig) => {
-
     const refs = useRef<(HTMLElement | null)[]>([]);
 
     useEffect(() => {
         let sr: scrollReveal.ScrollRevealObject;
 
         const setUpScrollReveal = (el: HTMLElement, i: number) => {
-            const {
-                intervalDelay,
-                ...options
-            } = config ?? {};
+            const { intervalDelay, ...options } = config ?? {};
 
             let delay = config?.delay ?? 100;
 
@@ -55,7 +51,7 @@ export const useScrollReveal = (config: ScrollRevealConfig) => {
                 .filter(el => isNullOrUndefined(el.dataset.revealed))
                 .forEach(setUpScrollReveal);
         })();
-    }, [ config ]);
+    }, [config]);
 
     return refs;
 };

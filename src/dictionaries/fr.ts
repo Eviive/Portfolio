@@ -36,6 +36,7 @@ export const fr: Dictionary = {
             about: "À propos",
             projects: "Projets"
         },
+        logoLinkLabel: "Portfolio d'Albert Vaillon",
         logoAlt: "Mon logo"
     },
     footer: {

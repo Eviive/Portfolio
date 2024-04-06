@@ -16,7 +16,6 @@ type Props = {
 };
 
 export const About: FC<Props> = ({ dict }) => {
-
     const refs = useScrollReveal({
         multiple: true
     });

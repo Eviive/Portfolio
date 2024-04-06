@@ -19,7 +19,7 @@
         }
 
         @include mixins.pseudo($pos: 40% auto auto 0) {
-            @include mixins.size(.35em);
+            @include mixins.size(0.35em);
             aspect-ratio: 1 / 1;
             background-color: hsl(var(--accent-1));
             border-radius: 50%;

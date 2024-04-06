@@ -15,4 +15,7 @@ export type SearchParams<P extends SearchParamsRecord = never> = {
     searchParams: P;
 };
 
-export type RouteHandler<B = never, P extends ParamsRecord = never> = (req: NextRequest, params: Params<P>) => Promise<NextResponse<B>> | NextResponse<B>;
+export type RouteHandler<B = never, P extends ParamsRecord = never> = (
+    req: NextRequest,
+    params: Params<P>
+) => Promise<NextResponse<B>> | NextResponse<B>;
