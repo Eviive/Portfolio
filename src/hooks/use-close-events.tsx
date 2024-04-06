@@ -23,9 +23,11 @@ export const useCloseEvents = <E extends HTMLElement>(handleClose: () => void, c
     } = config;
 
     useEffect(() => {
-        const element = ref.current,
-              controller = new AbortController(),
-              close = () => isOpen && handleClose();
+        const element = ref.current;
+
+        const controller = new AbortController();
+
+        const close = () => isOpen && handleClose();
 
         const handleOutsideClick = (e: MouseEvent) => {
             if (!ref.current?.contains(e.target as Node)) {

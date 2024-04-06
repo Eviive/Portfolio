@@ -8,12 +8,14 @@
 
     @include mixins.size(var(--size));
     background: radial-gradient(farthest-side, var(--color) 94%, transparent) top / var(--line-size) var(--line-size) no-repeat,
-                conic-gradient(transparent 30%, var(--color));
+        conic-gradient(transparent 30%, var(--color));
     -webkit-mask: radial-gradient(farthest-side, transparent var(--mask-size), black 0);
     border-radius: 50%;
 
     animation: rotate 1s infinite linear;
     @keyframes rotate {
-        to { rotate: 1turn; }
+        to {
+            rotate: 1turn;
+        }
     }
 }

@@ -65,10 +65,18 @@ html {
     animation: gradient 8s linear infinite;
 
     @keyframes gradient {
-        0% { background-position: 110% 50%; }
-        35% { background-position: 110% 50%; }
-        65% { background-position: -10% 50%; }
-        100% { background-position: -10% 50%; }
+        0% {
+            background-position: 110% 50%;
+        }
+        35% {
+            background-position: 110% 50%;
+        }
+        65% {
+            background-position: -10% 50%;
+        }
+        100% {
+            background-position: -10% 50%;
+        }
     }
 
     &.sr .reveal-hidden {
