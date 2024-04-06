@@ -1,21 +1,74 @@
 {
-  "extends": "next/core-web-vitals",
-  "plugins": ["@typescript-eslint"],
+  "extends": [
+    "next/core-web-vitals",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "root": true,
   "rules": {
-    "indent": ["error", 4, { "SwitchCase": 1, "VariableDeclarator": "first" }],
-    "quotes": ["error", "double"],
-    "semi": ["error", "always"],
-    "array-bracket-newline": ["error", "consistent"],
+    "indent": [
+      "error",
+      4,
+      {
+        "SwitchCase": 1,
+        "VariableDeclarator": "first"
+      }
+    ],
+    "quotes": [
+      "error",
+      "double"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
+    "array-bracket-newline": [
+      "error",
+      "consistent"
+    ],
     "arrow-spacing": "error",
-    "brace-style": ["error", "1tbs"],
-    "comma-dangle": ["error", "never"],
-    "eol-last": ["error", "always"],
-    "jsx-quotes": ["error", "prefer-double"],
-    "no-mixed-spaces-and-tabs": ["error"],
+    "brace-style": [
+      "error",
+      "1tbs"
+    ],
+    "comma-dangle": [
+      "error",
+      "never"
+    ],
+    "eol-last": [
+      "error",
+      "always"
+    ],
+    "jsx-quotes": [
+      "error",
+      "prefer-double"
+    ],
+    "no-mixed-spaces-and-tabs": [
+      "error"
+    ],
     "no-trailing-spaces": "error",
-    "object-curly-spacing": ["error", "always"],
-    "array-bracket-spacing": ["error", "always"],
-    "computed-property-spacing": ["error", "never"],
-    "@typescript-eslint/consistent-type-imports": ["error", { "prefer": "type-imports", "fixStyle": "separate-type-imports" }]
+    "object-curly-spacing": [
+      "error",
+      "always"
+    ],
+    "array-bracket-spacing": [
+      "error",
+      "always"
+    ],
+    "computed-property-spacing": [
+      "error",
+      "never"
+    ],
+    "@typescript-eslint/consistent-type-imports": [
+      "error",
+      {
+        "prefer": "type-imports",
+        "fixStyle": "separate-type-imports"
+      }
+    ]
   }
 }

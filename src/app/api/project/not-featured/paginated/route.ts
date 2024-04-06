@@ -1,4 +1,4 @@
-import { ProjectService } from "@/services";
+import { ProjectService } from "@/services/project";
 import type { RouteHandler } from "@/types/app";
 import type { Page, Project } from "@/types/entities";
 import { NextResponse } from "next/server";

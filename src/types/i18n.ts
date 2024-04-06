@@ -1,12 +1,14 @@
-import type { ErrorDictionary } from "@/app/[lang]/error";
-import type { MetadataDictionary } from "@/app/[lang]/layout";
-import type { AboutDictionary } from "@/components/about/About/About";
-import type { ButtonDictionary, HeaderDictionary } from "@/components/common/client";
-import type { FooterDictionary } from "@/components/common/server";
-import type { HomeDictionary } from "@/components/home";
-import type { FeaturedProjectCardDictionary, FeaturedProjectsDictionary } from "@/components/projects/featured";
-import type { OtherProjectsWrapperDictionary } from "@/components/projects/other/client";
-import type { OtherProjectsDictionary } from "@/components/projects/other/server";
+import type { ErrorDictionary } from "@/app/[locale]/error";
+import type { MetadataDictionary } from "@/app/[locale]/layout";
+import type { AboutDictionary } from "@/components/about/about";
+import type { FooterDictionary } from "@/components/common/footer";
+import type { HeaderDictionary } from "@/components/common/header";
+import type { HomeDictionary } from "@/components/home/home-title";
+import type { FeaturedProjectCardDictionary } from "@/components/projects/featured/featured-project-card";
+import type { FeaturedProjectsDictionary } from "@/components/projects/featured/featured-projects";
+import type { OtherProjectsDictionary } from "@/components/projects/other/other-projects";
+import type { OtherProjectsWrapperDictionary } from "@/components/projects/other/other-projects-wrapper";
+import type { ButtonDictionary } from "@/components/ui/button";
 
 export type DictionaryWithTitle<D = unknown> = D & {
     title: string;

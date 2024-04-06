@@ -1,4 +1,4 @@
-/** @type {import('next').NextConfig} */
+/** @type {import("next").NextConfig} */
 const nextConfig = {
     images: {
         remotePatterns: [
@@ -11,6 +11,7 @@ const nextConfig = {
         contentDispositionType: "attachment",
         contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;"
     },
+    productionBrowserSourceMaps: true,
     output: "standalone"
 };
 

@@ -1,0 +1,21 @@
+@use "@/mixins";
+
+.loader {
+    --size: var(--loader-size, 50px);
+    --color: var(--loader-color, hsl(var(--accent-1)));
+    --line-size: calc(var(--size) / 6.25);
+    --mask-size: calc(100% - var(--line-size));
+
+    @include mixins.size(var(--size));
+    background: radial-gradient(farthest-side, var(--color) 94%, transparent) top / var(--line-size) var(--line-size) no-repeat,
+        conic-gradient(transparent 30%, var(--color));
+    -webkit-mask: radial-gradient(farthest-side, transparent var(--mask-size), black 0);
+    border-radius: 50%;
+
+    animation: rotate 1s infinite linear;
+    @keyframes rotate {
+        to {
+            rotate: 1turn;
+        }
+    }
+}

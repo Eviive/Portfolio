@@ -1,8 +1,9 @@
-import { ImageResponse } from "next/server";
+import logo from "@/public/logo.svg";
+import { ImageResponse } from "next/og";
 
 export const GET = async (): Promise<ImageResponse> => {
 
-    const logoUrl = new URL("/logo.svg", process.env.NEXT_PUBLIC_BASE_URL).toString();
+    const logoUrl = new URL(logo.src, process.env.NEXT_PUBLIC_BASE_URL).toString();
 
     return new ImageResponse(
         (
@@ -21,6 +22,7 @@ export const GET = async (): Promise<ImageResponse> => {
                     fontFamily: "sans-serif"
                 }}
             >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                     src={logoUrl}
                     alt="Albert Vaillon's logo"
@@ -32,6 +34,6 @@ export const GET = async (): Promise<ImageResponse> => {
         {
             width: 1200,
             height: 630
-        },
+        }
     );
 };
