@@ -4,7 +4,7 @@ import { I18nContextProvider } from "@/contexts/i18n-context";
 import { getI18nServerContext } from "@/contexts/i18n-server-context";
 import { inter, montserrat, sourceCodePro } from "@/libs/fonts";
 import type { Locale } from "@/libs/i18n";
-import { defaultLocale, dictionaries, locales } from "@/libs/i18n";
+import { dictionaries, locales } from "@/libs/i18n";
 import { getDictionary } from "@/libs/utils/i18n";
 import { pick } from "@/libs/utils/object";
 import { formatClassNames } from "@/libs/utils/react";
@@ -29,13 +29,11 @@ export const generateMetadata = ({
 
     const dict = getDictionary("metadata");
 
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
-        ? new URL(process.env.NEXT_PUBLIC_BASE_URL)
-        : undefined;
+    const baseUrl = new URL(process.env.NEXT_PUBLIC_BASE_URL!);
 
     const localesUrl: Record<string, string> = {};
     for (const locale of locales) {
-        localesUrl[locale] = new URL(locale === defaultLocale ? "" : locale, baseUrl).toString();
+        localesUrl[locale] = new URL(locale, baseUrl).toString();
     }
 
     return {
