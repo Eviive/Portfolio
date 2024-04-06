@@ -1,6 +1,6 @@
 import type { CSSProperties, FC } from "react";
 
-import styles from "src/components/common/server/loader.module.scss";
+import styles from "./loader.module.scss";
 
 type Props = {
     size?: number;

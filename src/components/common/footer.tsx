@@ -3,7 +3,7 @@ import { Link } from "@/components/ui/link";
 import { useDictionary } from "@/hooks/useDictionary";
 import type { FC } from "react";
 
-import styles from "src/components/common/server/footer.module.scss";
+import styles from "./footer.module.scss";
 
 export type FooterDictionary = {
     portfolioGitHubLink: string;

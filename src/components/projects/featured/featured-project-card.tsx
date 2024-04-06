@@ -1,13 +1,17 @@
+"use client";
+
 import { Image } from "@/components/ui/image";
 import { Link } from "@/components/ui/link";
-import { useI18nContext } from "@/contexts/I18nContext";
 import { useDictionary } from "@/hooks/useDictionary";
+import { defaultLocale } from "@/libs/i18n";
+import { extractLocaleFromPathname } from "@/libs/utils/url";
 import { ImageService } from "@/services/image";
 import type { Project } from "@/types/entities";
+import { usePathname } from "next/navigation";
 import { forwardRef } from "react";
 import { FiExternalLink, FiGithub } from "react-icons/fi";
 
-import styles from "src/components/projects/featured/featured-project-card.module.scss";
+import styles from "./featured-project-card.module.scss";
 
 export type FeaturedProjectCardDictionary = {
     subtitle: string;
@@ -22,9 +26,11 @@ const FeaturedProjectCard = forwardRef<
     Props
 >(({ project }, ref) => {
 
-    const locale = useI18nContext();
+    const pathname = usePathname();
 
-    const dico = useDictionary("featuredProjectCard");
+    const locale = extractLocaleFromPathname(pathname) || defaultLocale;
+
+    const dico = useDictionary("featuredProjectCard", locale);
 
     project.skills.sort((a, b) => a.sort - b.sort);
 

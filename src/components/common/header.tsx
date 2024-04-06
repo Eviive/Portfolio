@@ -2,16 +2,15 @@
 
 import { Dropdown } from "@/components/ui/dropdown";
 import { Link } from "@/components/ui/link";
-import { useI18nContext } from "@/contexts/I18nContext";
 import { useDictionary } from "@/hooks/useDictionary";
-import { localeDictionary, locales } from "@/libs/i18n";
+import { defaultLocale, localeDictionary, locales } from "@/libs/i18n";
 import { extractLocaleFromPathname, formatUriWithLocale } from "@/libs/utils/url";
 import logo from "@/public/logo.svg";
 import NextImage from "next/image";
 import { usePathname } from "next/navigation";
 import type { FC } from "react";
 
-import styles from "src/components/common/header.module.scss";
+import styles from "./header.module.scss";
 
 const anchors = [ "home", "about", "projects" ] as const;
 type Anchor = typeof anchors[number];
@@ -23,18 +22,20 @@ export type HeaderDictionary = {
 
 export const Header: FC = () => {
 
-    const locale = useI18nContext();
-
-    const dico = useDictionary("header");
-
     const pathname = usePathname();
+
+    const pathnameLocale = extractLocaleFromPathname(pathname);
+
+    const locale = pathnameLocale || defaultLocale;
+
+    const dico = useDictionary("header", locale);
 
     return (
         <header className={styles.header}>
             <nav className={styles.nav}>
                 <div className={styles.left}>
                     <div className={styles.logo}>
-                        <Link href={`/${extractLocaleFromPathname(pathname)}`}>
+                        <Link href={`/${pathnameLocale}`}>
                             <NextImage
                                 src={logo}
                                 alt={dico.logoAlt}
@@ -45,7 +46,7 @@ export const Header: FC = () => {
                     </div>
                     <div className={styles.links}>
                         {anchors.map(a => (
-                            <Link key={a} href={`/${extractLocaleFromPathname(pathname)}#${a}`}>
+                            <Link key={a} href={`/${pathnameLocale}#${a}`}>
                                 {dico.anchors[a]}
                             </Link>
                         ))}

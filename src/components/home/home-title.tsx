@@ -1,7 +1,7 @@
 import { useDictionary } from "@/hooks/useDictionary";
 import type { FC } from "react";
 
-import styles from "src/components/home/home-title.module.scss";
+import styles from "./home-title.module.scss";
 
 export type HomeDictionary = {
     hi: string;

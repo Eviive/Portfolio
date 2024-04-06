@@ -2,7 +2,7 @@ import { formatClassNames } from "@/libs/utils/react";
 import NextLink from "next/link";
 import type { ComponentPropsWithRef, FC } from "react";
 
-import styles from "src/components/common/server/link.module.scss";
+import styles from "./link.module.scss";
 
 type LinkProps = ComponentPropsWithRef<typeof NextLink>;
 type Props = {

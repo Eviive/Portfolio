@@ -7,7 +7,7 @@ import { useScrollReveal } from "@/hooks/useScrollReveal";
 import type { Project } from "@/types/entities";
 import type { FC } from "react";
 
-import styles from "src/components/projects/featured/featured-projects-wrapper.module.scss";
+import styles from "./featured-projects-wrapper.module.scss";
 
 type Props = {
     projects: Project[];
@@ -28,7 +28,9 @@ export const FeaturedProjectsWrapper: FC<Props> = ({ projects, dico }) => {
                 {projects.map((project, i) => (
                     <FeaturedProjectCard
                         key={project.id}
-                        ref={el => refs.current[i] = el}
+                        ref={el => {
+                            refs.current[i] = el;
+                        }}
                         project={project}
                     />
                 ))}

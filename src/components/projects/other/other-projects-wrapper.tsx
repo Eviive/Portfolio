@@ -5,12 +5,15 @@ import { Button } from "@/components/ui/button";
 import { useDictionary } from "@/hooks/useDictionary";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 import { Grid } from "@/layouts/grid";
+import { defaultLocale } from "@/libs/i18n";
+import { extractLocaleFromPathname } from "@/libs/utils/url";
 import { ProjectService } from "@/services/project";
 import type { Page, Project } from "@/types/entities";
+import { usePathname } from "next/navigation";
 import type { FC } from "react";
 import { useState } from "react";
 
-import styles from "src/components/projects/other/other-projects-wrapper.module.scss";
+import styles from "./other-projects-wrapper.module.scss";
 
 export type OtherProjectsWrapperDictionary = {
     loadMoreButton: string;
@@ -29,7 +32,11 @@ type PaginationState<E> = {
 
 export const OtherProjectsWrapper: FC<Props> = props => {
 
-    const dico = useDictionary("otherProjectsWrapper");
+    const pathname = usePathname();
+
+    const locale = extractLocaleFromPathname(pathname) || defaultLocale;
+
+    const dico = useDictionary("otherProjectsWrapper", locale);
 
     const [ pagination, setPagination ] = useState<PaginationState<Project>>({
         data: props.initialPage.content,
@@ -64,7 +71,9 @@ export const OtherProjectsWrapper: FC<Props> = props => {
                 {pagination.data.map((project, i) => (
                     <OtherProjectCard
                         key={project.id}
-                        ref={el => refs.current[i] = el}
+                        ref={el => {
+                            refs.current[i] = el;
+                        }}
                         project={project}
                     />
                 ))}

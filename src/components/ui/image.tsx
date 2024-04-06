@@ -5,7 +5,7 @@ import NextImage from "next/image";
 import type { FC } from "react";
 import { useEffect, useState } from "react";
 
-import styles from "src/components/common/image.module.scss";
+import styles from "./image.module.scss";
 
 type Props = {
     src: string;

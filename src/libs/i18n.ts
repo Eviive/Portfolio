@@ -14,8 +14,4 @@ export const localeDictionary: Record<Locale, string> = {
     fr: "Français"
 };
 
-const dictionaries: Record<Locale, Dictionary> = { en, fr };
-
-export const getDictionary = <K extends keyof Dictionary>(locale: Locale, key: K): Dictionary[K] => {
-    return dictionaries[locale][key];
-};
+export const dictionaries: Record<Locale, Dictionary> = { en, fr };

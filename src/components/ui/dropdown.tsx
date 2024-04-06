@@ -7,7 +7,7 @@ import type { FC } from "react";
 import { useState } from "react";
 import { FaChevronDown } from "react-icons/fa6";
 
-import styles from "src/components/common/dropdown.module.scss";
+import styles from "./dropdown.module.scss";
 
 type DropdownItem = {
     text: string;

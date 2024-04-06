@@ -3,7 +3,7 @@ import type { FC } from "react";
 import { FaDiscord } from "react-icons/fa6";
 import { FiGithub, FiLinkedin, FiMail } from "react-icons/fi";
 
-import styles from "src/components/common/server/socials.module.scss";
+import styles from "./socials.module.scss";
 
 const links = [
     {

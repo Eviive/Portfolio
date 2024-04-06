@@ -2,10 +2,13 @@
 
 import { Loader } from "@/components/ui/loader";
 import { useDictionary } from "@/hooks/useDictionary";
+import { defaultLocale } from "@/libs/i18n";
 import { formatClassNames } from "@/libs/utils/react";
+import { extractLocaleFromPathname } from "@/libs/utils/url";
+import { usePathname } from "next/navigation";
 import type { FC, PropsWithChildren } from "react";
 
-import styles from "src/components/common/button.module.scss";
+import styles from "./button.module.scss";
 
 export type ButtonDictionary = {
     loading: string;
@@ -19,7 +22,11 @@ type Props = {
 
 export const Button: FC<PropsWithChildren<Props>> = props => {
 
-    const dico = useDictionary("button");
+    const pathname = usePathname();
+
+    const locale = extractLocaleFromPathname(pathname) || defaultLocale;
+
+    const dico = useDictionary("button", locale);
 
     return (
         <button

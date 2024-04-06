@@ -2,7 +2,10 @@
 
 import { Button } from "@/components/ui/button";
 import { useDictionary } from "@/hooks/useDictionary";
+import { defaultLocale } from "@/libs/i18n";
+import { extractLocaleFromPathname } from "@/libs/utils/url";
 import type { DictionaryWithTitle } from "@/types/i18n";
+import { usePathname } from "next/navigation";
 import type { FC } from "react";
 import { useEffect } from "react";
 
@@ -19,7 +22,11 @@ type Props = {
 
 const ErrorPage: FC<Props> = props => {
 
-    const dico = useDictionary("error");
+    const pathname = usePathname();
+
+    const locale = extractLocaleFromPathname(pathname) || defaultLocale;
+
+    const dico = useDictionary("error", locale);
 
     useEffect(() => {
         console.error(props.error);

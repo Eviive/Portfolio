@@ -1,9 +1,13 @@
+"use client";
+
 import type { Thing as ThingType } from "@/content/things";
-import { useI18nContext } from "@/contexts/I18nContext";
+import { defaultLocale } from "@/libs/i18n";
+import { extractLocaleFromPathname } from "@/libs/utils/url";
+import { usePathname } from "next/navigation";
 import { forwardRef } from "react";
 import { BsFillCircleFill } from "react-icons/bs";
 
-import styles from "src/components/about/thing.module.scss";
+import styles from "./thing.module.scss";
 
 type Props = ThingType;
 
@@ -12,7 +16,9 @@ const Thing = forwardRef<
     Props
 >((props, ref) => {
 
-    const locale = useI18nContext();
+    const pathname = usePathname();
+
+    const locale = extractLocaleFromPathname(pathname) || defaultLocale;
 
     return (
         <li ref={ref} className={styles.card}>

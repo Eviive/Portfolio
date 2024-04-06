@@ -1,7 +1,7 @@
 import { formatClassNames } from "@/libs/utils/react";
 import type { CSSProperties, FC, PropsWithChildren } from "react";
 
-import styles from "src/layouts/grid.module.scss";
+import styles from "./grid.module.scss";
 
 type Props = {
     className?: string;

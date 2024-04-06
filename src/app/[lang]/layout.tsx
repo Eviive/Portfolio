@@ -1,13 +1,13 @@
 import { Footer } from "@/components/common/footer";
 import { Header } from "@/components/common/header";
-import { I18nContextProvider } from "@/contexts/I18nContext";
+import { getI18nServerContext } from "@/contexts/I18nServerContext";
 import { inter, montserrat, sourceCodePro } from "@/libs/fonts";
 import type { Locale } from "@/libs/i18n";
-import { defaultLocale, getDictionary, locales } from "@/libs/i18n";
+import { defaultLocale, dictionaries, locales } from "@/libs/i18n";
 import { formatClassNames } from "@/libs/utils/react";
 import "@/styles/reset.scss";
 import type { PropsWithParams } from "@/types/app";
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import type { FC, PropsWithChildren } from "react";
 
 import styles from "./layout.module.scss";
@@ -18,7 +18,11 @@ export type MetadataDictionary = {
 
 export const generateMetadata = ({ params: { lang } }: { params: RootParams }): Metadata => {
 
-    const dico = getDictionary(lang, "metadata");
+    const i18n = getI18nServerContext();
+
+    i18n.locale = lang;
+
+    const dico = dictionaries[i18n.locale]["metadata"];
 
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL ? new URL(process.env.NEXT_PUBLIC_BASE_URL) : undefined;
 
@@ -50,8 +54,6 @@ export const generateMetadata = ({ params: { lang } }: { params: RootParams }): 
             name: "Albert Vaillon",
             url: process.env.NEXT_PUBLIC_BASE_URL
         },
-        themeColor: "#1a1a1a",
-        colorScheme: "dark",
         creator: "Albert Vaillon",
         publisher: "Albert Vaillon",
         robots: {
@@ -80,7 +82,7 @@ export const generateMetadata = ({ params: { lang } }: { params: RootParams }): 
                     alt: "Albert Vaillon - Portfolio"
                 }
             ],
-            locale: lang,
+            locale: i18n.locale,
             countryName: "France",
             type: "website"
         },
@@ -103,6 +105,11 @@ export const generateMetadata = ({ params: { lang } }: { params: RootParams }): 
     };
 };
 
+export const viewport: Viewport = {
+    themeColor: "#1a1a1a",
+    colorScheme: "dark"
+};
+
 type RootParams = {
     lang: Locale;
 };
@@ -112,16 +119,19 @@ export const generateStaticParams = (): RootParams[] => {
 };
 
 const RootLayout: FC<PropsWithParams<PropsWithChildren, RootParams>> = ({ children, params }) => {
+
+    const i18n = getI18nServerContext();
+
+    i18n.locale = params.lang;
+
     return (
         <html lang={params.lang} className="sr">
             <body className={formatClassNames(inter.className, sourceCodePro.variable, montserrat.variable)}>
-                <I18nContextProvider value={params.lang}>
-                    <Header />
-                    <main className={styles.main}>
-                        {children}
-                    </main>
-                    <Footer />
-                </I18nContextProvider>
+                <Header />
+                <main className={styles.main}>
+                    {children}
+                </main>
+                <Footer />
             </body>
         </html>
     );

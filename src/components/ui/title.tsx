@@ -1,6 +1,6 @@
 import type { FC } from "react";
 
-import styles from "src/components/common/server/title.module.scss";
+import styles from "./title.module.scss";
 
 type Props = {
     title: string;

@@ -5,16 +5,23 @@ import { Title } from "@/components/ui/title";
 import { thingsData } from "@/content/things";
 import { useDictionary } from "@/hooks/useDictionary";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { defaultLocale } from "@/libs/i18n";
+import { extractLocaleFromPathname } from "@/libs/utils/url";
 import type { DictionaryWithTitle } from "@/types/i18n";
+import { usePathname } from "next/navigation";
 import type { FC } from "react";
 
-import styles from "src/components/about/about.module.scss";
+import styles from "./about.module.scss";
 
 export type AboutDictionary = DictionaryWithTitle;
 
 export const About: FC = () => {
 
-    const dico = useDictionary("about");
+    const pathname = usePathname();
+
+    const locale = extractLocaleFromPathname(pathname) || defaultLocale;
+
+    const dico = useDictionary("about", locale);
 
     const refs = useScrollReveal({
         multiple: true
@@ -28,7 +35,9 @@ export const About: FC = () => {
                     {thingsData.map((content, i) => (
                         <Thing
                             key={content.name.en}
-                            ref={el => refs.current[i] = el}
+                            ref={el => {
+                                refs.current[i] = el;
+                            }}
                             {...content}
                         />
                     ))}

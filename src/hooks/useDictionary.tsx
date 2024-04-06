@@ -1,10 +1,8 @@
-import { useI18nContext } from "@/contexts/I18nContext";
-import { getDictionary } from "@/libs/i18n";
+import { getI18nServerContext } from "@/contexts/I18nServerContext";
+import type { Locale } from "@/libs/i18n";
+import { dictionaries } from "@/libs/i18n";
 import type { Dictionary } from "@/types/i18n";
 
-export const useDictionary = <K extends keyof Dictionary>(key: K): Dictionary[K] => {
-
-    const locale = useI18nContext();
-
-    return getDictionary(locale, key);
+export const useDictionary = <K extends keyof Dictionary>(key: K, locale?: Locale): Dictionary[K] => {
+    return dictionaries[locale ?? getI18nServerContext().locale][key];
 };

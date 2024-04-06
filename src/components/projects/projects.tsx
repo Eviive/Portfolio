@@ -3,7 +3,7 @@ import { OtherProjects } from "@/components/projects/other/other-projects";
 import { useDictionary } from "@/hooks/useDictionary";
 import type { FC } from "react";
 
-import styles from "src/components/projects/projects.module.scss";
+import styles from "./projects.module.scss";
 
 export const Projects: FC = () => {
 

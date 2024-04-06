@@ -1,10 +1,12 @@
 import { Link } from "@/components/ui/link";
-import { useI18nContext } from "@/contexts/I18nContext";
+import { defaultLocale } from "@/libs/i18n";
+import { extractLocaleFromPathname } from "@/libs/utils/url";
 import type { Project } from "@/types/entities";
+import { usePathname } from "next/navigation";
 import { forwardRef } from "react";
 import { FiExternalLink, FiFolder, FiGithub } from "react-icons/fi";
 
-import styles from "src/components/projects/other/other-project-card.module.scss";
+import styles from "./other-project-card.module.scss";
 
 type Props = {
     project: Project;
@@ -15,7 +17,9 @@ const OtherProjectCard = forwardRef<
     Props
 >(({ project }, ref) => {
 
-    const locale = useI18nContext();
+    const pathname = usePathname();
+
+    const locale = extractLocaleFromPathname(pathname) || defaultLocale;
 
     project.skills.sort((a, b) => a.sort - b.sort);
 
