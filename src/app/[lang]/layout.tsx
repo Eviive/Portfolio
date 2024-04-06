@@ -1,6 +1,6 @@
 import { Footer } from "@/components/common/footer";
 import { Header } from "@/components/common/header";
-import { getI18nServerContext } from "@/contexts/I18nServerContext";
+import { getI18nServerContext } from "@/contexts/i18n-server-context";
 import { inter, montserrat, sourceCodePro } from "@/libs/fonts";
 import type { Locale } from "@/libs/i18n";
 import { defaultLocale, dictionaries, locales } from "@/libs/i18n";

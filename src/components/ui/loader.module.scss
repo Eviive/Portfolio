@@ -1,4 +1,4 @@
-@use "../../styles/mixins";
+@use "@/mixins";
 
 .loader {
     --size: var(--loader-size, 50px);

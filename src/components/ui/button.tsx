@@ -1,7 +1,7 @@
 "use client";
 
 import { Loader } from "@/components/ui/loader";
-import { useDictionary } from "@/hooks/useDictionary";
+import { useDictionary } from "@/hooks/use-dictionary";
 import { defaultLocale } from "@/libs/i18n";
 import { formatClassNames } from "@/libs/utils/react";
 import { extractLocaleFromPathname } from "@/libs/utils/url";

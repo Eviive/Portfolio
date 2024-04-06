@@ -1,4 +1,4 @@
-import { getI18nServerContext } from "@/contexts/I18nServerContext";
+import { getI18nServerContext } from "@/contexts/i18n-server-context";
 import type { Locale } from "@/libs/i18n";
 import { dictionaries } from "@/libs/i18n";
 import type { Dictionary } from "@/types/i18n";

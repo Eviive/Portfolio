@@ -1,6 +1,6 @@
 import { FeaturedProjects } from "@/components/projects/featured/featured-projects";
 import { OtherProjects } from "@/components/projects/other/other-projects";
-import { useDictionary } from "@/hooks/useDictionary";
+import { useDictionary } from "@/hooks/use-dictionary";
 import type { FC } from "react";
 
 import styles from "./projects.module.scss";

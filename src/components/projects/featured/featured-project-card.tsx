@@ -2,7 +2,7 @@
 
 import { Image } from "@/components/ui/image";
 import { Link } from "@/components/ui/link";
-import { useDictionary } from "@/hooks/useDictionary";
+import { useDictionary } from "@/hooks/use-dictionary";
 import { defaultLocale } from "@/libs/i18n";
 import { extractLocaleFromPathname } from "@/libs/utils/url";
 import { ImageService } from "@/services/image";

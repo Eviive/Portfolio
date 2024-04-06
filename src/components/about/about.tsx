@@ -3,8 +3,8 @@
 import { Thing } from "@/components/about/thing";
 import { Title } from "@/components/ui/title";
 import { thingsData } from "@/content/things";
-import { useDictionary } from "@/hooks/useDictionary";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { useDictionary } from "@/hooks/use-dictionary";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import { defaultLocale } from "@/libs/i18n";
 import { extractLocaleFromPathname } from "@/libs/utils/url";
 import type { DictionaryWithTitle } from "@/types/i18n";

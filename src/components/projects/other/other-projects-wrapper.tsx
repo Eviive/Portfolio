@@ -2,8 +2,8 @@
 
 import { OtherProjectCard } from "@/components/projects/other/other-project-card";
 import { Button } from "@/components/ui/button";
-import { useDictionary } from "@/hooks/useDictionary";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { useDictionary } from "@/hooks/use-dictionary";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import { Grid } from "@/layouts/grid";
 import { defaultLocale } from "@/libs/i18n";
 import { extractLocaleFromPathname } from "@/libs/utils/url";

@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { useDictionary } from "@/hooks/useDictionary";
+import { useDictionary } from "@/hooks/use-dictionary";
 import { defaultLocale } from "@/libs/i18n";
 import { extractLocaleFromPathname } from "@/libs/utils/url";
 import type { DictionaryWithTitle } from "@/types/i18n";

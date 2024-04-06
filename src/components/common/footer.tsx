@@ -1,6 +1,6 @@
 import { Socials } from "@/components/common/socials";
 import { Link } from "@/components/ui/link";
-import { useDictionary } from "@/hooks/useDictionary";
+import { useDictionary } from "@/hooks/use-dictionary";
 import type { FC } from "react";
 
 import styles from "./footer.module.scss";

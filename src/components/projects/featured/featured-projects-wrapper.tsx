@@ -3,7 +3,7 @@
 import { FeaturedProjectCard } from "@/components/projects/featured/featured-project-card";
 import type { FeaturedProjectsDictionary } from "@/components/projects/featured/featured-projects";
 import { Title } from "@/components/ui/title";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import type { Project } from "@/types/entities";
 import type { FC } from "react";
 

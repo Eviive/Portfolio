@@ -1,7 +1,7 @@
 "use client";
 
 import { Link } from "@/components/ui/link";
-import { useCloseEvents } from "@/hooks/useCloseEvents";
+import { useCloseEvents } from "@/hooks/use-close-events";
 import { formatClassNames } from "@/libs/utils/react";
 import type { FC } from "react";
 import { useState } from "react";

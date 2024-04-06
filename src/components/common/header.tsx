@@ -2,7 +2,7 @@
 
 import { Dropdown } from "@/components/ui/dropdown";
 import { Link } from "@/components/ui/link";
-import { useDictionary } from "@/hooks/useDictionary";
+import { useDictionary } from "@/hooks/use-dictionary";
 import { defaultLocale, localeDictionary, locales } from "@/libs/i18n";
 import { extractLocaleFromPathname, formatUriWithLocale } from "@/libs/utils/url";
 import logo from "@/public/logo.svg";
