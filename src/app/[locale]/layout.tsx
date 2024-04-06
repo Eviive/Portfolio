@@ -91,7 +91,6 @@ export const generateMetadata = ({
             }
         },
         alternates: {
-            canonical: baseUrl?.toString(),
             languages: localesUrl
         },
         manifest: "/manifest.json",
