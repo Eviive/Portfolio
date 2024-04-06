@@ -28,8 +28,16 @@
             grid-column: 4 / -1;
             align-items: flex-end;
 
+            @include mixins.media-query(s) {
+                align-items: flex-start;
+            }
+
             .logos > div {
                 justify-content: flex-end;
+
+                @include mixins.media-query(s) {
+                    justify-content: flex-start;
+                }
             }
         }
 
