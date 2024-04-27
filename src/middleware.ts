@@ -9,7 +9,7 @@ const getLocale = (req: NextRequest): string => {
     const headers: Negotiator.Headers = {};
     req.headers.forEach((value, key) => (headers[key] = value));
 
-    const languages = new Negotiator({ headers }).languages();
+    const languages = new Negotiator({ headers }).languages([...locales]);
 
     return match(languages, locales, defaultLocale);
 };

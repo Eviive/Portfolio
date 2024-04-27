@@ -42,7 +42,9 @@ export const Dropdown: FC<Props> = props => {
                     .filter(i => !i.isSelected)
                     .map(i => (
                         <li key={i.text}>
-                            <Link href={i.href}>{i.text}</Link>
+                            <Link href={i.href} scroll={false}>
+                                {i.text}
+                            </Link>
                         </li>
                     ))}
             </ul>
