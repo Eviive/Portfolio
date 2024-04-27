@@ -1,8 +1,11 @@
-import logo from "@/public/logo.svg";
 import { ImageResponse } from "next/og";
+import { readFile } from "node:fs/promises";
+import { join } from "node:path";
 
 export const GET = async (): Promise<ImageResponse> => {
-    const logoUrl = new URL(logo.src, process.env.NEXT_PUBLIC_BASE_URL).toString();
+    const logoData = await readFile(join(process.cwd(), "public", "logo.svg"), "utf-8");
+
+    const logoSrc = `data:image/svg+xml,${encodeURIComponent(logoData)}`;
 
     return new ImageResponse(
         (
@@ -22,7 +25,7 @@ export const GET = async (): Promise<ImageResponse> => {
                 }}
             >
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={logoUrl} alt="Albert Vaillon's logo" height={300} />
+                <img src={logoSrc} alt="Albert Vaillon's logo" height={300} />
                 Albert Vaillon&apos;s Portfolio
             </div>
         ),
