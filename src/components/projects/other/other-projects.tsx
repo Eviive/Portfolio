@@ -8,7 +8,7 @@ import type { FC } from "react";
 export type OtherProjectsDictionary = DictionaryWithTitle;
 
 export const OtherProjects: FC = async () => {
-    const otherProjectsPage = await ProjectService.findAllNotFeaturedPaginated();
+    const otherProjectsPage = await ProjectService.findAllNotFeatured();
 
     const dict = getDictionary("otherProjects");
     const wrapperDict = getDictionary("otherProjectsWrapper");

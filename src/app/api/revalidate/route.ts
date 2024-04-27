@@ -1,3 +1,4 @@
+import { toLocalDate } from "@/libs/utils/date";
 import type { RevalidateRequest, RevalidateResponse } from "@/types/api";
 import { revalidatePath } from "next/cache";
 import type { NextRequest } from "next/server";
@@ -9,35 +10,33 @@ export const POST = async (req: NextRequest): Promise<NextResponse<RevalidateRes
     try {
         reqBody = await req.json();
     } catch (error) {
-        return NextResponse.json(
-            {
-                revalidated: false,
-                timestamp: Date.now()
-            },
-            {
-                status: 400,
-                statusText: "Bad Request"
-            }
-        );
+        return buildRevalidateResponse(false, {
+            status: 400,
+            statusText: "Bad Request"
+        });
     }
 
     if (!process.env.REVALIDATE_SECRET || reqBody.secret !== process.env.REVALIDATE_SECRET) {
-        return NextResponse.json(
-            {
-                revalidated: false,
-                timestamp: Date.now()
-            },
-            {
-                status: 401,
-                statusText: "Unauthorized"
-            }
-        );
+        return buildRevalidateResponse(false, {
+            status: 401,
+            statusText: "Unauthorized"
+        });
     }
 
     revalidatePath(reqBody.path ?? "/");
 
-    return NextResponse.json({
-        revalidated: true,
-        timestamp: Date.now()
-    });
+    return buildRevalidateResponse(true);
+};
+
+const buildRevalidateResponse = (
+    revalidated: boolean,
+    init?: ResponseInit
+): NextResponse<RevalidateResponse> => {
+    return NextResponse.json(
+        {
+            revalidated,
+            timestamp: toLocalDate(new Date()).toISOString()
+        },
+        init
+    );
 };

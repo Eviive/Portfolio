@@ -38,9 +38,7 @@ export const OtherProjectsWrapper: FC<Props> = ({ initialPage, dict }) => {
     const handleClick = async () => {
         setPagination({ ...pagination, isLoadingMore: true });
 
-        const nextPage = await ProjectService.findAllNotFeaturedPaginatedFromNext(
-            pagination.page + 1
-        );
+        const nextPage = await ProjectService.findAllNotFeaturedFromNext(pagination.page + 1);
 
         setPagination(prevState => ({
             data: [...prevState.data, ...nextPage.content],

@@ -5,5 +5,5 @@ export type RevalidateRequest = {
 
 export type RevalidateResponse = {
     revalidated: boolean;
-    timestamp: number;
+    timestamp: string;
 };
