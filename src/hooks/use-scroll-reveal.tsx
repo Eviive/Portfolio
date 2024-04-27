@@ -49,6 +49,7 @@ export const useScrollReveal = (config: ScrollRevealConfig) => {
             refs.current
                 .filter(isNotNullOrUndefined)
                 .filter(el => isNullOrUndefined(el.dataset.revealed))
+                .filter(el => el.classList.contains("reveal-hidden"))
                 .forEach(setUpScrollReveal);
         })();
     }, [config]);
