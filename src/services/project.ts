@@ -7,21 +7,29 @@ const URL = "project";
 
 const findAllFeatured = () => request<Project[]>(`/${URL}/featured`);
 
-const findAllNotFeatured = (page?: number | string | null, size?: number | string | null) => {
+const findAllNotFeatured = (page?: number | string | null) => {
     const searchParams: SearchParamsRecord = {};
 
-    isNotNullOrUndefined(page) && (searchParams.page = page.toString());
-    isNotNullOrUndefined(size) && (searchParams.size = size.toString());
+    if (isNotNullOrUndefined(page)) {
+        searchParams.page = page.toString();
+    }
+
+    searchParams.size = "6";
 
     return request<Page<Project>>(`/${URL}/not-featured`, searchParams);
 };
 
-const findAllNotFeaturedFromNext = (page?: number) =>
-    request<Page<Project>>(
-        `/api/${URL}/not-featured`,
-        page ? { page: page.toString() } : undefined,
-        { fetchFromNext: true }
-    );
+const findAllNotFeaturedFromNext = (page?: number) => {
+    const searchParams: SearchParamsRecord = {};
+
+    if (isNotNullOrUndefined(page)) {
+        searchParams.page = page.toString();
+    }
+
+    return request<Page<Project>>(`/api/${URL}/not-featured`, searchParams, {
+        fetchFromNext: true
+    });
+};
 
 export const ProjectService = {
     findAllFeatured,
