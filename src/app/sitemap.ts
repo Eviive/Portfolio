@@ -1,5 +1,4 @@
-import { defaultLocale, locales } from "@/libs/i18n";
-import { toLocalDate } from "@/libs/utils/date";
+import { locales } from "@/libs/i18n";
 import type { MetadataRoute } from "next";
 
 const sitemap = (): MetadataRoute.Sitemap => {
@@ -7,12 +6,10 @@ const sitemap = (): MetadataRoute.Sitemap => {
 
     const availableLocales = ["", ...locales] as const;
 
-    return availableLocales
-        .filter(locale => locale !== defaultLocale)
-        .map(locale => ({
-            url: new URL(locale, baseUrl).toString(),
-            lastModified: toLocalDate(new Date()).toISOString()
-        }));
+    return availableLocales.map(locale => ({
+        url: new URL(locale, baseUrl).toString(),
+        lastModified: new Date().toISOString()
+    }));
 };
 
 export default sitemap;
