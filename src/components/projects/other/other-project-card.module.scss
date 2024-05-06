@@ -13,7 +13,6 @@ $title-font-size: 1.2em;
     max-width: 500px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     background-color: hsl(var(--primary-2));
     border: 1px solid hsl(var(--primary-3));
     border-radius: 5px;
@@ -46,16 +45,26 @@ $title-font-size: 1.2em;
             opacity: 1;
         }
 
-        .title {
+        .title a {
             color: hsl(var(--accent-1));
         }
     }
 
     .title {
-        width: fit-content;
-        display: flex;
-        font-size: $title-font-size;
-        transition: color 0.3s;
+
+        a {
+            margin-bottom: 0.2em;
+            width: fit-content;
+            display: flex;
+            font-size: $title-font-size;
+            transition: color 0.3s;
+        }
+
+        span {
+            color: hsl(var(--secondary-2));
+            font-size: 0.85em;
+            text-transform: capitalize;
+        }
     }
 
     p {
@@ -100,6 +109,7 @@ $title-font-size: 1.2em;
 }
 
 .skills {
+    margin-top: auto;
     padding: 0;
     display: flex;
     flex-wrap: wrap;

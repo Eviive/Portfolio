@@ -16,27 +16,33 @@ type Props = {
 const OtherProjectCard = forwardRef<HTMLLIElement, Props>(({ project }, ref) => {
     const i18n = useI18nContext();
 
+    const dateFormatter = new Intl.DateTimeFormat(i18n.locale, {
+        month: "long",
+        year: "numeric"
+    });
+
     project.skills.sort((a, b) => a.sort - b.sort);
 
     return (
         <li ref={ref} className={formatClassNames(styles.card, "reveal-hidden")}>
-            <div>
-                <div className={styles.icons}>
-                    <FiFolder size={40} strokeWidth={1} className={styles.folder} />
-                    <div className={styles.links}>
-                        <Link href={project.repoUrl} aria-label="GitHub repository" blank>
-                            <FiGithub size={22} />
-                        </Link>
-                        <Link href={project.demoUrl} aria-label="Demonstration" blank>
-                            <FiExternalLink size={22} />
-                        </Link>
-                    </div>
+            <div className={styles.icons}>
+                <FiFolder size={40} strokeWidth={1} className={styles.folder} />
+                <div className={styles.links}>
+                    <Link href={project.repoUrl} aria-label="GitHub repository" blank>
+                        <FiGithub size={22} />
+                    </Link>
+                    <Link href={project.demoUrl} aria-label="Demonstration" blank>
+                        <FiExternalLink size={22} />
+                    </Link>
                 </div>
-                <Link className={styles.title} href={project.demoUrl}>
+            </div>
+            <div className={styles.title}>
+                <Link href={project.demoUrl}>
                     <h3>{project.title}</h3>
                 </Link>
-                <p>{i18n.locale === "en" ? project.descriptionEn : project.descriptionFr}</p>
+                <span>{dateFormatter.format(new Date(project.creationDate))}</span>
             </div>
+            <p>{i18n.locale === "en" ? project.descriptionEn : project.descriptionFr}</p>
             <ul className={styles.skills}>
                 {project.skills.map(s => (
                     <li key={s.id}>{s.name}</li>

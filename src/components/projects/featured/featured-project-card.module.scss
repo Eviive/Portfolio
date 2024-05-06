@@ -113,21 +113,27 @@
     align-items: inherit;
     text-shadow: 0 0 5px hsl(var(--primary-2));
 
+    .featured {
+        color: hsl(var(--accent-1));
+        font-family: var(--font-mono);
+        font-size: 0.9em;
+    }
+
     a {
         @include mixins.media-query(s) {
             color: hsl(0deg, 0%, 95%);
         }
+
+        h3 {
+            margin: 0.2em 0;
+            font-size: 2em;
+        }
     }
 
-    h3 {
-        margin: 0.2em 0;
-        font-size: 2em;
-    }
-
-    span {
-        color: hsl(var(--accent-1));
-        font-family: var(--font-mono);
+    .date {
+        color: hsl(var(--secondary-2));
         font-size: 0.9em;
+        text-transform: capitalize;
     }
 }
 
