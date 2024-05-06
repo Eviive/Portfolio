@@ -23,16 +23,24 @@ type Props = {
 const FeaturedProjectCard = forwardRef<HTMLLIElement, Props>(({ project, dict }, ref) => {
     const i18n = useI18nContext();
 
+    const dateFormatter = new Intl.DateTimeFormat(i18n.locale, {
+        month: "long",
+        year: "numeric"
+    });
+
     project.skills.sort((a, b) => a.sort - b.sort);
 
     return (
         <li ref={ref} className={formatClassNames(styles.card, "reveal-hidden")}>
             <div className={styles.description}>
                 <div className={styles.title}>
-                    <span>{dict.subtitle}</span>
+                    <span className={styles.featured}>{dict.subtitle}</span>
                     <Link href={project.demoUrl} blank>
                         <h3>{project.title}</h3>
                     </Link>
+                    <span className={styles.date}>
+                        {dateFormatter.format(new Date(project.creationDate))}
+                    </span>
                 </div>
                 <p>{i18n.locale === "en" ? project.descriptionEn : project.descriptionFr}</p>
                 <div className={styles.logos}>

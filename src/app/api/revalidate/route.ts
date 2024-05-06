@@ -1,4 +1,3 @@
-import { toLocalDate } from "@/libs/utils/date";
 import type { RevalidateRequest, RevalidateResponse } from "@/types/api";
 import { revalidatePath } from "next/cache";
 import type { NextRequest } from "next/server";
@@ -35,7 +34,7 @@ const buildRevalidateResponse = (
     return NextResponse.json(
         {
             revalidated,
-            timestamp: toLocalDate(new Date()).toISOString()
+            timestamp: new Date().toISOString()
         },
         init
     );

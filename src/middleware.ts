@@ -1,21 +1,23 @@
 import { defaultLocale, locales } from "@/libs/i18n";
-import { createUrl, removePrefixSlash } from "@/libs/utils/url";
+import { removePrefixSlash } from "@/libs/utils/url";
 import { match } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
-import type { NextMiddleware, NextRequest } from "next/server";
+import type { NextMiddleware } from "next/server";
 import { NextResponse } from "next/server";
 
-const getLocale = (req: NextRequest): string => {
-    const headers: Negotiator.Headers = {};
-    req.headers.forEach((value, key) => (headers[key] = value));
+const getPreferredLocale = (headers: Headers): string => {
+    const negotiatorHeaders: Negotiator.Headers = {};
+    headers.forEach((value, key) => (negotiatorHeaders[key] = value));
 
-    const languages = new Negotiator({ headers }).languages([...locales]);
+    const languages = new Negotiator({ headers: negotiatorHeaders }).languages([...locales]);
 
     return match(languages, locales, defaultLocale);
 };
 
 export const middleware: NextMiddleware = req => {
-    const { pathname } = req.nextUrl;
+    const url = req.nextUrl.clone();
+
+    const { pathname } = url;
 
     const isLocalePresent = locales.some(locale => pathname.startsWith(`/${locale}`));
 
@@ -23,13 +25,11 @@ export const middleware: NextMiddleware = req => {
         return NextResponse.next();
     }
 
-    const locale = getLocale(req);
+    const locale = getPreferredLocale(req.headers);
 
-    const newPathname = removePrefixSlash(pathname);
+    url.pathname = `${locale}/${removePrefixSlash(pathname)}`;
 
-    return NextResponse.redirect(
-        createUrl(`/${locale}/${newPathname}`, process.env.NEXT_PUBLIC_BASE_URL)
-    );
+    return locale === defaultLocale ? NextResponse.rewrite(url) : NextResponse.redirect(url);
 };
 
 export const config = {
