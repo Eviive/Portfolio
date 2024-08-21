@@ -30,6 +30,10 @@ export const en: Dictionary = {
         loadMoreButton: "Load more"
     },
 
+    skills: {
+        title: "My skills"
+    },
+
     header: {
         anchors: {
             home: "Home",

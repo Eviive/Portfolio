@@ -8,6 +8,7 @@ import type { FeaturedProjectCardDictionary } from "@/components/projects/featur
 import type { FeaturedProjectsDictionary } from "@/components/projects/featured/featured-projects";
 import type { OtherProjectsDictionary } from "@/components/projects/other/other-projects";
 import type { OtherProjectsWrapperDictionary } from "@/components/projects/other/other-projects-wrapper";
+import type { SkillsDictionary } from "@/components/skills/skills";
 import type { ButtonDictionary } from "@/components/ui/button";
 
 export type DictionaryWithTitle<D = unknown> = D & {
@@ -25,6 +26,8 @@ export type Dictionary = {
     featuredProjectCard: FeaturedProjectCardDictionary;
     otherProjects: OtherProjectsDictionary;
     otherProjectsWrapper: OtherProjectsWrapperDictionary;
+
+    skills: SkillsDictionary;
 
     header: HeaderDictionary;
     footer: FooterDictionary;
