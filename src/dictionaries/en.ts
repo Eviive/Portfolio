@@ -44,6 +44,6 @@ export const en: Dictionary = {
     },
 
     button: {
-        loading: "loading..."
+        loading: "Loading..."
     }
 };

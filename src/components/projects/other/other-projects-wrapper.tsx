@@ -38,14 +38,19 @@ export const OtherProjectsWrapper: FC<Props> = ({ initialPage, dict }) => {
     const handleClick = async () => {
         setPagination({ ...pagination, isLoadingMore: true });
 
-        const nextPage = await ProjectService.findAllNotFeaturedFromNext(pagination.page + 1);
+        try {
+            const nextPage = await ProjectService.findAllNotFeaturedFromNext(pagination.page + 1);
 
-        setPagination(prevState => ({
-            data: [...prevState.data, ...nextPage.content],
-            page: nextPage.number,
-            isLastPage: nextPage.last,
-            isLoadingMore: false
-        }));
+            setPagination(prevState => ({
+                data: [...prevState.data, ...nextPage.content],
+                page: nextPage.number,
+                isLastPage: nextPage.last,
+                isLoadingMore: false
+            }));
+        } catch (error) {
+            console.error(error);
+            setPagination({ ...pagination, isLoadingMore: false });
+        }
     };
 
     pagination.data.sort((a, b) => a.sort - b.sort);

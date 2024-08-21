@@ -44,6 +44,6 @@ export const fr: Dictionary = {
     },
 
     button: {
-        loading: "chargement..."
+        loading: "Chargement..."
     }
 };

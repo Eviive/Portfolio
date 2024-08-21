@@ -15,6 +15,5 @@
 
     li {
         flex-grow: 1;
-        @include mixins.size();
     }
 }
