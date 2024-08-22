@@ -47,7 +47,7 @@
     &:hover {
         translate: 0 -5px;
 
-        .title, .yname {
+        .title, .yname, .projects {
             color: hsl(var(--accent-1));
         }
     }
@@ -79,6 +79,24 @@
                 margin-left: 1em;
                 margin-bottom: 0.2em;
             }
+        }
+    }
+
+    .projects {
+        margin-top: 1em;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2em;
+        font-size: 0.9em;
+        color: hsl(var(--secondary-2));
+        transition: color 0.3s;
+
+        li {
+            display: flex;
+            gap: 1em;
+            align-items: center;
+            border-radius: 5px;
+            font-family: var(--font-mono);
         }
     }
 }

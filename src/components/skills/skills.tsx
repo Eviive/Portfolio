@@ -13,6 +13,7 @@ type Props = {
 export type Skill = {
     name: string;
     years: SkillYear[];
+    projects: string[];
 };
 
 export type SkillYear = {
@@ -50,7 +51,8 @@ const skills: Skill[] = [
                     "Intégrer des solutions dans un environnement de production"
                 ]
             }
-        ]
+        ],
+        projects: ["Personal-API", "GeoFlag", "Portfolio", "Graph Map Analysis", "BUT Website"]
     },
     {
         name: "Optimiser",
@@ -80,7 +82,8 @@ const skills: Skill[] = [
                     "Choisir et utiliser des bibliothèques et méthodes dédiées au domaine d'application"
                 ]
             }
-        ]
+        ],
+        projects: ["Graph Map Analysis", "SAE Algorithmique"]
     },
     {
         name: "Administrer",
@@ -102,7 +105,8 @@ const skills: Skill[] = [
                     "Sécuriser les services et données d’un système"
                 ]
             }
-        ]
+        ],
+        projects: ["SAE Réseau", "SAE Systèmes d'exploitation"]
     },
     {
         name: "Gérer",
@@ -124,7 +128,8 @@ const skills: Skill[] = [
                     "Manipuler des données hétérogènes"
                 ]
             }
-        ]
+        ],
+        projects: ["SAE Base de données", "SAE Business Intelligence"]
     },
     {
         name: "Gérer des projets",
@@ -146,7 +151,8 @@ const skills: Skill[] = [
                     "Définir et mettre en œuvre une démarche de suivi de projet"
                 ]
             }
-        ]
+        ],
+        projects: ["SAE Gestion de projet informatique", "SAE Économie"]
     },
     {
         name: "Collaborer",
@@ -178,7 +184,8 @@ const skills: Skill[] = [
                     "Accompagner le management de projet informatique"
                 ]
             }
-        ]
+        ],
+        projects: ["SAE Communication", "SAE Recueil de besoin"]
     }
 ];
 
@@ -203,6 +210,11 @@ export const Skills: FC<Props> = ({ dict }) => {
                                         ))}
                                     </ul>
                                 </li>
+                            ))}
+                        </ul>
+                        <ul className={styles.projects}>
+                            {skill.projects.map(project => (
+                                <li key={project}>{project}</li>
                             ))}
                         </ul>
                     </li>
