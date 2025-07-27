@@ -37,7 +37,7 @@ export const Header: FC<Props> = ({ dict }) => {
             <nav className={styles.nav}>
                 <div className={styles.left}>
                     <div className={styles.logo}>
-                        <Link href={`/${pathnameLocale}`} aria-label={dict.logoLinkLabel}>
+                        <Link href={"/" + pathnameLocale} aria-label={dict.logoLinkLabel}>
                             <NextImage src={logo} alt={dict.logoAlt} height={35} priority />
                         </Link>
                     </div>

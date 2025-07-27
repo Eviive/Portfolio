@@ -19,7 +19,7 @@ export const middleware: NextMiddleware = req => {
 
     const { pathname } = url;
 
-    const isLocalePresent = locales.some(locale => pathname.startsWith(`/${locale}`));
+    const isLocalePresent = locales.some(locale => pathname.startsWith("/" + locale));
 
     if (isLocalePresent) {
         return NextResponse.next();

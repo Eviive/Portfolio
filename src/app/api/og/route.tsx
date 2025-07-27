@@ -5,7 +5,7 @@ import { join } from "node:path";
 export const GET = async (): Promise<ImageResponse> => {
     const logoData = await readFile(join(process.cwd(), "public", "logo.svg"), "utf-8");
 
-    const logoSrc = `data:image/svg+xml,${encodeURIComponent(logoData)}`;
+    const logoSrc = "data:image/svg+xml," + encodeURIComponent(logoData);
 
     return new ImageResponse(
         (
