@@ -9,21 +9,21 @@ import { FaChevronDown } from "react-icons/fa6";
 
 import styles from "./dropdown.module.scss";
 
-type DropdownItem = {
+interface DropdownItem {
     text: string;
     href: string;
     isSelected: boolean;
-};
+}
 
-type Props = {
+interface Props {
     items: DropdownItem[];
     menuClassName?: string;
-};
+}
 
 export const Dropdown: FC<Props> = props => {
     const [isOpen, setIsOpen] = useState(false);
 
-    const ref = useCloseEvents<HTMLUListElement>(() => setIsOpen(false), { isOpen });
+    const ref = useCloseEvents<HTMLUListElement>(() => { setIsOpen(false); }, { isOpen });
 
     return (
         <div className={formatClassNames(styles.dropdown, isOpen && styles.open)}>

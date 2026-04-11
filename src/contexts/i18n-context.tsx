@@ -5,16 +5,16 @@ import type { Dictionary } from "@/types/i18n";
 import type { FC, PropsWithChildren } from "react";
 import { createContext, useContext } from "react";
 
-export type II18nContext = {
+export interface II18nContext {
     locale: Locale;
     dictionaries: Pick<Dictionary, "error" | "button">;
-};
+}
 
 const I18nContext = createContext<II18nContext | null>(null);
 
-type Props = {
+interface Props {
     value: II18nContext;
-};
+}
 
 export const I18nContextProvider: FC<PropsWithChildren<Props>> = props => {
     return <I18nContext.Provider value={props.value}>{props.children}</I18nContext.Provider>;

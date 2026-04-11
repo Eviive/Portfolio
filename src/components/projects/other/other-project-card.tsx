@@ -9,9 +9,9 @@ import { FiExternalLink, FiFolder, FiGithub } from "react-icons/fi";
 
 import styles from "./other-project-card.module.scss";
 
-type Props = {
+interface Props {
     project: Project;
-};
+}
 
 const OtherProjectCard = forwardRef<HTMLLIElement, Props>(({ project }, ref) => {
     const i18n = useI18nContext();

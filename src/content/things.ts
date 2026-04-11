@@ -2,11 +2,11 @@ import type { Locale } from "@/libs/i18n";
 import type { IconType } from "react-icons";
 import { FaLaptopCode, FaMicrochip, FaSquareJs } from "react-icons/fa6";
 
-export type Thing = {
+export interface Thing {
     name: Record<Locale, string>;
     text: Record<Locale, string>;
     icon: IconType;
-};
+}
 
 export const thingsData: Thing[] = [
     {

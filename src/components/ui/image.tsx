@@ -7,14 +7,14 @@ import { useEffect, useState } from "react";
 
 import styles from "./image.module.scss";
 
-type Props = {
+interface Props {
     src: string;
     alt: string;
     width: number;
     height?: number;
     title?: string;
     priority?: boolean;
-};
+}
 
 export const Image: FC<Props> = props => {
     const [loading, setLoading] = useState<boolean | null>(null);
@@ -33,8 +33,8 @@ export const Image: FC<Props> = props => {
                 height={props.height ?? props.width}
                 title={props.title}
                 priority={props.priority}
-                onLoad={() => setLoading(false)}
-                onError={() => setLoading(false)}
+                onLoad={() => { setLoading(false); }}
+                onError={() => { setLoading(false); }}
             />
         </div>
     );

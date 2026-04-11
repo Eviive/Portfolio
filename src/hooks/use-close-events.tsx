@@ -1,10 +1,10 @@
 import { useEffect, useRef } from "react";
 
-type CloseEventsConfig = {
+interface CloseEventsConfig {
     onOutsideClick: boolean;
     onEscapePressed: boolean;
     isOpen: boolean;
-};
+}
 
 const defaultConfig: CloseEventsConfig = {
     onOutsideClick: true,
@@ -48,7 +48,7 @@ export const useCloseEvents = <E extends HTMLElement>(
                 window.addEventListener("keydown", handleKeyDown, { signal: controller.signal });
         }
 
-        return () => controller.abort();
+        return () => { controller.abort(); };
     }, [handleClose, onOutsideClick, onEscapePressed, isOpen]);
 
     return ref;

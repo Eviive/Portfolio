@@ -1,9 +1,9 @@
-export type RevalidateRequest = {
+export interface RevalidateRequest {
     path?: string;
     secret?: string;
-};
+}
 
-export type RevalidateResponse = {
+export interface RevalidateResponse {
     revalidated: boolean;
     timestamp: string;
-};
+}
