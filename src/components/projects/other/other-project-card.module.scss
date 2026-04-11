@@ -31,8 +31,7 @@ $title-font-size: 1.2em;
     }
 
     @include mixins.hover-shard(
-        $top:
-            calc(
+        $top: calc(
                 $card-padding-vertical + $folder-size + $icons-margin-bottom + $title-font-size *
                     0.75
             )
@@ -51,7 +50,6 @@ $title-font-size: 1.2em;
     }
 
     .title {
-
         a {
             margin-bottom: 0.2em;
             width: fit-content;
