@@ -25,5 +25,9 @@ export const request = async <T>(
         ...restConfig
     });
 
+    if (!res.ok) {
+        throw new Error(`Request failed with status ${res.status.toString()}`);
+    }
+
     return res.json();
 };

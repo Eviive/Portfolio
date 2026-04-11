@@ -2,7 +2,7 @@ import { defaultLocale, locales } from "@/libs/i18n";
 import { removePrefixSlash } from "@/libs/utils/url";
 import { match } from "@formatjs/intl-localematcher";
 import Negotiator from "negotiator";
-import type { NextMiddleware } from "next/server";
+import type { NextProxy } from "next/server";
 import { NextResponse } from "next/server";
 
 const getPreferredLocale = (headers: Headers): string => {
@@ -14,7 +14,7 @@ const getPreferredLocale = (headers: Headers): string => {
     return match(languages, locales, defaultLocale);
 };
 
-export const middleware: NextMiddleware = req => {
+export const proxy: NextProxy = req => {
     const url = req.nextUrl.clone();
 
     const { pathname } = url;
