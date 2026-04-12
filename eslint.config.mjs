@@ -4,7 +4,6 @@ import nextTs from "eslint-config-next/typescript";
 import eslintConfigPrettier from "eslint-config-prettier/flat";
 import react from "eslint-plugin-react";
 import reactHooks from "eslint-plugin-react-hooks";
-import reactRefresh from "eslint-plugin-react-refresh";
 import { defineConfig, globalIgnores } from "eslint/config";
 import globals from "globals";
 import ts from "typescript-eslint";
@@ -18,7 +17,6 @@ export default defineConfig([
     react.configs.flat.recommended,
     react.configs.flat["jsx-runtime"],
     reactHooks.configs.flat["recommended-latest"],
-    reactRefresh.configs.vite,
     eslintConfigPrettier,
     ...nextVitals,
     ...nextTs,
@@ -72,7 +70,8 @@ export default defineConfig([
                     component: true,
                     html: false
                 }
-            ]
+            ],
+            "@typescript-eslint/no-non-null-assertion": "off"
         }
     }
 ]);

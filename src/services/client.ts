@@ -29,5 +29,5 @@ export const request = async <T>(
         throw new Error(`Request failed with status ${res.status.toString()}`);
     }
 
-    return res.json();
+    return res.json() as Promise<T>;
 };

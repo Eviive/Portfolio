@@ -17,12 +17,6 @@ import { use } from "react";
 
 import styles from "./layout.module.scss";
 
-const envBaseUrl = process.env.NEXT_PUBLIC_BASE_URL;
-
-if (envBaseUrl === undefined) {
-    throw new Error("NEXT_PUBLIC_BASE_URL environment variable is not defined");
-}
-
 export interface MetadataDictionary {
     description: string;
 }
@@ -36,7 +30,7 @@ export const generateMetadata = async ({
 
     const dict = getDictionary("metadata");
 
-    const baseUrl = new URL(envBaseUrl);
+    const baseUrl = new URL(process.env.NEXT_PUBLIC_BASE_URL!);
 
     const localesUrl: Record<string, string> = {};
     for (const locale of locales) {

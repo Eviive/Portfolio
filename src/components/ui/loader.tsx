@@ -10,7 +10,7 @@ interface Props {
 
 export const Loader: FC<Props> = ({ size, color, absolute }) => {
     const loaderStyle = {
-        ...(size && { "--loader-size": `${size}px` }),
+        ...(size && { "--loader-size": `${size.toString()}px` }),
         ...(color && { "--loader-color": color }),
         ...(absolute && { position: "absolute" })
     } as CSSProperties;

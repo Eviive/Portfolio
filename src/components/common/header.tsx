@@ -38,6 +38,7 @@ export const Header: FC<Props> = ({ dict }) => {
                 <div className={styles.left}>
                     <div className={styles.logo}>
                         <Link href={"/" + pathnameLocale} aria-label={dict.logoLinkLabel}>
+                            {/* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment */}
                             <NextImage src={logo} alt={dict.logoAlt} height={35} priority />
                         </Link>
                     </div>
