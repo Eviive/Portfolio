@@ -13,7 +13,8 @@ const nextConfig: NextConfig = {
         contentDispositionType: "attachment",
         contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;"
     },
-    productionBrowserSourceMaps: true
+    productionBrowserSourceMaps: true,
+    output: "standalone"
 };
 
 export default nextConfig;

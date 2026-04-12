@@ -1,42 +1,43 @@
-FROM node:18-alpine AS base
+ARG NODE_VERSION=24.14.1-slim
 
-FROM base AS deps
-
-RUN apk add --no-cache libc6-compat
+FROM node:${NODE_VERSION} AS dependencies
 
 WORKDIR /app
 
 COPY package.json package-lock.json ./
 
-RUN npm ci
+RUN npm ci --no-audit --no-fund
 
-FROM base AS builder
+FROM node:${NODE_VERSION} AS builder
 
 WORKDIR /app
 
-COPY --from=deps /app/node_modules ./node_modules
+COPY --from=dependencies /app/node_modules ./node_modules
+
 COPY . .
+
+ENV NODE_ENV=production
 
 RUN npm run build
 
-FROM base AS runner
+FROM node:${NODE_VERSION} AS runner
 
 WORKDIR /app
 
-ENV NODE_ENV production
+ENV NODE_ENV=production
+ENV PORT=3000
+ENV HOSTNAME="0.0.0.0"
 
-RUN addgroup --system --gid 1001 nodejs && \
-    adduser --system --uid 1001 nextjs
+COPY --from=builder --chown=node:node /app/public ./public
 
-COPY --from=builder /app/public ./public
+RUN mkdir .next && \
+    chown node:node .next
 
-COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
-COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+COPY --from=builder --chown=node:node /app/.next/standalone ./
+COPY --from=builder --chown=node:node /app/.next/static ./.next/static
 
-USER nextjs
+USER node
 
 EXPOSE 3000
-
-ENV PORT 3000
 
 CMD ["node", "server.js"]
