@@ -3,7 +3,7 @@ import type { FC } from "react";
 
 import styles from "./home.module.scss";
 
-export const Home: FC = async () => {
+export const Home: FC = () => {
     return (
         <section id="home" className={styles.home}>
             <HomeTitle />

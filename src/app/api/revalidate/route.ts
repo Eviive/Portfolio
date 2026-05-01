@@ -7,8 +7,8 @@ export const POST = async (req: NextRequest): Promise<NextResponse<RevalidateRes
     let reqBody: RevalidateRequest;
 
     try {
-        reqBody = await req.json();
-    } catch (error) {
+        reqBody = (await req.json()) as RevalidateRequest;
+    } catch {
         return buildRevalidateResponse(false, {
             status: 400,
             statusText: "Bad Request"

@@ -8,10 +8,10 @@ import type { FC } from "react";
 
 import styles from "./featured-projects-wrapper.module.scss";
 
-type Props = {
+interface Props {
     projects: Project[];
     cardDict: FeaturedProjectCardDictionary;
-};
+}
 
 export const FeaturedProjectsWrapper: FC<Props> = ({ projects, cardDict }) => {
     const refs = useScrollReveal({

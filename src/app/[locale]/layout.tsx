@@ -12,20 +12,21 @@ import "@/styles/reset.scss";
 import type { PropsWithParams } from "@/types/app";
 import type { EmptyRecord } from "@/types/utils";
 import type { Metadata, Viewport } from "next";
-import type { FC, PropsWithChildren } from "react";
+import type { ReactNode } from "react";
+import { use } from "react";
 
 import styles from "./layout.module.scss";
 
-export type MetadataDictionary = {
+export interface MetadataDictionary {
     description: string;
-};
+}
 
-export const generateMetadata = ({
-    params: { locale }
-}: PropsWithParams<EmptyRecord, LocaleParams>): Metadata => {
+export const generateMetadata = async ({
+    params
+}: PropsWithParams<EmptyRecord, LocaleParams>): Promise<Metadata> => {
     const i18n = getI18nServerContext();
 
-    i18n.locale = locale;
+    i18n.locale = (await params).locale as Locale;
 
     const dict = getDictionary("metadata");
 
@@ -136,26 +137,27 @@ export const viewport: Viewport = {
     colorScheme: "dark"
 };
 
-export type LocaleParams = {
-    locale: Locale;
-};
+export type LocaleParams = Record<"locale", string>;
 
 export const generateStaticParams = (): LocaleParams[] => {
     return locales.map(locale => ({ locale }));
 };
 
-const LocaleLayout: FC<PropsWithParams<PropsWithChildren, LocaleParams>> = ({
+const LocaleLayout = ({
     children,
     params
+}: {
+    children: ReactNode | undefined;
+    params: Promise<LocaleParams>;
 }) => {
     const i18n = getI18nServerContext();
 
-    i18n.locale = params.locale;
+    i18n.locale = use(params).locale as Locale;
 
     const headerDict = getDictionary("header");
 
     return (
-        <html lang={params.locale} className="sr">
+        <html lang={i18n.locale} className="sr">
             <body
                 className={formatClassNames(
                     inter.className,

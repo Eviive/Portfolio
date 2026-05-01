@@ -14,7 +14,7 @@ export type DictionaryWithTitle<D = unknown> = D & {
     title: string;
 };
 
-export type Dictionary = {
+export interface Dictionary {
     metadata: MetadataDictionary;
     error: ErrorDictionary;
 
@@ -30,4 +30,4 @@ export type Dictionary = {
     footer: FooterDictionary;
 
     button: ButtonDictionary;
-};
+}

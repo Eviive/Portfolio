@@ -2,15 +2,15 @@ import type { CSSProperties, FC } from "react";
 
 import styles from "./loader.module.scss";
 
-type Props = {
+interface Props {
     size?: number;
     color?: string;
     absolute?: boolean;
-};
+}
 
 export const Loader: FC<Props> = ({ size, color, absolute }) => {
     const loaderStyle = {
-        ...(size && { "--loader-size": `${size}px` }),
+        ...(size && { "--loader-size": `${size.toString()}px` }),
         ...(color && { "--loader-color": color }),
         ...(absolute && { position: "absolute" })
     } as CSSProperties;

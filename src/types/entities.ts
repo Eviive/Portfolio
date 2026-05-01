@@ -1,4 +1,4 @@
-export type Project = {
+export interface Project {
     id: number;
     title: string;
     descriptionEn: string;
@@ -10,47 +10,36 @@ export type Project = {
     sort: number;
     skills: Skill[];
     image: Image;
-};
+}
 
-export type Skill = {
+export interface Skill {
     id: number;
     name: string;
     sort: number;
     image: Image;
-};
+}
 
-export type Image = {
+export interface Image {
     id: number;
     uuid?: string;
     altEn: string;
     altFr: string;
-};
+}
 
-export type Page<E> = {
-    content: E[];
-    pageable: {
-        sort: {
-            empty: boolean;
-            sorted: boolean;
-            unsorted: boolean;
-        };
-        offset: number;
-        pageSize: number;
-        pageNumber: number;
-        paged: boolean;
-        unpaged: boolean;
-    };
-    last: boolean;
-    totalElements: number;
-    totalPages: number;
+export interface Page<T> {
+    content: T[];
+    page: PageInfos;
+}
+
+interface PageInfos {
     number: number;
     size: number;
-    sort: {
-        empty: boolean;
-        sorted: boolean;
-        unsorted: boolean;
-    };
-    first: boolean;
     numberOfElements: number;
-    empty: boolean;
-};
+    hasContent: boolean;
+    first: boolean;
+    last: boolean;
+    next: boolean;
+    previous: boolean;
+    totalPages: number;
+    totalElements: number;
+}

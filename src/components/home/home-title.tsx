@@ -3,10 +3,10 @@ import type { FC } from "react";
 
 import styles from "./home-title.module.scss";
 
-export type HomeDictionary = {
+export interface HomeDictionary {
     hi: string;
     occupation: string;
-};
+}
 
 export const HomeTitle: FC = () => {
     const dict = getDictionary("home");

@@ -12,10 +12,10 @@ export type ErrorDictionary = DictionaryWithTitle & {
     tryAgain: string;
 };
 
-type Props = {
+interface Props {
     error: Error;
     reset: () => void;
-};
+}
 
 const ErrorPage: FC<Props> = props => {
     const i18n = useI18nContext();
