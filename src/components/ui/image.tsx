@@ -20,6 +20,7 @@ export const Image: FC<Props> = props => {
     const [loading, setLoading] = useState<boolean | null>(null);
 
     useEffect(() => {
+        // eslint-disable-next-line react-hooks/set-state-in-effect
         setLoading(prevState => prevState ?? true);
     }, []);
 
