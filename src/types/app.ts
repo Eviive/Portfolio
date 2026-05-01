@@ -7,15 +7,15 @@ export type PropsWithParams<
     S extends SearchParamsRecord = never
 > = P & Params<R> & SearchParams<S>;
 
-export type Params<P extends ParamsRecord = never> = {
-    params: P;
-};
+export interface Params<P extends ParamsRecord> {
+    params: Promise<P>;
+}
 
-export type SearchParams<P extends SearchParamsRecord = never> = {
+export interface SearchParams<P extends SearchParamsRecord> {
     searchParams: P;
-};
+}
 
-export type RouteHandler<B = never, P extends ParamsRecord = never> = (
+export type RouteHandler<B = never, P extends ParamsRecord = ParamsRecord> = (
     req: NextRequest,
     params: Params<P>
 ) => Promise<NextResponse<B>> | NextResponse<B>;

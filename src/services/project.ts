@@ -3,7 +3,7 @@ import { request } from "@/services/client";
 import type { Page, Project } from "@/types/entities";
 import type { SearchParamsRecord } from "@/types/utils";
 
-const URL = "project";
+const URL = "api/project";
 
 const findAllFeatured = () => request<Project[]>(`/${URL}/featured`);
 
@@ -26,7 +26,7 @@ const findAllNotFeaturedFromNext = (page?: number) => {
         searchParams.page = page.toString();
     }
 
-    return request<Page<Project>>(`/api/${URL}/not-featured`, searchParams, {
+    return request<Page<Project>>(`/${URL}/not-featured`, searchParams, {
         fetchFromNext: true
     });
 };

@@ -1,10 +1,10 @@
 import { useEffect, useRef } from "react";
 
-type CloseEventsConfig = {
+interface CloseEventsConfig {
     onOutsideClick: boolean;
     onEscapePressed: boolean;
     isOpen: boolean;
-};
+}
 
 const defaultConfig: CloseEventsConfig = {
     onOutsideClick: true,
@@ -29,7 +29,11 @@ export const useCloseEvents = <E extends HTMLElement>(
 
         const controller = new AbortController();
 
-        const close = () => isOpen && handleClose();
+        const close = () => {
+            if (isOpen) {
+                handleClose();
+            }
+        };
 
         const handleOutsideClick = (e: MouseEvent) => {
             if (!ref.current?.contains(e.target as Node)) {
@@ -37,18 +41,26 @@ export const useCloseEvents = <E extends HTMLElement>(
             }
         };
 
-        const handleKeyDown = (e: KeyboardEvent) => e.key === "Escape" && close();
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "Escape") {
+                close();
+            }
+        };
 
         if (element) {
             element.focus();
 
-            onOutsideClick &&
+            if (onOutsideClick) {
                 window.addEventListener("click", handleOutsideClick, { signal: controller.signal });
-            onEscapePressed &&
+            }
+            if (onEscapePressed) {
                 window.addEventListener("keydown", handleKeyDown, { signal: controller.signal });
+            }
         }
 
-        return () => controller.abort();
+        return () => {
+            controller.abort();
+        };
     }, [handleClose, onOutsideClick, onEscapePressed, isOpen]);
 
     return ref;

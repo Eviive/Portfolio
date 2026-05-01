@@ -2,9 +2,9 @@ import type { FC } from "react";
 
 import styles from "./title.module.scss";
 
-type Props = {
+interface Props {
     title: string;
-};
+}
 
 export const Title: FC<Props> = props => {
     return (

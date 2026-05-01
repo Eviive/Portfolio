@@ -11,14 +11,14 @@ import { FiExternalLink, FiGithub } from "react-icons/fi";
 
 import styles from "./featured-project-card.module.scss";
 
-export type FeaturedProjectCardDictionary = {
+export interface FeaturedProjectCardDictionary {
     subtitle: string;
-};
+}
 
-type Props = {
+interface Props {
     project: Project;
     dict: FeaturedProjectCardDictionary;
-};
+}
 
 const FeaturedProjectCard = forwardRef<HTMLLIElement, Props>(({ project, dict }, ref) => {
     const i18n = useI18nContext();

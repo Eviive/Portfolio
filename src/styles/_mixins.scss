@@ -1,3 +1,5 @@
+@use "sass:meta";
+
 @mixin size($width: 100%, $height: $width) {
     width: $width;
     height: $height;
@@ -48,7 +50,9 @@
 
 @mixin hover-shard($width: 1px, $side: left, $top: 25%) {
     $shift: -$width;
-    $inset: if($side == left, 65% auto auto $shift, 65% $shift auto auto);
+    $inset: if(
+        sass($side == left): 65% auto auto $shift; else: 65% $shift auto auto
+    );
 
     @include pseudo($loc: after, $pos: $inset) {
         opacity: 0;
@@ -65,7 +69,7 @@
                 $width: 0.667px;
                 $shift: -$width;
 
-                inset: if($side == left, 65% auto auto $shift, 65% $shift auto auto);
+                inset: if(sass($side == left): 65% auto auto $shift; else: 65% $shift auto auto);
                 width: $width;
             }
         }

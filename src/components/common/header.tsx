@@ -15,15 +15,15 @@ import styles from "./header.module.scss";
 const anchors = ["home", "about", "projects"] as const;
 type Anchor = (typeof anchors)[number];
 
-export type HeaderDictionary = {
+export interface HeaderDictionary {
     anchors: Record<Anchor, string>;
     logoLinkLabel: string;
     logoAlt: string;
-};
+}
 
-type Props = {
+interface Props {
     dict: HeaderDictionary;
-};
+}
 
 export const Header: FC<Props> = ({ dict }) => {
     const pathname = usePathname();
@@ -37,7 +37,8 @@ export const Header: FC<Props> = ({ dict }) => {
             <nav className={styles.nav}>
                 <div className={styles.left}>
                     <div className={styles.logo}>
-                        <Link href={`/${pathnameLocale}`} aria-label={dict.logoLinkLabel}>
+                        <Link href={"/" + pathnameLocale} aria-label={dict.logoLinkLabel}>
+                            {/* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment */}
                             <NextImage src={logo} alt={dict.logoAlt} height={35} priority />
                         </Link>
                     </div>

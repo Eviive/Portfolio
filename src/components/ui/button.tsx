@@ -7,15 +7,15 @@ import type { FC, PropsWithChildren } from "react";
 
 import styles from "./button.module.scss";
 
-export type ButtonDictionary = {
+export interface ButtonDictionary {
     loading: string;
-};
+}
 
-type Props = {
+interface Props {
     className?: string;
     loading?: boolean;
     handleClick?: () => void;
-};
+}
 
 export const Button: FC<PropsWithChildren<Props>> = props => {
     const i18n = useI18nContext();

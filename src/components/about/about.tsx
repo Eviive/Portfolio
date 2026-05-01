@@ -11,9 +11,9 @@ import styles from "./about.module.scss";
 
 export type AboutDictionary = DictionaryWithTitle;
 
-type Props = {
+interface Props {
     dict: AboutDictionary;
-};
+}
 
 export const About: FC<Props> = ({ dict }) => {
     const refs = useScrollReveal({

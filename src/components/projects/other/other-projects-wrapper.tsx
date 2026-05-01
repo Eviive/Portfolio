@@ -11,27 +11,27 @@ import { useState } from "react";
 
 import styles from "./other-projects-wrapper.module.scss";
 
-export type OtherProjectsWrapperDictionary = {
+export interface OtherProjectsWrapperDictionary {
     loadMoreButton: string;
-};
+}
 
-type Props = {
+interface Props {
     initialPage: Page<Project>;
     dict: OtherProjectsWrapperDictionary;
-};
+}
 
-type PaginationState<E> = {
+interface PaginationState<E> {
     data: E[];
     page: number;
     isLastPage: boolean;
     isLoadingMore: boolean;
-};
+}
 
 export const OtherProjectsWrapper: FC<Props> = ({ initialPage, dict }) => {
     const [pagination, setPagination] = useState<PaginationState<Project>>({
         data: initialPage.content,
-        page: initialPage.number,
-        isLastPage: initialPage.last,
+        page: initialPage.page.number,
+        isLastPage: initialPage.page.last,
         isLoadingMore: false
     });
 
@@ -42,8 +42,8 @@ export const OtherProjectsWrapper: FC<Props> = ({ initialPage, dict }) => {
 
         setPagination(prevState => ({
             data: [...prevState.data, ...nextPage.content],
-            page: nextPage.number,
-            isLastPage: nextPage.last,
+            page: nextPage.page.number,
+            isLastPage: nextPage.page.last,
             isLoadingMore: false
         }));
     };

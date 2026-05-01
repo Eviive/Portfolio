@@ -6,9 +6,9 @@ import type { FC } from "react";
 
 import styles from "./footer.module.scss";
 
-export type FooterDictionary = {
+export interface FooterDictionary {
     portfolioGitHubLink: string;
-};
+}
 
 export const Footer: FC = () => {
     const dict = getDictionary("footer");

@@ -13,9 +13,9 @@ export const useScrollReveal = (config: ScrollRevealConfig) => {
         let sr: scrollReveal.ScrollRevealObject;
 
         const setUpScrollReveal = (el: HTMLElement, i: number) => {
-            const { intervalDelay, ...options } = config ?? {};
+            const { intervalDelay, ...options } = config;
 
-            let delay = config?.delay ?? 100;
+            let delay = config.delay ?? 100;
 
             if (config.multiple) {
                 delay += i * (intervalDelay ?? 100);
@@ -32,7 +32,7 @@ export const useScrollReveal = (config: ScrollRevealConfig) => {
                 cleanup: true,
                 ...options,
                 afterReveal: (el: HTMLElement) => {
-                    options?.afterReveal?.(el);
+                    options.afterReveal?.(el);
                     sr.clean(el);
                     el.removeAttribute("style");
                     el.classList.remove("reveal-hidden");
@@ -43,7 +43,7 @@ export const useScrollReveal = (config: ScrollRevealConfig) => {
             el.dataset.revealed = "";
         };
 
-        (async () => {
+        void (async () => {
             sr = (await import("scrollreveal")).default();
 
             refs.current
