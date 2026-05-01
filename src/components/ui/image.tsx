@@ -33,8 +33,12 @@ export const Image: FC<Props> = props => {
                 height={props.height ?? props.width}
                 title={props.title}
                 priority={props.priority}
-                onLoad={() => { setLoading(false); }}
-                onError={() => { setLoading(false); }}
+                onLoad={() => {
+                    setLoading(false);
+                }}
+                onError={() => {
+                    setLoading(false);
+                }}
             />
         </div>
     );
